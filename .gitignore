@@ -1,0 +1,15 @@
+# ignore secrets.sh file
+**/secrets.sh 
+
+# ignore github copilot files
+github-copilot
+
+# ignore tmux plugins directory
+tmux/plugins
+
+# ignore .DS_Store files
+.DS_Store
+
+# ignore .env files
+**/.env
+
