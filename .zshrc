@@ -14,37 +14,7 @@ source ~/.config/zsh/custom-aliases.sh
 source ~/.config/zsh/pnpm-config.sh
 source ~/.config/zsh/secrets.sh
 # source ~/.config/zsh/android-studio-config.sh
-
-# Set up fzf key bindings and fuzzy completion
-source <(fzf --zsh)
-
-# Add zeoxide to the shell
-eval "$(zoxide init zsh)"
-alias cd="z"
-
-# history setup
-HISTFILE=$HOME/.zhistory
-SAVEHIST=1000
-HISTSIZE=999
-setopt share_history 
-setopt hist_expire_dups_first
-setopt hist_ignore_dups
-setopt hist_verify
-
-# completion using arrow keys (based on history)
-bindkey '^[[A' history-search-backward
-bindkey '^[[B' history-search-forward
-
-# completion using arrow keys (based on commands)
-source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-
-# Bat (better cat)
-export BAT_THEME=tokyonight_night
-
-# Eza (better ls) 
-alias ls="eza --icons=always"
+source ~/.config/zsh/zsh-config.sh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
