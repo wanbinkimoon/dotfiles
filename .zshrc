@@ -5,9 +5,10 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+
 source $(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme
 
-# source ~/.config/zsh/nvm-config.sh
+source ~/.config/zsh/nvm-config.sh
 source ~/.config/zsh/omz-git-aliases.sh
 source ~/.config/zsh/git-aliases.sh
 source ~/.config/zsh/custom-aliases.sh
