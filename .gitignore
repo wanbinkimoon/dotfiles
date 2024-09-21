@@ -13,3 +13,11 @@ tmux/plugins
 # ignore .env files
 **/.env
 
+# ignore ember cli files
+configstore/ember-cli.json
+
+# ignore raycast files
+raycast
+
+# ignore gh files
+gh
