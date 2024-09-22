@@ -18,17 +18,24 @@ return {
     config = function()
       local telescope = require("telescope")
 
-      telescope.setup({
-        extensions = {
-          ["ui-select"] = {
-            require("telescope.themes").get_dropdown({}),
-          },
-          ["live_grep_args"] = {
-            auto_qoting = true,
-          },
+      local options = {}
+
+      options.extensions = {
+        ["ui-select"] = {
+          require("telescope.themes").get_dropdown({}),
         },
-      })
+        ["live_grep_args"] = {
+          auto_qoting = true,
+        },
+      }
+
+      -- vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = "#191a21" })
+
+      telescope.setup(options)
+
+      -- Keymaps
       local builtin = require("telescope.builtin")
+
       vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "[S]earch: [F]iles" })
       vim.keymap.set(
         "n",
