@@ -27,6 +27,7 @@ return {
   config = function()
     require("bufferline").setup({
       options = {
+        mode = "tabs",
         numbers = "ordinal", -- Can be "none", "ordinal", "buffer_id", "both"
         close_command = "bdelete! %d", -- can be a string | function, see "Mouse actions"
         right_mouse_command = "bdelete! %d", -- can be a string | function, see "Mouse actions"
