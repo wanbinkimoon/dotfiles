@@ -35,7 +35,3 @@ alias ls="eza --icons=always -T --level=1 --header --hyperlink"
 # Bat (better cat)
 export BAT_THEME='Dracula'
 
-# Open in nvim with bat preview and fzf 
-search_open() {
-    nvim "$(fzf --preview 'bat --style=numbers --color=always {}')"
-}

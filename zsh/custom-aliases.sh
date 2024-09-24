@@ -11,3 +11,13 @@ alias yalc-embroider-run="yalc add $1 && rm -rf $TMPDIR/embroider && pnpm i && p
 killport() {
     lsof -ti :"$1" | xargs kill -9
 }
+
+# Open in nvim with bat preview and fzf 
+nvim-open() {
+  nvim "$(fzf --preview 'bat --style=numbers --color=always {}')"
+}
+
+# Preview in bat with fzf
+bat-preview(){ 
+  fzf --preview 'bat --style=numbers --color=always {}'
+}
