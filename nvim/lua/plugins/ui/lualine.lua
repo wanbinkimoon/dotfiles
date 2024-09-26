@@ -14,7 +14,7 @@ return {
       },
       sections = {
         -- lualine_c = { { "filename", path = 3 } },
-        lualine_c = { { "ex.relative_filename" } },
+        lualine_c = { { "ex.relative_filename", max_length = 0.8 } },
         lualine_x = { "filetype" },
         lualine_y = { "encoding" },
       },
