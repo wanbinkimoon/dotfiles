@@ -15,7 +15,7 @@ after-login-command = []
 after-startup-command = []
 
 # Start AeroSpace at login
-start-at-login = false
+start-at-login = true
 
 # Normalizations. See: https://nikitabobko.github.io/AeroSpace/guide#normalization
 enable-normalization-flatten-containers = true
@@ -168,7 +168,7 @@ run = ["layout floating", "move-node-to-workspace 1"]
 
 [[on-window-detected]]
 if.app-id = 'com.apple.finder'
-run = ["move-node-to-workspace 3"]
+run = ["move-node-to-workspace 6"]
 
 [[on-window-detected]]
 if.app-id = 'com.github.wez.wezterm'

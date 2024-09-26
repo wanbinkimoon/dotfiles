@@ -18,6 +18,7 @@ return {
 			"lua_ls",
 			"ts_ls",
 			"eslint",
+			"yamlls",
 		},
 	},
 }
