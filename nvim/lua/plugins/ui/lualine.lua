@@ -22,10 +22,12 @@ return {
 					{
 						"tabs",
 						mode = 1,
+						path = 0,
 						symbols = { modified = "󱗝" },
+						use_mode_colors = true,
 						tabs_color = {
-							active = { fg = dracula.bright_blue },
-							inactive = { fg = dracula.purple },
+							active = { fg = dracula.purple },
+							inactive = { fg = dracula.fg },
 						},
 					},
 				},
