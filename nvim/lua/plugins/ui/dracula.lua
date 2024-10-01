@@ -7,6 +7,7 @@ return {
 				show_end_of_buffer = true,
 				colors = {
 					bg = "none",
+					semi_transparent_green = "#273D36", -- Transparent green
 				},
 				lualine_bg_color = "none",
 				italic_comment = true,
@@ -16,6 +17,9 @@ return {
 						NeoTreeCursorLine = { bg = colors.menu },
 						NeoTreeTitleBar = { bg = colors.pink, fg = colors.black },
 						NeoTreeFloatBorder = { bg = colors.bg, fg = colors.pink },
+						DiffAdd = { bg = colors.semi_transparent_green },
+						DiffChanged = { fg = colors.pink },
+						WinSeparator = { fg = colors.gutter_fg },
 					}
 				end,
 			})
