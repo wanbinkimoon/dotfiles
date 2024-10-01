@@ -21,3 +21,31 @@ nvim-open() {
 bat-preview(){ 
   fzf --preview 'bat --style=numbers --color=always {}'
 }
+
+function git-clean() {
+  git pull
+  git fetch -p
+
+  # Check if --force is passed as an argument
+  local force_delete=false
+  if [[ "$1" == "--force" ]]; then
+    force_delete=true
+  fi
+
+  # Delete local branches whose upstream has been deleted
+  for branch in $(git branch -vv | grep ': gone]' | awk '{print $1}'); do
+    if $force_delete; then
+      # Try to delete the branch with force
+      if ! git branch -d "$branch"; then
+        # If it fails, it means the branch is not fully merged
+        echo "The branch '$branch' is not fully merged. Do you want to delete it? (y/n)"
+        read -r response
+        if [[ "$response" == "y" ]]; then
+          git branch -D "$branch"
+        fi
+      fi
+    else
+      git branch -d "$branch"
+    fi
+  done
+}
