@@ -5,6 +5,5 @@ return {
 	},
 	config = function()
 		require("grug-far").setup({})
-		vim.map.localleader = ","
 	end,
 }

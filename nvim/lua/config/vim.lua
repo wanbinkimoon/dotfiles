@@ -1,8 +1,9 @@
-vim.cmd("set expandtab")
-vim.cmd("set tabstop=2")
 vim.cmd("set softtabstop=2")
+vim.cmd("set tabstop=2")
 vim.cmd("set shiftwidth=2")
+vim.cmd("set expandtab")
 vim.g.mapleader = " "
+vim.g.maplocalleader = ","
 
 vim.opt.showmode = false
 vim.opt.swapfile = false
@@ -12,19 +13,18 @@ vim.opt.undofile = true
 vim.wo.number = true
 vim.opt.scrolloff = 10
 
--- Navigate vim panes better
-vim.keymap.set("n", "<c-k>", ":wincmd k<CR>")
-vim.keymap.set("n", "<c-j>", ":wincmd j<CR>")
-vim.keymap.set("n", "<c-h>", ":wincmd h<CR>")
-vim.keymap.set("n", "<c-l>", ":wincmd l<CR>")
+-- Disable arrow keys
+-- vim.keymap.set("n", "<left>", '<cmd>echo "Use h to move!!"<CR>')
+-- vim.keymap.set("n", "<right>", '<cmd>echo "Use l to move!!"<CR>')
+-- vim.keymap.set("n", "<up>", '<cmd>echo "Use k to move!!"<CR>')
+-- vim.keymap.set("n", "<down>", '<cmd>echo "Use j to move!!"<CR>')
 
--- Move lines up and down
-vim.keymap.set("n", "<A-Down>", ":m .+1<CR>==")
-vim.keymap.set("n", "<A-Up>", ":m .-2<CR>==")
-vim.keymap.set("v", "<A-Down>", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "<A-Up>", ":m '<-2<CR>gv=gv")
-
+-- Remove search highlight
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
+
+-- Add new line remaning in normal mode
+vim.keymap.set("n", "<leader>o", "o<ESC>k", { desc = "Add new line below" })
+vim.keymap.set("n", "<leader>O", "O<ESC>j", { desc = "Add new line above" })
 
 vim.api.nvim_create_autocmd("TextYankPost", {
 	desc = "Highlight when yanking (copying) text",
