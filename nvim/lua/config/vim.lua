@@ -13,6 +13,7 @@ vim.opt.undofile = true
 vim.wo.number = true
 vim.opt.scrolloff = 10
 vim.opt.showtabline = 0
+vim.opt.splitright = true
 
 -- Disable arrow keys
 -- vim.keymap.set("n", "<left>", '<cmd>echo "Use h to move!!"<CR>')
