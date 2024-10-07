@@ -20,6 +20,11 @@ return {
 						DiffAdd = { bg = colors.semi_transparent_green },
 						DiffChanged = { fg = colors.pink },
 						WinSeparator = { fg = colors.gutter_fg },
+						TelescopeBorder = { fg = colors.pink },
+						TelescopePromptBorder = { fg = colors.pink },
+						TelescopePreviewBorder = { fg = colors.pink },
+						TelescopeResultsBorder = { fg = colors.pink },
+						GitSignsCurrentLineBlame = { fg = colors.comment },
 					}
 				end,
 			})
