@@ -39,5 +39,7 @@ config.keys = {
   { mods = "CMD", key = "Backspace",  action = wezterm.action.SendKey({ mods = "CTRL", key = "u" }) },
 }
 
+require("zen-mode")
+
 -- and finally, return the configuration to wezterm
 return config
