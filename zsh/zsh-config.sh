@@ -35,3 +35,5 @@ alias ls="eza --icons=always -T --level=1 --header --hyperlink"
 # Bat (better cat)
 export BAT_THEME='Dracula'
 
+# anaconda path
+export PATH="/opt/homebrew/anaconda3/bin:$PATH"
