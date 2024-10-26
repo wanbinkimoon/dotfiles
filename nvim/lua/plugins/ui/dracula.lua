@@ -25,6 +25,7 @@ return {
 						TelescopePreviewBorder = { fg = colors.pink },
 						TelescopeResultsBorder = { fg = colors.pink },
 						GitSignsCurrentLineBlame = { fg = colors.comment },
+						NeoTreeModified = { fg = colors.orange },
 					}
 				end,
 			})
