@@ -1,7 +1,12 @@
 return {
 	"nvim-lualine/lualine.nvim",
+	lazy = true,
+	event = "VimEnter",
 	dependencies = {
-		{ "dokwork/lualine-ex" },
+		{
+			"dokwork/lualine-ex",
+			lazy = true,
+		},
 	},
 	config = function()
 		local dracula = require("dracula").colors()

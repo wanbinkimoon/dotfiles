@@ -1,6 +1,7 @@
 return {
 	{
 		"ruifm/gitlinker.nvim",
+		lazy = true,
 		config = function()
 			local gitlinker = require("gitlinker")
 			gitlinker.setup({

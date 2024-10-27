@@ -1,8 +1,13 @@
 return {
 	{
 		"luukvbaal/statuscol.nvim",
+		lazy = true,
+		event = "BufEnter",
 		dependencies = {
-			{ "lewis6991/gitsigns.nvim" },
+			{
+				"lewis6991/gitsigns.nvim",
+				lazy = true,
+			},
 		},
 		config = function()
 			require("statuscol").setup({})
