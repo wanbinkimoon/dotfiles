@@ -1,6 +1,8 @@
 return {
 	{
 		"williamboman/mason.nvim",
+		lazy = false,
+		event = "BufRead",
 		dependencies = {
 			"williamboman/mason-lspconfig.nvim",
 		},
@@ -12,19 +14,19 @@ return {
 			local all_servers = {
 				-- "jsonls",
 				"lua_ls",
-				"clangd",
+				-- "clangd",
 				"prosemd_lsp",
 				"cssls",
-				"vuels",
+				-- "vuels",
 				-- "tsserver",
 				"ts_ls",
 				"ember",
 				"texlab",
-				"angularls",
+				-- "angularls",
 				"eslint",
 				"cmake",
 				"emmet_language_server",
-				"rust_analyzer",
+				-- "rust_analyzer",
 				"tailwindcss",
 			}
 

@@ -1,7 +1,12 @@
 return {
 	"nvimtools/none-ls.nvim",
+	lazy = true,
+	event = "BufRead",
 	dependencies = {
-		"nvimtools/none-ls-extras.nvim",
+		{
+			"nvimtools/none-ls-extras.nvim",
+			lazy = true,
+		},
 	},
 	config = function()
 		local null_ls = require("null-ls")

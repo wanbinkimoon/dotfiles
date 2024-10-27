@@ -9,6 +9,7 @@ return {
 
 		local lspconfig = require("lspconfig")
 		local icons = require("config.icons")
+
 		lspconfig.ts_ls.setup({
 			capabilities = capabilities,
 		})
@@ -81,6 +82,7 @@ return {
 			focusable = true,
 			relative = "cursor",
 		})
+
 		-- suppress error messages from lang servers
 		---@diagnostic disable-next-line: duplicate-set-field
 		vim.notify = function(msg, log_level)
@@ -106,9 +108,9 @@ return {
 		-- Basic Setup END --
 
 		vim.keymap.set("n", "<leader>D", vim.lsp.buf.hover, { desc = "Definition" })
-		vim.keymap.set("n", "<leader>cgd", vim.lsp.buf.definition, { desc = "[C]ode: [G]o to [D]efinition" })
-		vim.keymap.set("n", "<leader>cgr", vim.lsp.buf.references, { desc = "[C]ode: [G]o to [R]eference" })
-		vim.keymap.set("n", "<leader>cgi", vim.lsp.buf.implementation, { desc = "[C]ode: [G]o to [I]mplementation" })
+		vim.keymap.set("n", "<leader>cd", vim.lsp.buf.definition, { desc = "[C]ode: Go to [d]efinition" })
+		vim.keymap.set("n", "<leader>cR", vim.lsp.buf.references, { desc = "[C]ode: Go to [R]eference" })
+		vim.keymap.set("n", "<leader>ci", vim.lsp.buf.implementation, { desc = "[C]ode: Go to [i]mplementation" })
 		vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "[C]ode: [A]ction" })
 		vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "[C]ode: [R]ename" })
 	end,
