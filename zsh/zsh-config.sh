@@ -37,3 +37,8 @@ export BAT_THEME='Dracula'
 
 # anaconda path
 export PATH="/opt/homebrew/anaconda3/bin:$PATH"
+
+# Default editor
+export EDITOR='nvim'
+
+export PATH="/Users/nicola.bertelloni/.local/bin:$PATH"

@@ -16,11 +16,14 @@ source ~/.config/zsh/pnpm-config.sh
 source ~/.config/zsh/secrets.sh
 # source ~/.config/zsh/android-studio-config.sh
 source ~/.config/zsh/zsh-config.sh
+source ~/.config/zsh/anaconda-config.sh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-PATH=~/.console-ninja/.bin:$PATH
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/nicola.bertelloni/.lmstudio/bin"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
