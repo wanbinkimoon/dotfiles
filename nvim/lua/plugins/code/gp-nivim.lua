@@ -1,5 +1,6 @@
 return {
 	"robitx/gp.nvim",
+	enabled = false,
 	lazy = true,
 	event = "VeryLazy",
 	config = function()
