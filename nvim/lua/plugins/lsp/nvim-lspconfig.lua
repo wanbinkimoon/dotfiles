@@ -35,11 +35,22 @@ return {
 		})
 
 		lspconfig.eslint.setup({
-			--- ...
 			on_attach = function(client, bufnr)
-				vim.api.nvim_create_autocmd("BufWritePre", {
-					buffer = bufnr,
-					command = "EslintFixAll",
+				client.server_capabilities.document_formatting = true
+				-- vim.api.nvim_create_autocmd("BufWritePre", {
+				-- 	callback = function()
+				-- 		vim.lsp.buf.format()
+				-- 	end,
+				-- })
+				-- vim.api.nvim_create_autocmd("BufWritePre", {
+				-- 	buffer = bufnr,
+				-- 	command = "EslintFixAll",
+				-- })
+				vim.api.nvim_create_autocmd("BufWritePost", {
+					callback = function()
+						vim.cmd("EslintFixAll")
+						vim.cmd("Format")
+					end,
 				})
 			end,
 		})
