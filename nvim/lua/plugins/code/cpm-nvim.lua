@@ -3,6 +3,7 @@ return {
 	lazy = true,
 	event = "BufReadPre",
 	dependencies = {
+		"mattn/emmet-vim",
 		"dcampos/cmp-emmet-vim",
 		{
 			"L3MON4D3/LuaSnip",
@@ -12,6 +13,7 @@ return {
 		"hrsh7th/cmp-nvim-lsp",
 		"rafamadriz/friendly-snippets",
 		"saadparwaiz1/cmp_luasnip",
+		"tailwind-tools",
 	},
 	config = function()
 		local cmp = require("cmp")
