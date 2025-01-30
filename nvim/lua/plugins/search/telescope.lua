@@ -75,6 +75,7 @@ return {
 					oldfiles = {
 						-- theme = "dropdown",
 						previewer = false,
+						initial_mode = "normal",
 						layout_config = {
 							width = 0.65,
 							height = 0.65,
@@ -82,6 +83,7 @@ return {
 					},
 					buffers = {
 						-- theme = "dropdown",
+						initial_mode = "normal",
 						previewer = false,
 						layout_config = {
 							width = 0.65,
