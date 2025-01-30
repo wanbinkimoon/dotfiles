@@ -42,54 +42,45 @@
 # whit 
 # https://www.ditig.com/publications/256-colors-cheat-sheet
 
-# 0	black
-  # Prompt colors.
-  local grey='242'
+## Dracula
+# red='#FF5C57'
+# green='#50fa7b'
+# yellow='#f1fa8c'
+# blue='#57C7FF'
+# magenta='#FF6AC1'
+# cyan='#8be9fd'
+# orange='#ffb86c'
+# white='#f8f8f2'
+# purple='#bd93f9'
+# neutral='#6272a4'
+# pink='#ff79c6'
 
-# 1	red
-  # local red='#FF5C57'
-  # local red='1'
-  local red='202'
+local grey='242'
+local red='202'
+local green='84'
+local yellow='228'
+local blue='4'
+local magenta='5'
+local cyan='117'
+local orange='215'
+local white='7'
+local purple='141'
+local neutral='103'
+local pink='212'
 
-# 2	green
-  # local green='#50fa7b'
-  local green='84'
-
-# 3	yellow
-  # local yellow='#f1fa8c'
-  local yellow='228'
-
-# 4	blue
-  # local blue='#57C7FF'
-  local blue='4'
-
-# 5	magenta
-  # local magenta='#FF6AC1'
-  local magenta='5'
-
-# 6	cyan
-  # local cyan='#8be9fd'
-  local cyan='117'
-
-# 7	white
-  # local white='#f8f8f2'
-  local white='7'
-
-#	organge
-  # local orange='#ffb86c'
-  local orange='215'
-
-# purple
-  # local purple='#bd93f9'
-  local purple='141'
-
-# neutral
-  # local neutral='#6272a4'
-  local neutral='103'
-
-# pink
-  # local pink='#ff79c6'
-  local pink='212'
+## Tokyonight
+# local grey='242'
+# local red='210'
+# local green='115'
+# local yellow='179'
+# local blue='111'
+# local magenta='141'
+# local cyan='117'
+# local white='7'
+# local orange='209'
+# local purple='104'
+# local neutral='80'
+# local pink='212'
 
   # Left prompt segments.
   typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(

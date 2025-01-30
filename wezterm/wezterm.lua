@@ -16,27 +16,38 @@ local config = wezterm.config_builder()
 -- 	ansi = { "#214969", "#E52E2E", "#44FFB1", "#FFE073", "#0FC5ED", "#a277ff", "#24EAF7", "#24EAF7" },
 -- 	brights = { "#214969", "#E52E2E", "#44FFB1", "#FFE073", "#A277FF", "#a277ff", "#24EAF7", "#24EAF7" },
 -- }
+
 config.color_scheme = "Dracula"
+-- config.color_scheme = "tokyonight-storm"
 
 -- config.font = wezterm.font("MesloLGS Nerd Font Mono")
 config.font = wezterm.font("JetBrainsMono Nerd Font")
+-- config.font = wezterm.font("FiraCode Nerd Font")
 -- config.font = wezterm.font("CaskaydiaCove Nerd Font")
--- config.harfbuzz_features = { "ss01", "ss02", "ss03", "ss19", "ss20" }
+
+config.harfbuzz_features = { "ss01", "ss02", "ss03", "ss19", "ss20" }
+
 config.font_size = 14
-config.line_height = 1.1
+config.line_height = 1.2
 
 config.enable_tab_bar = false
+config.window_padding = {
+	left = 2,
+	right = 2,
+	top = 0,
+	bottom = 0,
+}
 
 config.window_decorations = "RESIZE"
 config.window_background_opacity = 0.95
 config.macos_window_background_blur = 40
 
 config.keys = {
-  { mods = "OPT", key = "LeftArrow",  action = wezterm.action.SendKey({ mods = "ALT", key = "b" }) },
-  { mods = "OPT", key = "RightArrow", action = wezterm.action.SendKey({ mods = "ALT", key = "f" }) },
-  { mods = "CMD", key = "LeftArrow",  action = wezterm.action.SendKey({ mods = "CTRL", key = "a" }) },
-  { mods = "CMD", key = "RightArrow", action = wezterm.action.SendKey({ mods = "CTRL", key = "e" }) },
-  { mods = "CMD", key = "Backspace",  action = wezterm.action.SendKey({ mods = "CTRL", key = "u" }) },
+	{ mods = "OPT", key = "LeftArrow", action = wezterm.action.SendKey({ mods = "ALT", key = "b" }) },
+	{ mods = "OPT", key = "RightArrow", action = wezterm.action.SendKey({ mods = "ALT", key = "f" }) },
+	{ mods = "CMD", key = "LeftArrow", action = wezterm.action.SendKey({ mods = "CTRL", key = "a" }) },
+	{ mods = "CMD", key = "RightArrow", action = wezterm.action.SendKey({ mods = "CTRL", key = "e" }) },
+	{ mods = "CMD", key = "Backspace", action = wezterm.action.SendKey({ mods = "CTRL", key = "u" }) },
 }
 
 require("zen-mode")
