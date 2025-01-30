@@ -13,7 +13,8 @@ return {
 
 		require("lualine").setup({
 			options = {
-				theme = "dracula",
+				-- theme = "dracula-nvim",
+				theme = "palenight",
 				component_separators = "/",
 				section_separators = { left = "", right = "" },
 				-- disabled_filetypes = { "neo-tree" },
