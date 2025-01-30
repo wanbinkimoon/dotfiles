@@ -2,6 +2,7 @@ return {
 	{
 		"ruifm/gitlinker.nvim",
 		lazy = true,
+		event = "BufRead",
 		config = function()
 			local gitlinker = require("gitlinker")
 			gitlinker.setup({
