@@ -21,3 +21,8 @@ raycast
 
 # ignore gh files
 gh
+
+glab-cli
+uv
+configstore
+.gp.md
