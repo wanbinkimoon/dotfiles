@@ -12,13 +12,19 @@ return {
 			local actions = require("telescope.actions")
 			local action_state = require("telescope.actions.state")
 
+			-- Unified dimensions for consistent sizing
+			local dimensions = {
+				width = 0.85,
+				height = 0.85,
+			}
+
 			local options = {
 				defaults = {
 					layout_strategy = "horizontal",
 					layout_config = {
 						horizontal = {
-							height = 0.85,
-							width = 0.85,
+							height = dimensions.height,
+							width = dimensions.width,
 							preview_width = 0.5,
 							prompt_position = "top",
 							preview_position = "bottom",
@@ -68,8 +74,8 @@ return {
 						-- theme = "dropdown",
 						previewer = false,
 						layout_config = {
-							width = 0.65,
-							height = 0.65,
+							width = dimensions.width,
+							height = dimensions.height,
 						},
 					},
 					oldfiles = {
@@ -77,8 +83,8 @@ return {
 						previewer = false,
 						initial_mode = "normal",
 						layout_config = {
-							width = 0.65,
-							height = 0.65,
+							width = dimensions.width,
+							height = dimensions.height,
 						},
 					},
 					buffers = {
@@ -86,16 +92,16 @@ return {
 						initial_mode = "normal",
 						previewer = false,
 						layout_config = {
-							width = 0.65,
-							height = 0.65,
+							width = dimensions.width,
+							height = dimensions.height,
 						},
 					},
 					live_grep = {
 						theme = "dropdown",
 						previewer = false,
 						layout_config = {
-							width = 0.65,
-							height = 0.65,
+							width = dimensions.width,
+							height = dimensions.height,
 						},
 					},
 				},
@@ -104,8 +110,8 @@ return {
 					["ui-select"] = {
 						require("telescope.themes").get_dropdown({
 							layout_config = {
-								width = 0.65,
-								height = 0.65,
+								width = dimensions.width,
+								height = dimensions.height,
 							},
 						}),
 					},
