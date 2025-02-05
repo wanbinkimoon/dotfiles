@@ -19,141 +19,115 @@ return {
 			local action_state = require("telescope.actions.state")
 			local lga_actions = require("telescope-live-grep-args.actions")
 
-			-- Unified dimensions for consistent sizing
+			-- Core configuration components
 			local dimensions = {
 				width = 0.85,
 				height = 0.85,
 			}
 
+			-- Layout configuration
+			local layout = {
+				horizontal = {
+					height = dimensions.height,
+					width = dimensions.width,
+					preview_width = 0.5,
+					prompt_position = "top",
+					preview_position = "bottom",
+				},
+			}
+
+			-- Common mappings
+			local common_mappings = {
+				n = {
+					["<C-p>"] = require("telescope.actions.layout").toggle_preview,
+					["j"] = actions.move_selection_next,
+					["k"] = actions.move_selection_previous,
+					["<C-c>"] = actions.close,
+					["<CR>"] = actions.select_default,
+				},
+				i = {
+					["<C-p>"] = require("telescope.actions.layout").toggle_preview,
+					["<C-c>"] = actions.close,
+					["<C-j>"] = actions.move_selection_next,
+					["<C-k>"] = actions.move_selection_previous,
+				},
+			}
+
+			-- Visual styling
+			local visual_style = {
+				borderchars = {
+					prompt = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+					results = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+					preview = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+				},
+				highlights = {
+					selection_caret = { fg = "#89b4fa" },
+					selection = { bg = "#45475a", fg = "#89b4fa" },
+				},
+			}
+
 			local options = {
 				defaults = {
 					layout_strategy = "horizontal",
-					layout_config = {
-						horizontal = {
-							height = dimensions.height,
-							width = dimensions.width,
-							preview_width = 0.5,
-							prompt_position = "top",
-							preview_position = "bottom",
-						},
-					},
+					layout_config = layout,
 					sorting_strategy = "ascending",
-					-- Center results in the screen
 					results_title = false,
 					prompt_prefix = "   ",
 					selection_caret = "  ",
-					-- Initial state: no preview, normal mode
 					initial_mode = "insert",
-					-- No preview on startup
 					previewer = false,
-					preview = {
-						hide_on_startup = true,
-					},
-					mappings = {
-						n = {
-							["<C-p>"] = require("telescope.actions.layout").toggle_preview,
-							["j"] = actions.move_selection_next,
-							["k"] = actions.move_selection_previous,
-							["<C-c>"] = actions.close,
-							["<CR>"] = actions.select_default,
-						},
-						i = {
-							["<C-p>"] = require("telescope.actions.layout").toggle_preview,
-							["<C-c>"] = actions.close,
-							["<C-j>"] = actions.move_selection_next,
-							["<C-k>"] = actions.move_selection_previous,
-						},
-					},
-					-- Consistent theme across all pickers
-					borderchars = {
-						prompt = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
-						results = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
-						preview = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
-					},
-					-- Better highlighting
-					highlights = {
-						selection_caret = { fg = "#89b4fa" },
-						selection = { bg = "#45475a", fg = "#89b4fa" },
-					},
+					preview = { hide_on_startup = true },
+					mappings = common_mappings,
+					borderchars = visual_style.borderchars,
+					highlights = visual_style.highlights,
 				},
 
-				pickers = {
-					-- Consistent configuration for all pickers
-					find_files = {
-						-- theme = "dropdown",
-						previewer = false,
-						layout_config = {
-							width = dimensions.width,
-							height = dimensions.height,
-						},
+				-- Common picker configuration template
+				local picker_template = {
+					previewer = false,
+					layout_config = {
+						width = dimensions.width,
+						height = dimensions.height,
 					},
-					oldfiles = {
-						-- theme = "dropdown",
-						previewer = false,
+				}
+
+				-- File picker configurations
+				local file_pickers = {
+					find_files = vim.tbl_extend("force", picker_template, {}),
+					oldfiles = vim.tbl_extend("force", picker_template, {
 						initial_mode = "normal",
-						layout_config = {
-							width = dimensions.width,
-							height = dimensions.height,
-						},
-					},
-					buffers = {
-						-- theme = "dropdown",
+					}),
+					buffers = vim.tbl_extend("force", picker_template, {
 						initial_mode = "normal",
-						previewer = false,
-						layout_config = {
-							width = dimensions.width,
-							height = dimensions.height,
-						},
-					},
-					live_grep = {
-						-- theme = "dropdown",
-						previewer = false,
-						layout_config = {
-							width = dimensions.width,
-							height = dimensions.height,
-						},
+					}),
+				}
+
+				-- Git picker configurations
+				local git_pickers = {
+					git_branches = vim.tbl_extend("force", picker_template, {}),
+					git_commits = vim.tbl_extend("force", picker_template, {
+						initial_mode = "normal",
+					}),
+					git_bcommits = vim.tbl_extend("force", picker_template, {
+						initial_mode = "normal",
+					}),
+					git_file_history = vim.tbl_extend("force", picker_template, {
+						initial_mode = "normal",
+						layout_strategy = "vertical",
+					}),
+				}
+
+				-- Search picker configurations
+				local search_pickers = {
+					live_grep = vim.tbl_extend("force", picker_template, {
 						additional_args = function()
 							return { "--hidden", "--glob=!**/.git/*" }
 						end,
 						file_ignore_patterns = { "node_modules/", ".git/" },
-					},
-					git_branches = {
-						-- theme = "dropdown",
-						previewer = false,
-						layout_config = {
-							width = dimensions.width,
-							height = dimensions.height,
-						},
-					},
-					git_commits = {
-						-- theme = "dropdown",
-						initial_mode = "normal",
-						previewer = false,
-						layout_config = {
-							width = dimensions.width,
-							height = dimensions.height,
-						},
-					},
-					git_bcommits = {
-						-- theme = "dropdown",
-						initial_mode = "normal",
-						previewer = false,
-						layout_config = {
-							width = dimensions.width,
-							height = dimensions.height,
-						},
-					},
-					git_file_history = {
-						-- theme = "dropdown",
-						initial_mode = "normal",
-						layout_strategy = "vertical",
-						previewer = false,
-						layout_config = {
-							width = dimensions.width,
-							height = dimensions.height,
-						},
-					},
-				},
+					}),
+				}
+
+				options.pickers = vim.tbl_extend("force", {}, file_pickers, git_pickers, search_pickers)
 
 				extensions = {
 					["ui-select"] = {
