@@ -20,12 +20,12 @@ return {
 
 		-- Set menu
 		dashboard.section.buttons.val = {
-			dashboard.button("f", icons.ui.Files .. " Find file", ":Telescope find_files <CR>"),
-			dashboard.button("n", icons.ui.NewFile .. " New file", ":ene <BAR> startinsert <CR>"),
-			dashboard.button("r", icons.ui.History .. " Recent files", ":Telescope oldfiles <CR>"),
-			dashboard.button("t", icons.ui.Text .. " Find text", ":Telescope live_grep <CR>"),
-			dashboard.button("c", icons.ui.Gear .. " Config", ":e $MYVIMRC <CR>"),
-			dashboard.button("q", icons.ui.SignOut .. " Quit", ":qa<CR>"),
+			dashboard.button("f", " Find file", ":Telescope find_files <CR>"),
+			dashboard.button("n", " New file", ":ene <BAR> startinsert <CR>"),
+			dashboard.button("r", " Recent files", ":Telescope oldfiles <CR>"),
+			dashboard.button("t", " Find text", ":Telescope live_grep <CR>"),
+			dashboard.button("c", " Config", ":e $MYVIMRC <CR>"),
+			dashboard.button("q", " Quit", ":qa<CR>"),
 		}
 
 		-- Set footer
