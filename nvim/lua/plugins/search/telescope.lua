@@ -1,136 +1,40 @@
 return {
-	{ "nvim-telescope/telescope-ui-select.nvim" },
-	{ "mrloop/telescope-git-branch.nvim" },
+	{
+		"nvim-telescope/telescope-ui-select.nvim",
+	},
+	{
+		"mrloop/telescope-git-branch.nvim",
+	},
 	{
 		"nvim-telescope/telescope.nvim",
+		-- tag = "0.1.5",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
-			{ "nvim-telescope/telescope-live-grep-args.nvim", version = "^1.0.0" },
+			{
+				"nvim-telescope/telescope-live-grep-args.nvim",
+				version = "^1.0.0",
+			},
 		},
 		config = function()
 			local telescope = require("telescope")
-			local actions = require("telescope.actions")
-			local action_state = require("telescope.actions.state")
 
-			-- Unified dimensions for consistent sizing
-			local dimensions = {
-				width = 0.85,
-				height = 0.85,
-			}
+			local options = {}
 
-			local options = {
-				defaults = {
-					layout_strategy = "horizontal",
-					layout_config = {
-						horizontal = {
-							height = dimensions.height,
-							width = dimensions.width,
-							preview_width = 0.5,
-							prompt_position = "top",
-							preview_position = "bottom",
-						},
-					},
-					sorting_strategy = "ascending",
-					-- Center results in the screen
-					results_title = false,
-					prompt_prefix = "   ",
-					selection_caret = "  ",
-					-- Initial state: no preview, normal mode
-					initial_mode = "insert",
-					preview = {
-						hide_on_startup = true,
-					},
-					mappings = {
-						n = {
-							["<localleader>p"] = require("telescope.actions.layout").toggle_preview,
-							["j"] = actions.move_selection_next,
-							["k"] = actions.move_selection_previous,
-							["<C-c>"] = actions.close,
-							["<CR>"] = actions.select_default,
-						},
-						i = {
-							["<localleader>p"] = require("telescope.actions.layout").toggle_preview,
-							["<C-c>"] = actions.close,
-							["<C-j>"] = actions.move_selection_next,
-							["<C-k>"] = actions.move_selection_previous,
-						},
-					},
-					-- Consistent theme across all pickers
-					borderchars = {
-						prompt = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
-						results = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
-						preview = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
-					},
-					-- Better highlighting
-					highlights = {
-						selection_caret = { fg = "#89b4fa" },
-						selection = { bg = "#45475a", fg = "#89b4fa" },
-					},
+			-- Optione: Extensions
+			options.extensions = {
+				["ui-select"] = {
+					require("telescope.themes").get_dropdown({}),
 				},
-
-				pickers = {
-					-- Consistent configuration for all pickers
-					find_files = {
-						-- theme = "dropdown",
-						previewer = false,
-						layout_config = {
-							width = dimensions.width,
-							height = dimensions.height,
-						},
-					},
-					oldfiles = {
-						-- theme = "dropdown",
-						previewer = false,
-						initial_mode = "normal",
-						layout_config = {
-							width = dimensions.width,
-							height = dimensions.height,
-						},
-					},
-					buffers = {
-						-- theme = "dropdown",
-						initial_mode = "normal",
-						previewer = false,
-						layout_config = {
-							width = dimensions.width,
-							height = dimensions.height,
-						},
-					},
-					live_grep = {
-						theme = "dropdown",
-						previewer = false,
-						layout_config = {
-							width = dimensions.width,
-							height = dimensions.height,
-						},
-					},
-				},
-
-				extensions = {
-					["ui-select"] = {
-						require("telescope.themes").get_dropdown({
-							layout_config = {
-								width = dimensions.width,
-								height = dimensions.height,
-							},
-						}),
-					},
-					["live_grep_args"] = {
-						auto_quoting = true,
-						theme = "dropdown",
-						previewer = false,
-						layout_config = {
-							width = 0.65,
-							height = 0.65,
-						},
-					},
+				["live_grep_args"] = {
+					auto_qoting = true,
 				},
 			}
 
 			telescope.setup(options)
 
-			-- Your existing keymaps
+			-- Keymaps
 			local builtin = require("telescope.builtin")
+
 			vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "[S]earch: [F]iles" })
 			vim.keymap.set("n", "<leader><leader>", builtin.oldfiles, { desc = "[S]earch: Oldfiles " })
 			vim.keymap.set("n", "<leader>sb", builtin.buffers, { desc = "[S]earch: [B]uffers" })
@@ -158,7 +62,6 @@ return {
 				{ noremap = true, silent = true, desc = "[S]earch current [S]election" }
 			)
 
-			-- LSP related keymaps
 			vim.keymap.set(
 				{ "n", "v" },
 				"gd",
