@@ -1,19 +1,16 @@
 return {
-	{ "nvim-telescope/telescope-ui-select.nvim" },
-	{ "mrloop/telescope-git-branch.nvim" },
 	{
 		"nvim-telescope/telescope.nvim",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
+			"nvim-telescope/telescope-ui-select.nvim",
 			{ "nvim-telescope/telescope-live-grep-args.nvim", version = "^1.0.0" },
 			"ahmedkhalf/project.nvim",
 			{ "echasnovski/mini.icons", version = "*" },
+			"mrloop/telescope-git-branch.nvim",
 			{
 				"isak102/telescope-git-file-history.nvim",
-				dependencies = {
-					"nvim-lua/plenary.nvim",
-					"tpope/vim-fugitive",
-				},
+				dependencies = { "nvim-lua/plenary.nvim", "tpope/vim-fugitive" },
 			},
 		},
 		config = function()
@@ -274,19 +271,53 @@ return {
 				{ desc = "[S]earch: Git [H]istory" }
 			)
 
-			telescope.setup({
-				extensions = {
-					git_file_history = {
-						mappings = {
-							i = { ["<C-g>"] = telescope.extensions.git_file_history.actions.open_in_browser },
-							n = { ["<C-g>"] = telescope.extensions.git_file_history.actions.open_in_browser },
-						},
-						browser_command = nil,
-					},
-				},
-			})
+			-- Load extensions
+			telescope.load_extension("ui-select")
+			telescope.load_extension("live_grep_args")
+			telescope.load_extension("git_branch")
+			telescope.load_extension("git_file_history")
 
-			-- LSP related keymaps
+			-- Set up keymaps by category
+			-- File search
+			vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "[S]earch: [F]iles" })
+			vim.keymap.set("n", "<leader><leader>", builtin.oldfiles, { desc = "[S]earch: Recent Files" })
+			vim.keymap.set("n", "<leader>sb", builtin.buffers, { desc = "[S]earch: [B]uffers" })
+
+			-- Text search
+			vim.keymap.set("n", "<leader>s<CR>", ":GrepCurrentDir<CR>", { desc = "Grep Current Dir" })
+			vim.keymap.set("n", "<leader>sp", ":GrepProject<CR>", { desc = "Grep Project" })
+			vim.keymap.set(
+				"n",
+				"<leader>sg",
+				":lua require('telescope').extensions.live_grep_args.live_grep_args({opts = { search_dirs = true }})<CR>",
+				{ desc = "[S]earch: Live [G]rep" }
+			)
+			vim.keymap.set(
+				{ "n", "v" },
+				"<leader>sw",
+				live_grep_args_shortcuts.grep_word_under_cursor,
+				{ desc = "[S]earch: [W]ord" }
+			)
+			vim.keymap.set(
+				"v",
+				"<leader>ss",
+				live_grep_args_shortcuts.grep_visual_selection,
+				{ desc = "[S]earch current [S]election" }
+			)
+
+			-- Git operations
+			vim.keymap.set({ "n", "v" }, "<leader>sd", git_branch.files, { desc = "[S]earch: Git [D]iff" })
+			vim.keymap.set({ "n", "v" }, "<leader>sb", builtin.git_branches, { desc = "[S]earch: Git [B]ranches" })
+			vim.keymap.set({ "n", "v" }, "<leader>sc", builtin.git_commits, { desc = "[S]earch: Git [C]ommits" })
+			vim.keymap.set({ "n", "v" }, "<leader>sh", builtin.git_bcommits, { desc = "[S]earch: Git [H]istory" })
+			vim.keymap.set(
+				{ "n", "v" },
+				"<leader>sH",
+				":Telescope git_file_history<CR>",
+				{ desc = "[S]earch: Git File [H]istory" }
+			)
+
+			-- LSP operations
 			vim.keymap.set(
 				{ "n", "v" },
 				"gd",
@@ -294,7 +325,7 @@ return {
 				{ desc = "Search: LSP [D]efinitions", remap = true }
 			)
 			vim.keymap.set({ "n", "v" }, "gr", builtin.lsp_references, { desc = "Search: LSP [R]eferences" })
-			vim.keymap.set({ "n", "v" }, "gi", builtin.lsp_implementations, { desc = "search: lsp [i]mplementations" })
+			vim.keymap.set({ "n", "v" }, "gi", builtin.lsp_implementations, { desc = "Search: LSP [I]mplementations" })
 			vim.keymap.set(
 				{ "n", "v" },
 				"gt",
@@ -302,11 +333,6 @@ return {
 				{ desc = "Search: LSP [T]ype Definitions" }
 			)
 			vim.keymap.set({ "n", "v" }, "gs", builtin.lsp_document_symbols, { desc = "Search: LSP [S]ymbols" })
-
-			telescope.load_extension("ui-select")
-			telescope.load_extension("live_grep_args")
-			telescope.load_extension("git_branch")
-			telescope.load_extension("git_file_history")
 		end,
 	},
 }
