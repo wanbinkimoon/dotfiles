@@ -8,6 +8,7 @@ fi
 
 source $(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme
 
+source ~/.config/zsh/window-rename.sh
 source ~/.config/zsh/nvm-config.sh
 source ~/.config/zsh/omz-git-aliases.sh
 source ~/.config/zsh/git-aliases.sh
