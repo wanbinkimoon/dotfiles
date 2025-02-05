@@ -20,4 +20,22 @@ require("lazy").setup({
 	{ import = "plugins.search" },
 	{ import = "plugins.tmux" },
 	{ import = "plugins.ui" },
-}, {})
+}, {
+	performance = {
+		rtp = {
+			disabled_plugins = {
+				"gzip",
+				"matchit",
+				"matchparen",
+				"netrwPlugin",
+				"tarPlugin",
+				"tohtml",
+				"tutor",
+				"zipPlugin",
+			},
+		},
+	},
+	ui = {
+		border = "single",
+	},
+})
