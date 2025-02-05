@@ -1,7 +1,10 @@
 return {
 	"folke/noice.nvim",
 	enabled = false,
-	event = "VeryLazy",
+	event = {
+		"CmdlineEnter",
+		"LspAttach",
+	},
 	opts = {
 		-- add any options here
 	},

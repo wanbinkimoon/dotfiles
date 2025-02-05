@@ -1,11 +1,13 @@
 return {
 	{
 		"github/copilot.vim",
+		event = "InsertEnter",
+		cmd = "Copilot",
 	},
 	{
 		"zbirenbaum/copilot.lua",
 		lazy = true,
-		event = "BufReadPre",
+		event = { "InsertEnter", "LspAttach" },
 		config = function()
 			require("copilot").setup({
 				suggestion = { enabled = true },

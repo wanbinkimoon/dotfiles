@@ -1,7 +1,12 @@
 return {
 	"nvim-neo-tree/neo-tree.nvim",
 	lazy = true,
-	event = "VimEnter",
+	cmd = "Neotree",
+	keys = {
+		{ "<leader>e", desc = "Neotree [e]xplore" },
+		{ "<leader>b", desc = "NeoTree [b]uffers" },
+		{ "<leader>G", desc = "NeoTree [G]it status" },
+	},
 	branch = "v3.x",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
