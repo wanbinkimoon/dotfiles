@@ -1,29 +1,24 @@
 return {
 	{
 		"nvim-telescope/telescope.nvim",
+		cmd = "Telescope", -- Load only when you run :Telescope
 		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-telescope/telescope-ui-select.nvim",
-			{ "nvim-telescope/telescope-live-grep-args.nvim", version = "^1.0.0" },
-			"ahmedkhalf/project.nvim",
-			{ "echasnovski/mini.icons", version = "*" },
-			"mrloop/telescope-git-branch.nvim",
-			{
-				"isak102/telescope-git-file-history.nvim",
-				dependencies = { "nvim-lua/plenary.nvim", "tpope/vim-fugitive" },
-			},
+			{ "nvim-lua/plenary.nvim" },
+			{ "nvim-telescope/telescope-ui-select.nvim" },
+			{ "nvim-telescope/telescope-live-grep-args.nvim" },
+			{ "ahmedkhalf/project.nvim" },
+			{ "echasnovski/mini.icons" },
+			{ "mrloop/telescope-git-branch.nvim" },
+			{ "isak102/telescope-git-file-history.nvim" },
+			{ "nvim-lua/plenary.nvim", "tpope/vim-fugitive" },
 		},
 		config = function()
 			local telescope = require("telescope")
 			local actions = require("telescope.actions")
-			local action_state = require("telescope.actions.state")
 			local lga_actions = require("telescope-live-grep-args.actions")
 
 			-- Core configuration components
-			local dimensions = {
-				width = 0.85,
-				height = 0.85,
-			}
+			local dimensions = { width = 0.85, height = 0.85 }
 
 			-- Layout configuration
 			local layout = {
@@ -81,82 +76,81 @@ return {
 					borderchars = visual_style.borderchars,
 					highlights = visual_style.highlights,
 				},
+			}
+			-- Common picker configuration template
+			local picker_template = {
+				previewer = false,
+				layout_config = {
+					width = dimensions.width,
+					height = dimensions.height,
+				},
+			}
 
-				-- Common picker configuration template
-				local picker_template = {
+			-- File picker configurations
+			local file_pickers = {
+				find_files = vim.tbl_extend("force", picker_template, {}),
+				oldfiles = vim.tbl_extend("force", picker_template, {
+					initial_mode = "normal",
+				}),
+				buffers = vim.tbl_extend("force", picker_template, {
+					initial_mode = "normal",
+				}),
+			}
+
+			-- Git picker configurations
+			local git_pickers = {
+				git_branches = vim.tbl_extend("force", picker_template, {}),
+				git_commits = vim.tbl_extend("force", picker_template, {
+					initial_mode = "normal",
+				}),
+				git_bcommits = vim.tbl_extend("force", picker_template, {
+					initial_mode = "normal",
+				}),
+				git_file_history = vim.tbl_extend("force", picker_template, {
+					initial_mode = "normal",
+					layout_strategy = "vertical",
+				}),
+			}
+
+			-- Search picker configurations
+			local search_pickers = {
+				live_grep = vim.tbl_extend("force", picker_template, {
+					additional_args = function()
+						return { "--hidden", "--glob=!**/.git/*" }
+					end,
+					file_ignore_patterns = { "node_modules/", ".git/" },
+				}),
+			}
+
+			options.pickers = vim.tbl_extend("force", {}, file_pickers, git_pickers, search_pickers)
+
+			extensions = {
+				["ui-select"] = {
+					require("telescope.themes").get_dropdown({
+						layout_config = {
+							width = dimensions.width,
+							height = dimensions.height,
+						},
+					}),
+				},
+				["live_grep_args"] = {
+					auto_quoting = true,
 					previewer = false,
 					layout_config = {
 						width = dimensions.width,
 						height = dimensions.height,
 					},
-				}
-
-				-- File picker configurations
-				local file_pickers = {
-					find_files = vim.tbl_extend("force", picker_template, {}),
-					oldfiles = vim.tbl_extend("force", picker_template, {
-						initial_mode = "normal",
-					}),
-					buffers = vim.tbl_extend("force", picker_template, {
-						initial_mode = "normal",
-					}),
-				}
-
-				-- Git picker configurations
-				local git_pickers = {
-					git_branches = vim.tbl_extend("force", picker_template, {}),
-					git_commits = vim.tbl_extend("force", picker_template, {
-						initial_mode = "normal",
-					}),
-					git_bcommits = vim.tbl_extend("force", picker_template, {
-						initial_mode = "normal",
-					}),
-					git_file_history = vim.tbl_extend("force", picker_template, {
-						initial_mode = "normal",
-						layout_strategy = "vertical",
-					}),
-				}
-
-				-- Search picker configurations
-				local search_pickers = {
-					live_grep = vim.tbl_extend("force", picker_template, {
-						additional_args = function()
-							return { "--hidden", "--glob=!**/.git/*" }
-						end,
-						file_ignore_patterns = { "node_modules/", ".git/" },
-					}),
-				}
-
-				options.pickers = vim.tbl_extend("force", {}, file_pickers, git_pickers, search_pickers)
-
-				extensions = {
-					["ui-select"] = {
-						require("telescope.themes").get_dropdown({
-							layout_config = {
-								width = dimensions.width,
-								height = dimensions.height,
-							},
-						}),
-					},
-					["live_grep_args"] = {
-						auto_quoting = true,
-						previewer = false,
-						layout_config = {
-							width = dimensions.width,
-							height = dimensions.height,
-						},
-						mappings = {
-							i = {
-								["<C-g>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
-								["<C-e>"] = function(prompt_bufnr)
-									local dir = vim.fn.input("Search directory: ", "", "dir")
-									actions._close(prompt_bufnr, true)
-									require("telescope.builtin").live_grep({
-										search_dirs = { dir },
-										prompt_title = "Grep in: " .. vim.fn.fnamemodify(dir, ":~:."),
-									})
-								end,
-							},
+					mappings = {
+						i = {
+							["<C-g>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
+							["<C-e>"] = function(prompt_bufnr)
+								local dir = vim.fn.input("Search directory: ", "", "dir")
+								actions._close(prompt_bufnr, true)
+								require("telescope.builtin").live_grep({
+									search_dirs = { dir },
+									prompt_title = "Grep in: " .. vim.fn.fnamemodify(dir, ":~:."),
+								})
+							end,
 						},
 					},
 				},
@@ -234,17 +228,6 @@ return {
 				{ noremap = true, silent = true, desc = "[S]earch current [S]election" }
 			)
 
-			-- Git related keymaps
-			vim.keymap.set({ "n", "v" }, "<leader>sb", builtin.git_branches, { desc = "[S]earch: Git [B]ranches" })
-			vim.keymap.set({ "n", "v" }, "<leader>sc", builtin.git_commits, { desc = "[S]earch: Git [C]ommits" })
-			vim.keymap.set({ "n", "v" }, "<leader>sh", builtin.git_bcommits, { desc = "[S]earch: Git [H]istory" })
-			vim.keymap.set(
-				{ "n", "v" },
-				"<leader>sH",
-				":Telescope git_file_history<CR>",
-				{ desc = "[S]earch: Git [H]istory" }
-			)
-
 			-- Load extensions
 			telescope.load_extension("ui-select")
 			telescope.load_extension("live_grep_args")
@@ -279,34 +262,25 @@ return {
 				{ desc = "[S]earch current [S]election" }
 			)
 
+			local nvmode = { "n", "v" }
 			-- Git operations
-			vim.keymap.set({ "n", "v" }, "<leader>sd", git_branch.files, { desc = "[S]earch: Git [D]iff" })
-			vim.keymap.set({ "n", "v" }, "<leader>sb", builtin.git_branches, { desc = "[S]earch: Git [B]ranches" })
-			vim.keymap.set({ "n", "v" }, "<leader>sc", builtin.git_commits, { desc = "[S]earch: Git [C]ommits" })
-			vim.keymap.set({ "n", "v" }, "<leader>sh", builtin.git_bcommits, { desc = "[S]earch: Git [H]istory" })
+			vim.keymap.set(nvmode, "<leader>sd", git_branch.files, { desc = "[S]earch: Git [D]iff" })
+			vim.keymap.set(nvmode, "<leader>sb", builtin.git_branches, { desc = "[S]earch: Git [B]ranches" })
+			vim.keymap.set(nvmode, "<leader>sc", builtin.git_commits, { desc = "[S]earch: Git [C]ommits" })
+			vim.keymap.set(nvmode, "<leader>sh", builtin.git_bcommits, { desc = "[S]earch: Git [H]istory" })
 			vim.keymap.set(
-				{ "n", "v" },
+				nvmode,
 				"<leader>sH",
 				":Telescope git_file_history<CR>",
-				{ desc = "[S]earch: Git File [H]istory" }
+				{ desc = "[S]earch: Git [H]istory" }
 			)
 
 			-- LSP operations
-			vim.keymap.set(
-				{ "n", "v" },
-				"gd",
-				builtin.lsp_definitions,
-				{ desc = "Search: LSP [D]efinitions", remap = true }
-			)
-			vim.keymap.set({ "n", "v" }, "gr", builtin.lsp_references, { desc = "Search: LSP [R]eferences" })
-			vim.keymap.set({ "n", "v" }, "gi", builtin.lsp_implementations, { desc = "Search: LSP [I]mplementations" })
-			vim.keymap.set(
-				{ "n", "v" },
-				"gt",
-				builtin.lsp_type_definitions,
-				{ desc = "Search: LSP [T]ype Definitions" }
-			)
-			vim.keymap.set({ "n", "v" }, "gs", builtin.lsp_document_symbols, { desc = "Search: LSP [S]ymbols" })
+			vim.keymap.set(nvmode, "gd", builtin.lsp_definitions, { desc = "Search: LSP [D]efinitions", remap = true })
+			vim.keymap.set(nvmode, "gr", builtin.lsp_references, { desc = "Search: LSP [R]eferences" })
+			vim.keymap.set(nvmode, "gi", builtin.lsp_implementations, { desc = "Search: LSP [I]mplementations" })
+			vim.keymap.set(nvmode, "gt", builtin.lsp_type_definitions, { desc = "Search: LSP [T]ype" })
+			vim.keymap.set(nvmode, "gs", builtin.lsp_document_symbols, { desc = "Search: LSP [S]ymbols" })
 		end,
 	},
 }
