@@ -120,5 +120,6 @@ return {
 		vim.keymap.set("n", "<leader>e", ":Neotree filesystem toggle left<CR>", { desc = "Neotree [e]xplore" })
 		vim.keymap.set("n", "<leader>b", ":Neotree buffers reveal float<CR>", { desc = "NeoTree [b]uffers" })
 		vim.keymap.set("n", "<leader>G", ":Neotree float git_status<CR>", { desc = "NeoTree [G]it status" })
+		vim.keymap.set("n", "<leader>w", ":Neotree filsystem toggle<CR>", { desc = "NeoTree [o]pen" })
 	end,
 }

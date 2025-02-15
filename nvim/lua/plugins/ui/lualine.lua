@@ -1,16 +1,35 @@
+local function get_custom_colors()
+	local custom_colors = {}
+	if pcall(require, "draclua") then
+		local dracula = require("draclua").colors()
+		custom_colors = {
+			tab_active = { fg = dracula.purple },
+			tab_inactive = { fg = dracula.fg },
+		}
+	elseif pcall(require, "tokyonight") then
+		local tokyonight = require("tokyonight.colors").setup()
+		custom_colors = {
+			tab_active = { fg = tokyonight.fg },
+			tab_inactive = { fg = tokyonight.fg_dark },
+		}
+	else
+		custom_colors = {
+			tab_active = { fg = "#bd93f9" },
+			tab_inactive = { fg = "#6272a4" },
+		}
+	end
+	return custom_colors
+end
+
 return {
 	"nvim-lualine/lualine.nvim",
-	lazy = true,
 	event = "VimEnter",
 	dependencies = {
-		{
-			"dokwork/lualine-ex",
-			lazy = true,
-		},
+		{ "dokwork/lualine-ex" },
+		{ "Mofiqul/dracula.nvim" },
 	},
 	config = function()
-		local dracula = require("dracula").colors()
-
+		local custom_colors = get_custom_colors()
 		require("lualine").setup({
 			options = {
 				-- theme = "dracula-nvim",
@@ -32,8 +51,8 @@ return {
 						symbols = { modified = "󱗝" },
 						use_mode_colors = true,
 						tabs_color = {
-							active = { fg = dracula.purple },
-							inactive = { fg = dracula.fg },
+							active = { fg = custom_colors.tab_active.fg },
+							inactive = { fg = custom_colors.tab_inactive.fg },
 						},
 					},
 				},

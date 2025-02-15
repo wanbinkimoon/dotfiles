@@ -1,31 +1,25 @@
 return {
 	{
 		"williamboman/mason.nvim",
-		lazy = false,
-		event = "BufRead",
+		event = "LspAttach", -- Wait until an LSP server attaches to a buffer
 		dependencies = {
-			"williamboman/mason-lspconfig.nvim",
+			{ "williamboman/mason-lspconfig.nvim" },
 		},
 		config = function()
 			local mason = require("mason")
 			local mason_lspconfig = require("mason-lspconfig")
 			local all_servers = {
-				-- "jsonls",
 				"lua_ls",
-				-- "clangd",
 				"prosemd_lsp",
 				"eslint",
 				"cssls",
-				-- "vuels",
-				-- "tsserver",
 				"ts_ls",
 				"ember",
 				"texlab",
-				-- "angularls",
+				"pyright",
 				"eslint",
 				"cmake",
 				"emmet_language_server",
-				-- "rust_analyzer",
 				"tailwindcss",
 			}
 

@@ -1,7 +1,6 @@
 return {
 	"hrsh7th/nvim-cmp",
-	lazy = true,
-	event = "BufReadPre",
+	event = "InsertEnter",
 	dependencies = {
 		"mattn/emmet-vim",
 		"dcampos/cmp-emmet-vim",

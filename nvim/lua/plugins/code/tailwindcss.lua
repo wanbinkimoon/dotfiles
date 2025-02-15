@@ -1,6 +1,8 @@
 return {
 	{
 		"roobert/tailwindcss-colorizer-cmp.nvim",
+		ft = { "html", "css", "javascript", "typescript" }, -- Load only for these filetypes
+		event = "BufRead", -- Load only when a file is opened
 		-- optionally, override the default options:
 		config = function()
 			require("tailwindcss-colorizer-cmp").setup({
@@ -10,6 +12,8 @@ return {
 	},
 	{
 		"luckasRanarison/tailwind-tools.nvim",
+		ft = { "html", "css", "javascript", "typescript" }, -- Load only for these filetype
+		event = "BufRead", -- Load only when a file is opened
 		name = "tailwind-tools",
 		build = ":UpdateRemotePlugins",
 		dependencies = {

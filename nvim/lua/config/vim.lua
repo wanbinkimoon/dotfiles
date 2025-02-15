@@ -37,3 +37,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 -- vim.cmd([[autocmd VimEnter * Neotree]])
+
+vim.g.loaded_man = 1 -- Disable :Man
+vim.g.loaded_spellfile = 1 -- Disable spellfile.vim
