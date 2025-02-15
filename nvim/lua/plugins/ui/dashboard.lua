@@ -20,7 +20,7 @@ return {
 
 		-- Set menu
 		dashboard.section.buttons.val = {
-			dashboard.button("f", icons.ui.Search .. " Find file", ":Neotree float<CR>"),
+			dashboard.button("f", icons.ui.Search .. " Find file", ":Telescope find_files<CR>"),
 			dashboard.button("n", icons.ui.NewFile .. " New file", ":ene <BAR> startinsert <CR>"),
 			dashboard.button("r", icons.ui.History .. " Recent files", ":Telescope oldfiles <CR>"),
 			dashboard.button("t", icons.ui.Note .. " Find text", ":Telescope live_grep <CR>"),
