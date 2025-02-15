@@ -3,14 +3,14 @@ return {
 		"nvim-telescope/telescope.nvim",
 		cmd = "Telescope", -- Load only when you run :Telescope
 		dependencies = {
-			{ "nvim-lua/plenary.nvim" },
-			{ "nvim-telescope/telescope-ui-select.nvim" },
-			{ "nvim-telescope/telescope-live-grep-args.nvim" },
-			{ "ahmedkhalf/project.nvim" },
-			{ "echasnovski/mini.icons" },
-			{ "mrloop/telescope-git-branch.nvim" },
-			{ "isak102/telescope-git-file-history.nvim" },
-			{ "nvim-lua/plenary.nvim", "tpope/vim-fugitive" },
+			{ "nvim-lua/plenary.nvim", lazy = true },
+			{ "nvim-telescope/telescope-ui-select.nvim", lazy = true },
+			{ "nvim-telescope/telescope-live-grep-args.nvim", lazy = true },
+			{ "ahmedkhalf/project.nvim", lazy = true },
+			{ "echasnovski/mini.icons", lazy = true },
+			{ "mrloop/telescope-git-branch.nvim", lazy = true },
+			{ "isak102/telescope-git-file-history.nvim", lazy = true },
+			{ "nvim-lua/plenary.nvim", "tpope/vim-fugitive", lazy = true },
 		},
 		config = function()
 			local telescope = require("telescope")
