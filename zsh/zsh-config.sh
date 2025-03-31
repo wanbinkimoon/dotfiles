@@ -1,8 +1,6 @@
 # Set up fzf key bindings and fuzzy completion
 source <(fzf --zsh)
 
-# FZF Dracula theme 
-export FZF_DEFAULT_OPTS='--color=fg:#f8f8f2,hl:#bd93f9 --color=fg+:#f8f8f2,hl+:#bd93f9 --color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6 --color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4'
 
 # history setup
 HISTFILE=$HOME/.zhistory
@@ -21,24 +19,8 @@ bindkey '^[[B' history-search-forward
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-# Add zeoxide to the shell
-eval "$(zoxide init zsh)"
-alias cd="z"
-
 # Add zsh-completions to the shell
 zstyle ':completion:*' menu select
 
-# Eza (better ls) 
-alias ls="eza --icons=always -T --level=1 --header --hyperlink"
 
 
-# Bat (better cat)
-export BAT_THEME='Dracula'
-
-# anaconda path
-export PATH="/opt/homebrew/anaconda3/bin:$PATH"
-
-# Default editor
-export EDITOR='nvim'
-
-export PATH="/Users/nicola.bertelloni/.local/bin:$PATH"

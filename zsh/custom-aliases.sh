@@ -49,3 +49,12 @@ function git-clean() {
     fi
   done
 }
+
+# Add zeoxide to the shell
+eval "$(zoxide init zsh)"
+alias cd="z"
+
+# Eza (better ls) 
+alias ls="eza --icons=always -T --level=1 --header --hyperlink"
+
+source ~/.config/zsh/openwebui.sh
