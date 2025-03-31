@@ -1,10 +1,10 @@
 local function get_custom_colors()
 	local custom_colors = {}
-	if pcall(require, "draclua") then
-		local dracula = require("draclua").colors()
+	if pcall(require, "dracula") then
+		local dracula = require("dracula").colors()
 		custom_colors = {
 			tab_active = { fg = dracula.purple },
-			tab_inactive = { fg = dracula.fg },
+			tab_inactive = { fg = "#9775c7" },
 		}
 	elseif pcall(require, "tokyonight") then
 		local tokyonight = require("tokyonight.colors").setup()
@@ -41,7 +41,9 @@ return {
 			},
 			sections = {
 				-- lualine_c = { { "filename", path = 3 } },
-				lualine_c = { { "ex.relative_filename", max_length = 0.8 } },
+				lualine_c = { "diff", "diagnostics" },
+				lualine_b = { { "ex.relative_filename", max_length = 0.8 } },
+				-- lualine_c = { { "git" }},
 				lualine_x = {
 					"filetype",
 					{
@@ -51,7 +53,7 @@ return {
 						symbols = { modified = "󱗝" },
 						use_mode_colors = true,
 						tabs_color = {
-							active = { fg = custom_colors.tab_active.fg },
+							active = { fg = custom_colors.tab_active.fg, bg = custom_colors.tab_active.bg },
 							inactive = { fg = custom_colors.tab_inactive.fg },
 						},
 					},

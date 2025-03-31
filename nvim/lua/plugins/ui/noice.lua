@@ -1,9 +1,8 @@
 return {
 	"folke/noice.nvim",
-	enabled = false,
+	enabled = true,
 	event = {
 		"CmdlineEnter",
-		"LspAttach",
 	},
 	opts = {
 		-- add any options here
@@ -57,15 +56,40 @@ return {
 					-- lua = false, -- to disable a format, set to `false`
 				},
 			},
+			popupmenu = {
+				enabled = false,
+				relative = "editor",
+				position = {
+					row = "8",
+					col = "50%",
+				},
+			},
+			notify = {
+				enabled = false,
+			},
 			messages = {
 				-- NOTE: If you enable messages, then the cmdline is enabled automatically.
 				-- This is a current Neovim limitation.
-				enabled = false, -- enables the Noice messages UI
-				view = "notify", -- default view for messages
-				view_error = "notify", -- view for errors
-				view_warn = "notify", -- view for warnings
+				enabled = true, -- enables the Noice messages UI
+				view = "virtualtext", -- default view for messages
+				view_info = "virtualtext", -- view for info messages
+				view_error = "virtualtext", -- view for errors
+				view_warn = "virtualtext", -- view for warnings
 				view_history = "messages", -- view for :messages
 				view_search = "virtualtext", -- view for search count messages. Set to `false` to disable
+			},
+			routes = {
+				{
+					filter = {
+						event = "msg_show",
+						kind = "",
+						find = "written",
+					},
+					opts = { skip = true },
+				},
+			},
+			documentation = {
+				enabled = false,
 			},
 			lsp = {
 				-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
