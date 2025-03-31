@@ -19,7 +19,7 @@ return {
 		local opts = {
 			close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab
 			enable_git_status = true,
-			enable_diagnostics = false,
+			enable_diagnostics = true,
 			indent = {
 				indent_size = 2,
 				padding = 0, -- extra padding on left hand side
@@ -35,19 +35,47 @@ return {
 				-- expander_highlight = "NeoTreeExpander",
 			},
 			filesystem = {
-				filtered_items = {
-					visible = true,
-					show_hidden_count = true,
-					hide_dotfiles = false,
-					hide_gitignored = false,
-					hide_by_name = { ".git" },
-					never_show = { ".DS_Store" },
-					always_show = { ".env" },
+				commands = {
+					avante_add_files = function(state)
+						local node = state.tree:get_node()
+						local filepath = node:get_id()
+						local relative_path = require("avante.utils").relative_path(filepath)
+
+						local sidebar = require("avante").get()
+
+						local open = sidebar:is_open()
+						-- ensure avante sidebar is open
+						if not open then
+							require("avante.api").ask()
+							sidebar = require("avante").get()
+						end
+
+						sidebar.file_selector:add_selected_file(relative_path)
+
+						-- remove neo tree buffer
+						if not open then
+							sidebar.file_selector:remove_selected_file("neo-tree filesystem [1]")
+						end
+					end,
 				},
-				follow_current_file = {
-					enabled = true,
-					leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
+				window = {
+					mappings = {
+						["oa"] = "avante_add_files",
+					},
 				},
+			},
+			filtered_items = {
+				visible = true,
+				show_hidden_count = true,
+				hide_dotfiles = false,
+				hide_gitignored = false,
+				hide_by_name = { ".git" },
+				never_show = { ".DS_Store" },
+				always_show = { ".env" },
+			},
+			follow_current_file = {
+				enabled = true,
+				leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
 			},
 			buffers = {
 				follow_current_file = {
@@ -107,6 +135,7 @@ return {
 				},
 			},
 		}
+
 		require("neo-tree").setup(opts)
 
 		vim.api.nvim_create_autocmd("BufEnter", {
@@ -120,6 +149,6 @@ return {
 		vim.keymap.set("n", "<leader>e", ":Neotree filesystem toggle left<CR>", { desc = "Neotree [e]xplore" })
 		vim.keymap.set("n", "<leader>b", ":Neotree buffers reveal float<CR>", { desc = "NeoTree [b]uffers" })
 		vim.keymap.set("n", "<leader>G", ":Neotree float git_status<CR>", { desc = "NeoTree [G]it status" })
-		vim.keymap.set("n", "<leader>w", ":Neotree filesystem toggle<CR>", { desc = "NeoTree [o]pen" })
+		vim.keymap.set("n", "<leader>w", ":Neotree filesystem toggle float<CR>", { desc = "NeoTree [o]pen" })
 	end,
 }
