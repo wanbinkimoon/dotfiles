@@ -11,6 +11,24 @@ return {
 			{ "mrloop/telescope-git-branch.nvim", lazy = true },
 			{ "isak102/telescope-git-file-history.nvim", lazy = true },
 			{ "nvim-lua/plenary.nvim", "tpope/vim-fugitive", lazy = true },
+			{
+				{
+					"LukasPietzschmann/telescope-tabs",
+					config = function()
+						require("telescope").load_extension("telescope-tabs")
+						require("telescope-tabs").setup({
+							-- Your custom config :^)
+							vim.api.nvim_set_keymap(
+								"n",
+								"<leader>st",
+								":lua require('telescope-tabs').list_tabs()<CR>",
+								{ noremap = true }
+							),
+						})
+					end,
+					dependencies = { "nvim-telescope/telescope.nvim" },
+				},
+			},
 		},
 		config = function()
 			local telescope = require("telescope")
