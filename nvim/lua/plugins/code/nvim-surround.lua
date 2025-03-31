@@ -1,7 +1,7 @@
 return {
 	"kylechui/nvim-surround",
 	version = "*", -- Use for stability; omit to use `main` branch for the latest features
-	keys = { "<C-g>s", "<C-g>S", "ys", "yss", "yS", "ySS", "S", "gS", "ds", "cs", "cS" },
+	event = "BufReadPre", -- Load when a buffer is opened
 	config = function()
 		require("nvim-surround").setup({
 			keymaps = {
