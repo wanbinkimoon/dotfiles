@@ -1,7 +1,7 @@
 return {
 	{
 		"williamboman/mason.nvim",
-		event = "LspAttach", -- Wait until an LSP server attaches to a buffer
+		event = "BufRead", -- Wait until a buffer is loaded
 		dependencies = {
 			{ "williamboman/mason-lspconfig.nvim" },
 		},
