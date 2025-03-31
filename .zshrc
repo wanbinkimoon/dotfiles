@@ -8,6 +8,7 @@ fi
 
 source $(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme
 
+source ~/.config/zsh/exports.sh
 source ~/.config/zsh/window-rename.sh
 source ~/.config/zsh/nvm-config.sh
 source ~/.config/zsh/omz-git-aliases.sh
@@ -15,29 +16,11 @@ source ~/.config/zsh/git-aliases.sh
 source ~/.config/zsh/custom-aliases.sh
 source ~/.config/zsh/pnpm-config.sh
 source ~/.config/zsh/secrets.sh
-# source ~/.config/zsh/android-studio-config.sh
 source ~/.config/zsh/zsh-config.sh
-source ~/.config/zsh/anaconda-config.sh
+source ~/.config/zsh/conda.sh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 
-# Added by LM Studio CLI (lms)
-export PATH="$PATH:/Users/nicola.bertelloni/.lmstudio/bin"
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/opt/homebrew/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/opt/homebrew/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/opt/homebrew/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/opt/homebrew/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
 
