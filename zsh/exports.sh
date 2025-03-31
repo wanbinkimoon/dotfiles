@@ -21,3 +21,5 @@ export CLAUDE_CODE_USE_BEDROCK=1
 export ANTHROPIC_MODE1='us.anthropic.claude-3-7-sonnet-20250219-v1:0'
 export DISABLE_PROMPT_CACHING=1
 
+# 1Password SSH Agent
+export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
