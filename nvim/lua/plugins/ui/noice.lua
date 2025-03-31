@@ -70,7 +70,7 @@ return {
 			messages = {
 				-- NOTE: If you enable messages, then the cmdline is enabled automatically.
 				-- This is a current Neovim limitation.
-				enabled = true, -- enables the Noice messages UI
+				enabled = false, -- disable the Noice messages UI
 				view = "virtualtext", -- default view for messages
 				view_info = "virtualtext", -- view for info messages
 				view_error = "virtualtext", -- view for errors
@@ -92,12 +92,26 @@ return {
 				enabled = false,
 			},
 			lsp = {
+				enabled = false, -- disable all LSP features
+				hover = {
+					enabled = false,
+				},
+				signature = {
+					enabled = false,
+				},
 				-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
 				override = {
-					["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-					["vim.lsp.util.stylize_markdown"] = true,
-					["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
+					["vim.lsp.util.convert_input_to_markdown_lines"] = false,
+					["vim.lsp.util.stylize_markdown"] = false,
+					["cmp.entry.get_documentation"] = false, -- requires hrsh7th/nvim-cmp
 				},
+			},
+			presets = {
+				bottom_search = false,
+				command_palette = false,
+				long_message_to_split = false,
+				inc_rename = false,
+				lsp_doc_border = false,
 			},
 		})
 	end,
