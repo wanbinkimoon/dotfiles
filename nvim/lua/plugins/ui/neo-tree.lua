@@ -1,6 +1,6 @@
 return {
 	"nvim-neo-tree/neo-tree.nvim",
-	lazy = true,
+	-- lazy = true,
 	cmd = "Neotree",
 	keys = {
 		{ "<leader>e", desc = "Neotree [e]xplore" },
@@ -19,7 +19,19 @@ return {
 		local opts = {
 			close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab
 			enable_git_status = true,
-			enable_diagnostics = true,
+			enable_diagnostics = false,
+			source_selector = {
+				winbar = true, -- toggle to show selector on winbar
+				statusline = true, -- toggle to show selector on statusline
+				show_scrolled_off_parent_node = true, -- this will replace the tabs with the parent path
+				-- of the top visible node when scrolled down.
+				-- sources = {
+				-- 	{ source = "filesystem" },
+				-- 	{ source = "buffers" },
+				-- 	{ source = "git_status" },
+				-- 	{ source = "document_symbols" },
+				-- },
+			},
 			indent = {
 				indent_size = 2,
 				padding = 0, -- extra padding on left hand side
@@ -35,52 +47,24 @@ return {
 				-- expander_highlight = "NeoTreeExpander",
 			},
 			filesystem = {
-				commands = {
-					avante_add_files = function(state)
-						local node = state.tree:get_node()
-						local filepath = node:get_id()
-						local relative_path = require("avante.utils").relative_path(filepath)
-
-						local sidebar = require("avante").get()
-
-						local open = sidebar:is_open()
-						-- ensure avante sidebar is open
-						if not open then
-							require("avante.api").ask()
-							sidebar = require("avante").get()
-						end
-
-						sidebar.file_selector:add_selected_file(relative_path)
-
-						-- remove neo tree buffer
-						if not open then
-							sidebar.file_selector:remove_selected_file("neo-tree filesystem [1]")
-						end
-					end,
+				filtered_items = {
+					visible = true,
+					show_hidden_count = true,
+					hide_dotfiles = false,
+					hide_gitignored = false,
+					hide_by_name = { ".git" },
+					never_show = { ".DS_Store" },
+					always_show = { ".env" },
 				},
-				window = {
-					mappings = {
-						["oa"] = "avante_add_files",
-					},
-				},
-			},
-			filtered_items = {
-				visible = true,
-				show_hidden_count = true,
-				hide_dotfiles = false,
-				hide_gitignored = false,
-				hide_by_name = { ".git" },
-				never_show = { ".DS_Store" },
-				always_show = { ".env" },
-			},
-			follow_current_file = {
-				enabled = true,
-				leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
-			},
-			buffers = {
 				follow_current_file = {
 					enabled = true,
 					-- leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
+				},
+				buffers = {
+					follow_current_file = {
+						enabled = true,
+						-- leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
+					},
 				},
 			},
 			mappings = {
@@ -147,8 +131,8 @@ return {
 		})
 
 		vim.keymap.set("n", "<leader>e", ":Neotree filesystem toggle left<CR>", { desc = "Neotree [e]xplore" })
-		vim.keymap.set("n", "<leader>b", ":Neotree buffers reveal float<CR>", { desc = "NeoTree [b]uffers" })
-		vim.keymap.set("n", "<leader>G", ":Neotree float git_status<CR>", { desc = "NeoTree [G]it status" })
+		vim.keymap.set("n", "<leader>b", ":Neotree buffers toggle bottom<CR>", { desc = "NeoTree [b]uffers" })
+		vim.keymap.set("n", "<leader>G", ":Neotree git_status toggle left<CR>", { desc = "NeoTree [G]it status" })
 		vim.keymap.set("n", "<leader>w", ":Neotree filesystem toggle float<CR>", { desc = "NeoTree [o]pen" })
 	end,
 }
