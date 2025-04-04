@@ -3,6 +3,7 @@ return {
 		"roobert/tailwindcss-colorizer-cmp.nvim",
 		ft = { "html", "css", "javascript", "typescript" }, -- Load only for these filetypes
 		event = "BufRead", -- Load only when a file is opened
+		lazy = true,
 		-- optionally, override the default options:
 		config = function()
 			require("tailwindcss-colorizer-cmp").setup({

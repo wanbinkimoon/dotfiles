@@ -15,13 +15,8 @@ return {
 
 			local cfg = {
 				setopt = true, -- Whether to set the 'statuscolumn' option, may be set to false for those who
-				-- want to use the click handlers in their own 'statuscolumn': _G.Sc[SFL]a().
-				-- Although I recommend just using the segments field below to build your
-				-- statuscolumn to benefit from the performance optimizations in this plugin.
-				-- builtin.lnumfunc number string options
 				thousands = false, -- or line number thousands separator string ("." / ",")
 				relculright = true, -- whether to right-align the cursor line number with 'relativenumber' set
-				-- Builtin 'statuscolumn' options
 				ft_ignore = nil, -- lua table with 'filetype' values for which 'statuscolumn' will be unset
 				bt_ignore = nil, -- lua table with 'buftype' values for which 'statuscolumn' will be unset
 				segments = {
@@ -65,7 +60,6 @@ return {
 				},
 				fold = {
 					width = 1, -- current width of the fold column
-					-- 'fillchars' option values:
 					close = "", -- foldclose
 					open = "", -- foldopen
 					sep = " ", -- foldsep

@@ -181,9 +181,9 @@ return {
 		-- Basic Setup END --
 
 		vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Definition" })
-		vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "[C]ode: Go to [d]efinition" })
-		vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "[C]ode: Go to [R]eference" })
-		vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "[C]ode: Go to [i]mplementation" })
+		vim.keymap.set("n", "Gd", vim.lsp.buf.definition, { desc = "[C]ode: Go to [d]efinition" })
+		vim.keymap.set("n", "Gr", vim.lsp.buf.references, { desc = "[C]ode: Go to [R]eference" })
+		vim.keymap.set("n", "Gi", vim.lsp.buf.implementation, { desc = "[C]ode: Go to [i]mplementation" })
 		vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "[C]ode: [A]ction" })
 		vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "[C]ode: [R]ename" })
 	end,

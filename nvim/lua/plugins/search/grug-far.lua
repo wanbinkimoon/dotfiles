@@ -1,7 +1,7 @@
 return {
 	"MagicDuck/grug-far.nvim",
 	lazy = true,
-	event = "VeryLazy",
+	event = "BufReadPost",
 	keys = {
 		{
 			"<leader>sr",

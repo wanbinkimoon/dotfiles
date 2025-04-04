@@ -24,37 +24,20 @@ return {
 				winbar = true, -- toggle to show selector on winbar
 				statusline = true, -- toggle to show selector on statusline
 				show_scrolled_off_parent_node = true, -- this will replace the tabs with the parent path
-				-- of the top visible node when scrolled down.
-				-- sources = {
-				-- 	{ source = "filesystem" },
-				-- 	{ source = "buffers" },
-				-- 	{ source = "git_status" },
-				-- 	{ source = "document_symbols" },
-				-- },
 			},
 			indent = {
 				indent_size = 2,
 				padding = 0, -- extra padding on left hand side
-				-- indent guides
-				-- with_markers = true,
-				-- indent_marker = "│",
-				-- last_indent_marker = "└",
-				-- highlight = "NeoTreeIndentMarker",
-				-- expander config, needed for nesting files
-				-- with_expanders = nil, -- if nil and file nesting is enabled, will enable expanders
-				-- expander_collapsed = "",
-				-- expander_expanded = "",
-				-- expander_highlight = "NeoTreeExpander",
 			},
 			filesystem = {
 				filtered_items = {
 					visible = true,
-					show_hidden_count = true,
+					show_hidden_count = false,
 					hide_dotfiles = false,
 					hide_gitignored = false,
 					hide_by_name = { ".git" },
 					never_show = { ".DS_Store" },
-					always_show = { ".env" },
+					always_show = { ".env", ".env.local", ".env.*" },
 				},
 				follow_current_file = {
 					enabled = true,
@@ -105,14 +88,16 @@ return {
 						-- Change type
 						added = icons.git.Add,
 						deleted = icons.git.Remove,
-						modified = icons.git.Mod,
+						-- modified = icons.git.Mod,
+						modified = "",
 						renamed = icons.git.Rename,
 						-- Status type
 						untracked = icons.git.Untrack,
 						ignored = icons.git.Ignore,
 						unstaged = "",
+						staged = icons.git.Mod,
 						-- staged = icons.git.Staged,
-						staged = "",
+						-- staged = "",
 						conflict = icons.git.Conflict,
 					},
 					align = "right",
@@ -131,8 +116,7 @@ return {
 		})
 
 		vim.keymap.set("n", "<leader>e", ":Neotree filesystem toggle left<CR>", { desc = "Neotree [e]xplore" })
-		vim.keymap.set("n", "<leader>b", ":Neotree buffers toggle bottom<CR>", { desc = "NeoTree [b]uffers" })
-		vim.keymap.set("n", "<leader>G", ":Neotree git_status toggle left<CR>", { desc = "NeoTree [G]it status" })
-		vim.keymap.set("n", "<leader>w", ":Neotree filesystem toggle float<CR>", { desc = "NeoTree [o]pen" })
+		vim.keymap.set("n", "<leader>b", ":Neotree buffers toggle<CR>", { desc = "NeoTree [b]uffers" })
+		vim.keymap.set("n", "<leader>G", ":Neotree git_status toggle<CR>", { desc = "NeoTree [G]it status" })
 	end,
 }
