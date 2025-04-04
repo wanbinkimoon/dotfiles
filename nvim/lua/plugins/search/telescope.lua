@@ -12,22 +12,20 @@ return {
 			{ "isak102/telescope-git-file-history.nvim", lazy = true },
 			{ "nvim-lua/plenary.nvim", "tpope/vim-fugitive", lazy = true },
 			{
-				{
-					"LukasPietzschmann/telescope-tabs",
-					config = function()
-						require("telescope").load_extension("telescope-tabs")
-						require("telescope-tabs").setup({
-							-- Your custom config :^)
-							vim.api.nvim_set_keymap(
-								"n",
-								"<leader>st",
-								":lua require('telescope-tabs').list_tabs()<CR>",
-								{ noremap = true }
-							),
-						})
-					end,
-					dependencies = { "nvim-telescope/telescope.nvim" },
-				},
+				"LukasPietzschmann/telescope-tabs",
+				config = function()
+					require("telescope").load_extension("telescope-tabs")
+					require("telescope-tabs").setup({
+						-- Your custom config :^)
+						vim.api.nvim_set_keymap(
+							"n",
+							"<leader>st",
+							":lua require('telescope-tabs').list_tabs()<CR>",
+							{ noremap = true }
+						),
+					})
+				end,
+				dependencies = { "nvim-telescope/telescope.nvim" },
 			},
 		},
 		config = function()
@@ -200,15 +198,6 @@ return {
 				})
 			end, { nargs = 1 })
 
-			-- Enhance existing functionality with these tricks:
-			-- 1. In live grep prompt:
-			--    - Type `:dir<space>` to search specific directories
-			--    - Type `:filetype<space>` to filter by file type
-			-- 2. Use these commands from normal mode:
-			--    - :GrepCurrentDir
-			--    - :GrepProject
-			--    - :FindFilesInDir [path]
-
 			-- Optional: Add to which-key descriptions if you use it
 
 			telescope.setup(options)
@@ -221,7 +210,6 @@ return {
 
 			vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "[S]earch: [F]iles" })
 			vim.keymap.set("n", "<leader><leader>", builtin.oldfiles, { desc = "[S]earch: Oldfiles " })
-			vim.keymap.set("n", "<leader>sb", builtin.buffers, { desc = "[S]earch: [B]uffers" })
 
 			local git_branch = require("git_branch")
 			vim.keymap.set({ "n", "v" }, "<leader>sd", git_branch.files, { desc = "[S]earch: Git [D]iff" })
@@ -256,7 +244,6 @@ return {
 			-- File search
 			vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "[S]earch: [F]iles" })
 			vim.keymap.set("n", "<leader><leader>", builtin.oldfiles, { desc = "[S]earch: Recent Files" })
-			vim.keymap.set("n", "<leader>sb", builtin.buffers, { desc = "[S]earch: [B]uffers" })
 
 			-- Text search
 			vim.keymap.set("n", "<leader>s<CR>", ":GrepCurrentDir<CR>", { desc = "Grep Current Dir" })

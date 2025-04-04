@@ -7,14 +7,14 @@ return {
 			"sindrets/diffview.nvim", -- Enhanced diff view similar to VSCode
 		},
 		keys = {
-			{ "<leader>gs", "<cmd>:Git<CR>", desc = "[G]it: open git status" },
-			{ "<leader>gb", "<cmd>:Git blame<CR>", desc = "[G]it: blame" },
-			{ "<leader>gd", "<cmd>:Gdiff<CR>", desc = "[G]it: diff" },
-			{ "<leader>gD", "<cmd>:Gdiffsplit<CR>", desc = "[G]it: diff split" },
-			{ "<leader>gk", "<cmd>:diffget //3<CR>", desc = "[G]it: diff get from right" },
-			{ "<leader>gj", "<cmd>:diffget //2<CR>", desc = "[G]it: diff get from left" },
-			{ "<leader>gv", "<cmd>DiffviewOpen<CR>", desc = "[G]it: open diff view" },
-			{ "<leader>gc", "<cmd>DiffviewClose<CR>", desc = "[G]it: close diff view" },
+			{ "gs", "<cmd>:Git<CR>", desc = "[G]it: open git status" },
+			{ "gb", "<cmd>:Git blame<CR>", desc = "[G]it: blame" },
+			{ "gd", "<cmd>:Gdiff<CR>", desc = "[G]it: diff" },
+			{ "gD", "<cmd>:Gdiffsplit<CR>", desc = "[G]it: diff split" },
+			{ "gk", "<cmd>:diffget //3<CR>", desc = "[G]it: diff get from right" },
+			{ "gj", "<cmd>:diffget //2<CR>", desc = "[G]it: diff get from left" },
+			{ "gv", "<cmd>DiffviewOpen<CR>", desc = "[G]it: open diff view" },
+			{ "gc", "<cmd>DiffviewClose<CR>", desc = "[G]it: close diff view" },
 		},
 		config = function()
 			vim.g.fugitive_git_command = "git"

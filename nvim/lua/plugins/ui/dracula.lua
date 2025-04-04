@@ -1,7 +1,7 @@
 return {
 	{
 		"Mofiqul/dracula.nvim",
-		enabled = true,
+		enabled = false,
 		config = function()
 			require("dracula").setup({
 				transparent_bg = true,

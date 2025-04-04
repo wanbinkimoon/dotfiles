@@ -2,17 +2,7 @@ return {
 	"folke/noice.nvim",
 	enabled = true,
 	event = { "CmdlineEnter" },
-	dependencies = {
-		"MunifTanjim/nui.nvim",
-		{
-			"rcarriga/nvim-notify",
-			config = function()
-				require("notify").setup({
-					background_colour = "#000000",
-				})
-			end,
-		},
-	},
+	dependencies = { "MunifTanjim/nui.nvim" },
 	config = function()
 		-- Define noice configuration options
 		local noice_opts = {
@@ -23,7 +13,6 @@ return {
 				opts = {
 					position = { row = "10%", col = "50%" },
 					size = { width = "50%" },
-					border = { style = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" } },
 				},
 				format = {
 					cmdline = { pattern = "^:", icon = "", lang = "vim" },
