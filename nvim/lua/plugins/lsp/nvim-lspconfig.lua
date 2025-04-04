@@ -56,6 +56,28 @@ return {
 				},
 			},
 		})
+		lspconfig.graphql.setup({
+			capabilities = capabilities,
+			filetypes = {
+				"gql",
+				"graphql",
+				"javascriptreact",
+				"typescriptreact",
+			},
+		})
+
+		lspconfig.emmet_ls.setup({
+			capabilities = capabilities,
+			filetypes = {
+				"css",
+				"html",
+				"javascriptreact",
+				"less",
+				"sass",
+				"scss",
+				"typescriptreact",
+			},
+		})
 
 		lspconfig.eslint.setup({
 			on_attach = function(client, bufnr)
@@ -110,9 +132,7 @@ return {
 			-- disable virtual text
 			virtual_text = { prefix = icons.ui.VirtualPrefix },
 			-- show signs
-			signs = {
-				active = signs,
-			},
+			signs = { active = signs },
 			update_in_insert = true,
 			underline = true,
 			severity_sort = true,
@@ -125,9 +145,11 @@ return {
 				prefix = "",
 			},
 		})
+
 		vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
 			border = "single",
 		})
+
 		vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
 			border = "single",
 			focusable = true,
@@ -158,10 +180,10 @@ return {
 		end
 		-- Basic Setup END --
 
-		vim.keymap.set("n", "<leader>D", vim.lsp.buf.hover, { desc = "Definition" })
-		vim.keymap.set("n", "<leader>cd", vim.lsp.buf.definition, { desc = "[C]ode: Go to [d]efinition" })
-		vim.keymap.set("n", "<leader>cR", vim.lsp.buf.references, { desc = "[C]ode: Go to [R]eference" })
-		vim.keymap.set("n", "<leader>ci", vim.lsp.buf.implementation, { desc = "[C]ode: Go to [i]mplementation" })
+		vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Definition" })
+		vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "[C]ode: Go to [d]efinition" })
+		vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "[C]ode: Go to [R]eference" })
+		vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "[C]ode: Go to [i]mplementation" })
 		vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "[C]ode: [A]ction" })
 		vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "[C]ode: [R]ename" })
 	end,

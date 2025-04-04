@@ -11,7 +11,7 @@ return {
 			local all_servers = {
 				"lua_ls",
 				"prosemd_lsp",
-				"eslint",
+				"eslint_d",
 				"cssls",
 				"ts_ls",
 				"ember",
