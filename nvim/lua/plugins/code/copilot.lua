@@ -19,29 +19,4 @@ return {
 			{ "<leader>cc", "<cmd>:CopilotChatToggle<cr>", desc = "Copilot Chat" },
 		},
 	},
-	-- Copilot
-	-- This plugin is used to integrate Copilot with Neovim
-	{
-		"zbirenbaum/copilot.lua",
-		lazy = true,
-		enabled = false,
-		event = { "InsertEnter", "LspAttach" },
-		config = function()
-			require("copilot").setup({
-				suggestion = { enabled = true },
-				panel = { enabled = false },
-			})
-		end,
-	},
-	-- Copilot CMP
-	-- This plugin is used to integrate Copilot with nvim-cmp
-	{
-		"zbirenbaum/copilot-cmp",
-		enabled = false,
-		lazy = true,
-		event = "BufReadPre",
-		config = function()
-			require("copilot_cmp").setup()
-		end,
-	},
 }
