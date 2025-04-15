@@ -14,11 +14,10 @@ vim.loader.enable()
 
 require("lazy").setup({
 	{ import = "plugins.code" },
+	{ import = "plugins.completion" },
 	{ import = "plugins.editor" },
 	{ import = "plugins.git" },
-	{ import = "plugins.lsp" },
-	{ import = "plugins.search" },
-	{ import = "plugins.tmux" },
+	{ import = "plugins.navigation" },
 	{ import = "plugins.ui" },
 }, {
 	performance = {

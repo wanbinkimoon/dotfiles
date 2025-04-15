@@ -6,8 +6,8 @@ return {
 	{
 		"CopilotC-Nvim/CopilotChat.nvim",
 		dependencies = {
-			{ "github/copilot.vim" }, -- or zbirenbaum/copilot.lua
-			{ "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
+			{ "github/copilot.vim" },
+			{ "nvim-lua/plenary.nvim", branch = "master" },
 		},
 		build = "make tiktoken", -- Only on MacOS or Linux
 		event = { "InsertEnter", "LspAttach" },

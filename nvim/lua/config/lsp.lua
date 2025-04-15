@@ -33,14 +33,21 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			},
 		})
 
+		local width = math.floor(vim.o.columns * 0.8)
+		local height = math.floor(vim.o.lines * 0.3)
+
 		vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-			border = "single",
+			border = "rounded",
+			max_width = width,
+			max_height = height,
 		})
 
 		vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-			border = "single",
+			border = "rounded",
 			focusable = true,
 			relative = "cursor",
+			max_width = width,
+			max_height = height,
 		})
 
 		-- suppress error messages from lang servers
