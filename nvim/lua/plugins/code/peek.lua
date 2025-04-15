@@ -1,8 +1,9 @@
 return {
 	{
 		"toppair/peek.nvim",
-		event = { "VeryLazy" },
-		ft = { "markdown" },
+		event = "BufRead",
+		lazy = true,
+		ft = { "md" },
 		build = "deno task --quiet build:fast",
 		config = function()
 			local opts = {
