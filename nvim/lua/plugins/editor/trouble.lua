@@ -2,9 +2,21 @@ return {
 	"folke/trouble.nvim",
 	lazy = true,
 	event = "BufRead",
-	opts = { auto_close = true },
+	opts = {
+		auto_close = true,
+		modes = {
+			symbols = { -- Configure symbols mode
+				win = {
+					type = "split", -- split window
+					relative = "win", -- relative to current window
+					position = "right", -- right side
+					size = 0.3, -- 30% of the window
+				},
+			},
+		},
+	},
 	cmd = "Trouble",
-	kys = {
+	keys = {
 		{
 			"<leader>xx",
 			"<cmd>Trouble diagnostics toggle<cr>",
@@ -22,7 +34,7 @@ return {
 		},
 		{
 			"<leader>cl",
-			"<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+			"<cmd>Trouble lsp toggle focus=false win.position=right win.size=0.4<cr>",
 			desc = "LSP Definitions / references / ... (Trouble)",
 		},
 		{

@@ -1,6 +1,7 @@
 return {
 	"goolord/alpha-nvim",
 	event = "VimEnter",
+	lazy = true,
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	config = function()
 		local dashboard = require("alpha.themes.dashboard")
@@ -21,7 +22,7 @@ return {
 		-- Set menu
 		dashboard.section.buttons.val = {
 			dashboard.button("f", icons.ui.Search .. " Find file", ":Telescope find_files<CR>"),
-			dashboard.button("n", icons.ui.NewFile .. " New file", ":ene <BAR> startinsert <CR>"),
+			dashboard.button("d", icons.documents.Files .. " Search diff", ":Telescope git_branch<CR>"),
 			dashboard.button("r", icons.ui.History .. " Recent files", ":Telescope oldfiles <CR>"),
 			dashboard.button("t", icons.ui.Note .. " Find text", ":Telescope live_grep <CR>"),
 			dashboard.button("c", icons.ui.Gear .. " Config", ":e $MYVIMRC <CR>"),

@@ -34,7 +34,7 @@ return {
 			local lga_actions = require("telescope-live-grep-args.actions")
 
 			-- Core configuration components
-			local dimensions = { width = 0.85, height = 0.85 }
+			local dimensions = { width = 0.75, height = 0.75 } -- Smaller dimensions for faster rendering
 
 			-- Layout configuration
 			local layout = {
@@ -132,9 +132,9 @@ return {
 			local search_pickers = {
 				live_grep = vim.tbl_extend("force", picker_template, {
 					additional_args = function()
-						return { "--hidden", "--glob=!**/.git/*" }
+						return { "--hidden", "--glob=!**/.git/*", "--max-count=1000" } -- Limit results for faster response
 					end,
-					file_ignore_patterns = { "node_modules/", ".git/" },
+					file_ignore_patterns = { "node_modules/", ".git/", "dist/", "build/", ".next/", "*.min.js" },
 				}),
 			}
 
@@ -271,21 +271,14 @@ return {
 			-- Git operations
 			vim.keymap.set(nvmode, "<leader>sd", git_branch.files, { desc = "[S]earch: Git [D]iff" })
 			vim.keymap.set(nvmode, "<leader>sb", builtin.git_branches, { desc = "[S]earch: Git [B]ranches" })
-			vim.keymap.set(nvmode, "<leader>sc", builtin.git_commits, { desc = "[S]earch: Git [C]ommits" })
-			vim.keymap.set(nvmode, "<leader>sh", builtin.git_bcommits, { desc = "[S]earch: Git [H]istory" })
-			vim.keymap.set(
-				nvmode,
-				"<leader>sH",
-				":Telescope git_file_history<CR>",
-				{ desc = "[S]earch: Git [H]istory" }
-			)
-
+			vim.keymap.set(nvmode, "<leader>gc", builtin.git_commits, { desc = "[G]it: [C]ommits" })
+			vim.keymap.set(nvmode, "<leader>gh", builtin.git_bcommits, { desc = "[G]it: [H]istory" })
+			vim.keymap.set(nvmode, "<leader>gfh", ":Telescope git_file_history<CR>", { desc = "[G}it: File [H]istory" })
 			-- LSP operations
-			vim.keymap.set(nvmode, "gd", builtin.lsp_definitions, { desc = "Search: LSP [D]efinitions", remap = true })
-			vim.keymap.set(nvmode, "gr", builtin.lsp_references, { desc = "Search: LSP [R]eferences" })
-			vim.keymap.set(nvmode, "gi", builtin.lsp_implementations, { desc = "Search: LSP [I]mplementations" })
-			vim.keymap.set(nvmode, "gt", builtin.lsp_type_definitions, { desc = "Search: LSP [T]ype" })
-			vim.keymap.set(nvmode, "gs", builtin.lsp_document_symbols, { desc = "Search: LSP [S]ymbols" })
+			vim.keymap.set(nvmode, "Gd", builtin.lsp_definitions, { desc = "Search: LSP [D]efinitions", remap = true })
+			vim.keymap.set(nvmode, "Gr", builtin.lsp_references, { desc = "Search: LSP [R]eferences" })
+			vim.keymap.set(nvmode, "Gi", builtin.lsp_implementations, { desc = "Search: LSP [I]mplementations" })
+			vim.keymap.set(nvmode, "Gt", builtin.lsp_type_definitions, { desc = "Search: LSP [T]ype" })
 		end,
 	},
 }

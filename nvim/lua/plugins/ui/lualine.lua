@@ -17,6 +17,15 @@ return {
 	config = function()
 		local custom_colors = get_custom_colors()
 		local icons = require("config.icons")
+
+		function isRecording()
+			local reg = vim.fn.reg_recording()
+			if reg == "" then
+				return ""
+			end -- not recording
+			return "recording to " .. reg
+		end
+
 		require("lualine").setup({
 			options = {
 				-- theme = "dracula-nvim",
@@ -45,6 +54,7 @@ return {
 				},
 				-- lualine_c = { { "git" }},
 				lualine_x = {
+					isRecording,
 					{
 						"tabs",
 						mode = 1,
