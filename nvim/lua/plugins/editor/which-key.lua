@@ -4,18 +4,10 @@ return {
 	event = "VeryLazy",
 	opts = {
 		---@type false | "classic" | "modern" | "helix"
-		preset = "helix",
-		delay = function(ctx)
-			return 500
-		end,
+		preset = "classic",
+		delay = 500,
 	},
 	keys = {
-		{
-			"<leader>?",
-			function()
-				require("which-key").show({ global = true })
-			end,
-			desc = "Buffer Local Keymaps (which-key)",
-		},
+		{ "<leader>?", "<cmd>WhichKey<cr>", desc = "Buffer Local Keymaps (which-key)" },
 	},
 }
