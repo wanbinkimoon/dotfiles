@@ -3,6 +3,11 @@ return {
 	lazy = true,
 	event = "BufRead",
 	config = function()
-		require("autoclose").setup()
+		local autoclose = require("autoclose")
+		autoclose.setup({
+			options = {
+				pair_spaces = true,
+			},
+		})
 	end,
 }
