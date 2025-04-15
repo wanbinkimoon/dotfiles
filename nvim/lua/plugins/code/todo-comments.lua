@@ -16,9 +16,6 @@ return {
 			todo_comments.jump_prev()
 		end, { desc = "Previous todo comment" })
 
-		-- :TodoTelescope keywords=TODO,FIX
-		keymap.set("n", "<leader>ft", "<cmd>TodoTelescope keywords=TODO,FIX <cr>", { desc = "Find todo comments" })
-
 		-- :Trouble todo
 		keymap.set("n", "<leader>xt", "<cmd>Trouble todo<cr>", { desc = "Find todo comments" })
 
