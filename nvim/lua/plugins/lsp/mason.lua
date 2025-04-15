@@ -1,7 +1,7 @@
 return {
 	{
 		"williamboman/mason.nvim",
-		event = "BufRead", -- Wait until a buffer is loaded
+		event = "VeryLazy", -- Load even later
 		dependencies = {
 			{ "williamboman/mason-lspconfig.nvim" },
 		},

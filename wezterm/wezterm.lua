@@ -21,28 +21,37 @@ config.color_scheme = "Dracula"
 -- config.color_scheme = "tokyonight-night"
 -- config.color_scheme = "Batman"
 
--- config.font = wezterm.font("MesloLGS Nerd Font Mono")
 config.font = wezterm.font("JetBrainsMono Nerd Font")
+-- config.font = wezterm.font("MesloLGS Nerd Font Mono")
 -- config.font = wezterm.font("FiraCode Nerd Font")
 -- config.font = wezterm.font("CaskaydiaCove Nerd Font")
+-- config.font = wezterm.font("FantasqueSansM Nerd Font")
+-- config.font = wezterm.font("Iosevka Nerd Font")
+-- config.font = wezterm.font("Monoid Nerd Font")
+-- config.font = wezterm.font("VictorMono Nerd Font")
+-- config.font = wezterm.font("MonoLisa", { weight = "Light" })
 
 config.harfbuzz_features = { "ss01", "ss02", "ss03", "ss19", "ss20" }
 
 config.font_size = 14
-config.line_height = 1.15
+config.line_height = 1.2
 
 config.enable_tab_bar = false
 config.window_padding = {
 	left = 2,
 	right = 2,
-	top = 0,
+	top = 4,
 	bottom = 0,
 }
 
-config.window_decorations = "RESIZE"
-config.window_background_opacity = 0.95
-config.macos_window_background_blur = 40
+config.inactive_pane_hsb = {
+	saturation = 0.9,
+	brightness = 0.8,
+}
 
+config.window_decorations = "RESIZE"
+config.window_background_opacity = 1.95
+config.macos_window_background_blur = 40
 config.keys = {
 	{ mods = "OPT", key = "LeftArrow", action = wezterm.action.SendKey({ mods = "ALT", key = "b" }) },
 	{ mods = "OPT", key = "RightArrow", action = wezterm.action.SendKey({ mods = "ALT", key = "f" }) },

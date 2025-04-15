@@ -1,6 +1,6 @@
 return {
 	"nvim-neo-tree/neo-tree.nvim",
-	-- lazy = true,
+	lazy = true,
 	cmd = "Neotree",
 	keys = {
 		{ "<leader>e", desc = "Neotree [e]xplore" },

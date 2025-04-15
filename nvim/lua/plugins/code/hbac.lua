@@ -4,8 +4,8 @@ return {
 		event = "BufRead",
 		config = function()
 			require("hbac").setup({
-				autoclose = true, -- set autoclose to false if you want to close manually
-				threshold = 5, -- Lower threshold from 10 to 5
+				autoclose = true,
+				threshold = 3, -- Even lower threshold to be more aggressive with buffer closing
 				close_command = function(bufnr)
 					-- Don't close modified buffers
 					if not vim.api.nvim_buf_get_option(bufnr, "modified") then

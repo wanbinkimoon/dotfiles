@@ -1,6 +1,6 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
-	event = "BufRead",
+	event = "VeryLazy",
 	build = ":TSUpdate",
 	dependencies = {
 		"nvim-treesitter/nvim-treesitter-textobjects",
@@ -12,22 +12,17 @@ return {
 			highlight = { enable = true },
 			indent = { enable = true },
 			-- ensure these language parsers are installed
+			-- Only install parsers you actually use frequently
 			ensure_installed = {
 				"json",
 				"javascript",
-				"typescript",
+				"typescript", 
 				"tsx",
-				"yaml",
 				"html",
 				"css",
-				"prisma",
 				"markdown",
-				"markdown_inline",
-				"graphql",
-				"bash",
 				"lua",
 				"vim",
-				"dockerfile",
 				"gitignore",
 			},
 			incremental_selection = {
