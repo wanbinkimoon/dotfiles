@@ -2,17 +2,30 @@ return {
 	"hrsh7th/nvim-cmp",
 	event = "InsertEnter",
 	dependencies = {
-		"mattn/emmet-vim",
-		"dcampos/cmp-emmet-vim",
+		{ "mattn/emmet-vim", lazy = true, event = "InsertEnter", ft = { "html", "css", "javascript", "typescript" } },
+		{
+			"dcampos/cmp-emmet-vim",
+			lazy = true,
+			event = "InsertEnter",
+			ft = { "html", "css", "javascript", "typescript" },
+		},
 		{
 			"L3MON4D3/LuaSnip",
 			version = "v2.*",
 			build = "make install_jsregexp",
+			lazy = true,
+			event = "InsertEnter",
+			ft = { "lua" },
 		},
 		"hrsh7th/cmp-nvim-lsp",
 		"rafamadriz/friendly-snippets",
 		"saadparwaiz1/cmp_luasnip",
-		"tailwind-tools",
+		{
+			"tailwind-tools",
+			lazy = true,
+			event = "InsertEnter",
+			ft = { "html", "css", "javascript", "typescript" },
+		},
 	},
 	config = function()
 		local cmp = require("cmp")
