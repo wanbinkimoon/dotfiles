@@ -9,3 +9,5 @@ require("config.autoreload").setup()
 require("config.buffer-management").setup()
 
 require("customs")
+
+require("config.lsp")

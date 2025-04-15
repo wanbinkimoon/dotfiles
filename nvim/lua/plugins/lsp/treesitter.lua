@@ -2,21 +2,17 @@ return {
 	"nvim-treesitter/nvim-treesitter",
 	event = "VeryLazy",
 	build = ":TSUpdate",
-	dependencies = {
-		"nvim-treesitter/nvim-treesitter-textobjects",
-	},
+	dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
 	config = function()
 		local config = require("nvim-treesitter.configs")
 		config.setup({
 			auto_install = true,
 			highlight = { enable = true },
 			indent = { enable = true },
-			-- ensure these language parsers are installed
-			-- Only install parsers you actually use frequently
 			ensure_installed = {
 				"json",
 				"javascript",
-				"typescript", 
+				"typescript",
 				"tsx",
 				"html",
 				"css",

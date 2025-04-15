@@ -13,7 +13,6 @@ vim.opt.rtp:prepend(lazypath)
 vim.loader.enable()
 
 require("lazy").setup({
-	-- { import = "plugins" },
 	{ import = "plugins.code" },
 	{ import = "plugins.editor" },
 	{ import = "plugins.git" },
