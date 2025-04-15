@@ -17,6 +17,13 @@ vim.opt.splitright = true
 -- WARN: this option collapse the command line.
 vim.opt.cmdheight = 0
 
+vim.wo.foldcolumn = "1"
+vim.wo.foldmethod = "indent"
+vim.wo.foldlevel = 99
+
+vim.g.loaded_man = 1 -- Disable :Man
+vim.g.loaded_spellfile = 1 -- Disable spellfile.vim
+
 -- Disable arrow keys
 -- vim.keymap.set("n", "<left>", '<cmd>echo "Use h to move!!"<CR>')
 -- vim.keymap.set("n", "<right>", '<cmd>echo "Use l to move!!"<CR>')
@@ -41,9 +48,3 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 -- NOTE: This is a workaround for the issue with the <C-i> key not working as expected in some terminal emulators.
 -- This is due because <C-i> is often interpreted as a tab character, since older keyboards didn't have a dedicated tab key.
 vim.keymap.set("n", "<C-p>", "<C-i>", { noremap = true, desc = "Jump forward" })
--- vim.keymap.set('n', '<C-n>', '<C-o>', { noremap = true, desc = "Jump backward" })
-
--- vim.cmd([[autocmd VimEnter * Neotree]])
-
-vim.g.loaded_man = 1 -- Disable :Man
-vim.g.loaded_spellfile = 1 -- Disable spellfile.vim
