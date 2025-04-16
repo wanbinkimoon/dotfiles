@@ -5,11 +5,10 @@ return {
 		local lint = require("lint")
 		lint.linters_by_ft = {
 			lua = { "luacheck" },
-			javascript = { "eslint_d" },
-			typescript = { "eslint_d" },
+			javascript = { "eslint", "eslint_d" },
+			typescript = { "eslint", "eslint_d" },
 		}
-
-		vim.api.nvim_create_autocmd("BufWritePost", {
+		vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter" }, {
 			callback = function()
 				lint.try_lint()
 			end,
