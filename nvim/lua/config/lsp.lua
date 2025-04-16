@@ -81,17 +81,18 @@ local capabilities = {
 
 capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
 
--- Setup language servers.
-
+-- Setup default language server configuration
 vim.lsp.config("*", {
 	capabilities = capabilities,
 	root_markers = { ".git", ".luarc.json", "package.json" },
 })
 
 -- Enable each language server by filename under the lsp/ folder
+-- Make sure each file in lsp/ returns a table with the proper configuration
 vim.lsp.enable({
 	"css_ls",
 	"eslint_ls",
+	"eslint_d_ls",
 	"emmet_ls",
 	"ember_ls",
 	"graphql_ls",
