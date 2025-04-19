@@ -14,6 +14,7 @@ return {
 			css = { "prettierd" },
 			scss = { "prettierd" },
 			html = { "prettierd" },
+			handlebars = { "djlint" },
 
 			-- For Lua files
 			lua = { "stylua" },
