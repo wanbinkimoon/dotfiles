@@ -33,7 +33,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			},
 		})
 
-		local width = math.floor(vim.o.columns * 0.8)
+		local width = math.floor(vim.o.columns * 0.5)
 		local height = math.floor(vim.o.lines * 0.3)
 
 		vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
@@ -65,36 +65,38 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Definition" })
 		vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "[C]ode: [A]ction" })
 		vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "[C]ode: [R]ename" })
+
+		-- This is copied straight from blink
+		-- https://cmp.saghen.dev/installation#merging-lsp-capabilities
+		local capabilities = {
+			textDocument = {
+				foldingRange = {
+					dynamicRegistration = false,
+					lineFoldingOnly = true,
+				},
+			},
+		}
+
+		capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
+
+		-- Setup default language server configuration
+		vim.lsp.config("*", {
+			capabilities = capabilities,
+			root_markers = { ".git", ".luarc.json", "package.json" },
+			inlay_hints = { enabled = true },
+		})
 	end,
-})
-
--- This is copied straight from blink
--- https://cmp.saghen.dev/installation#merging-lsp-capabilities
-local capabilities = {
-	textDocument = {
-		foldingRange = {
-			dynamicRegistration = false,
-			lineFoldingOnly = true,
-		},
-	},
-}
-
-capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
-
--- Setup default language server configuration
-vim.lsp.config("*", {
-	capabilities = capabilities,
-	root_markers = { ".git", ".luarc.json", "package.json" },
 })
 
 -- Enable each language server by filename under the lsp/ folder
 -- Make sure each file in lsp/ returns a table with the proper configuration
 vim.lsp.enable({
 	"css_ls",
-	"eslint_ls",
+	-- "eslint_ls",
 	"eslint_d_ls",
 	"emmet_ls",
 	"ember_ls",
+	"glint_ls",
 	"graphql_ls",
 	"html_ls",
 	"json_ls",
