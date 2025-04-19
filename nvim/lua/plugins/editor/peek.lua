@@ -1,7 +1,7 @@
 return {
 	{
 		"toppair/peek.nvim",
-		event = "BufRead",
+		event = "BufRead *.md",
 		lazy = true,
 		ft = { "md" },
 		build = "deno task --quiet build:fast",

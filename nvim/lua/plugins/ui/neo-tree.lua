@@ -1,6 +1,6 @@
 return {
 	"nvim-neo-tree/neo-tree.nvim",
-	lazy = true,
+	event = { "BufEnter" },
 	cmd = "Neotree",
 	keys = {
 		{ "<leader>e", desc = "Neotree [e]xplore" },
@@ -12,7 +12,6 @@ return {
 		"nvim-lua/plenary.nvim",
 		"nvim-tree/nvim-web-devicons",
 		"MunifTanjim/nui.nvim",
-		"sindrets/diffview.nvim",
 	},
 	config = function()
 		local icons = require("config.icons")

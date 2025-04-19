@@ -3,6 +3,13 @@ return {
 	{
 		"nvim-telescope/telescope.nvim",
 		cmd = "Telescope",
+		keys = {
+			{ "<leader>sf", "<cmd>Telescope find_files<cr>", desc = "[S]earch: [F]iles" },
+			{ "<leader><leader>", "<cmd>Telescope oldfiles<cr>", desc = "[S]earch: Recent Files" },
+			{ "<leader>sg", "<cmd>Telescope live_grep_args<cr>", desc = "[S]earch: Live [G]rep" },
+			{ "<leader>s/", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "[S]earch: Live [G]rep" },
+		},
+		lazy = true,
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-telescope/telescope-ui-select.nvim",

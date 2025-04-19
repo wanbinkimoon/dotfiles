@@ -3,7 +3,7 @@ return {
 		enabled = true,
 		"luukvbaal/statuscol.nvim",
 		lazy = true,
-		event = "BufEnter",
+		event = "BufReadPost",
 		dependencies = {
 			{ "lewis6991/gitsigns.nvim", lazy = true },
 		},
