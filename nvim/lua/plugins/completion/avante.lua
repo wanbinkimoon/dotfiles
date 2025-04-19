@@ -3,7 +3,6 @@ return {
 	{
 		"yetone/avante.nvim",
 		event = "BufRead",
-		version = false,
 		opts = {
 			mappings = {
 				submit = {
@@ -21,9 +20,7 @@ return {
 			"ibhagwan/fzf-lua", -- for file_selector provider fzf
 			{
 				"HakonHarnes/img-clip.nvim",
-				event = "VeryLazy",
 				opts = {
-					-- recommended settings
 					default = {
 						embed_image_as_base64 = false,
 						prompt_for_file_name = false,

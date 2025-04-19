@@ -1,7 +1,8 @@
 return {
 	{
 		"ramilito/winbar.nvim",
-		event = "VimEnter", -- Alternatively, BufReadPre if we don't care about the empty file when starting with 'nvim'
+		event = "BufReadPre",
+		lazy = true,
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = function()
 			local icons = require("config.icons")

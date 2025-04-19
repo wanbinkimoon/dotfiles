@@ -1,7 +1,6 @@
 return {
 	"folke/which-key.nvim",
-	lazy = true,
-	event = "VeryLazy",
+	event = "UIEnter",
 	opts = {
 		---@type false | "classic" | "modern" | "helix"
 		preset = "classic",

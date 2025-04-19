@@ -1,6 +1,8 @@
 return {
 	{
 		"saghen/blink.cmp",
+		event = "BufRead",
+		lazy = true,
 		dependencies = { "rafamadriz/friendly-snippets" },
 		version = "1.*",
 		---@module 'blink.cmp'
