@@ -37,4 +37,7 @@ require("lazy").setup({
 	ui = {
 		border = "single",
 	},
+	defaults = {
+		lazy = true,
+	},
 })
