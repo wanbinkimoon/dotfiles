@@ -1,6 +1,6 @@
 ---@type vim.lsp.Config
 return {
-  cmd = { "typescript-language-server", "--stdio" },
+	cmd = { "typescript-language-server", "--stdio" },
 	filetypes = {
 		"javascript",
 		"javascriptreact",
@@ -9,5 +9,5 @@ return {
 		"vue",
 		"svelte",
 	},
-  root_markers = { ".git", "package.json" },
+	root_markers = { "package.json", "tsconfig.json" },
 }
