@@ -1,7 +1,6 @@
 return {
 	"folke/trouble.nvim",
-	lazy = true,
-	event = "BufRead",
+	-- event = "BufRead",
 	opts = {
 		auto_close = true,
 		modes = {

@@ -1,40 +1,24 @@
 return {
-
 	{
 		"yetone/avante.nvim",
 		event = "BufRead",
 		opts = {
+			provider = "claude",
+
 			mappings = {
 				submit = {
 					insert = "<C-a>",
 				},
 			},
+			windows = {
+				width = 50,
+			},
 		},
 		build = "make",
 		dependencies = {
-			"stevearc/dressing.nvim",
+			-- "stevearc/dressing.nvim",
 			"nvim-lua/plenary.nvim",
 			"MunifTanjim/nui.nvim",
-			--- The below dependencies are optional,
-			"echasnovski/mini.pick", -- for file_selector provider mini.pick
-			"ibhagwan/fzf-lua", -- for file_selector provider fzf
-			{
-				"HakonHarnes/img-clip.nvim",
-				opts = {
-					default = {
-						embed_image_as_base64 = false,
-						prompt_for_file_name = false,
-						drag_and_drop = { insert_mode = true },
-						use_absolute_path = true,
-					},
-				},
-			},
-			{
-				"MeanderingProgrammer/render-markdown.nvim",
-				opts = {
-					file_types = { "markdown", "Avante" },
-				},
-			},
 		},
 	},
 }

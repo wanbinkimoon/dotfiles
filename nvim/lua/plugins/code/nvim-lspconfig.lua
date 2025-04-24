@@ -9,7 +9,7 @@ local eslint_filetypes = {
 return {
 	"neovim/nvim-lspconfig",
 	event = "LspAttach",
-	enabled = false,
+	enabled = true,
 	opts = { inlay_hints = { enabled = true } },
 	config = function()
 		local lspconfig = require("lspconfig")
@@ -41,6 +41,18 @@ return {
 						end
 
 						-- Format all file types
+						vim.cmd("Format")
+					end,
+				})
+			end,
+		})
+
+		lspconfig.ember.setup({
+			capabilities = capabilities,
+			on_attach = function(client)
+				client.server_capabilities.document_formatting = true
+				vim.api.nvim_create_autocmd("BufWritePre", {
+					callback = function()
 						vim.cmd("Format")
 					end,
 				})

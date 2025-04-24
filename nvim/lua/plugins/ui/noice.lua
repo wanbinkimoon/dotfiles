@@ -1,6 +1,6 @@
 return {
 	"folke/noice.nvim",
-	enabled = true,
+	enabled = false,
 	event = { "CmdlineEnter" },
 	dependencies = { "MunifTanjim/nui.nvim" },
 	config = function()
@@ -8,7 +8,7 @@ return {
 		local noice_opts = {
 			-- Command line configuration
 			cmdline = {
-				enabled = true,
+				enabled = false,
 				view = "cmdline_popup",
 				opts = {
 					position = { row = "10%", col = "50%" },
@@ -32,7 +32,7 @@ return {
 
 			-- LSP configuration
 			lsp = {
-				enabled = true,
+				enabled = false,
 				override = {
 					["vim.lsp.util.convert_input_to_markdown_lines"] = false,
 					["vim.lsp.util.stylize_markdown"] = false,

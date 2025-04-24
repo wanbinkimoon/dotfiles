@@ -10,15 +10,11 @@ end
 return {
 	"nvim-lualine/lualine.nvim",
 	event = "VimEnter",
-	dependencies = {
-		{ "dokwork/lualine-ex" },
-		{ "Mofiqul/dracula.nvim" },
-	},
 	config = function()
 		local custom_colors = get_custom_colors()
 		local icons = require("config.icons")
 
-		function isRecording()
+		local function isRecording()
 			local reg = vim.fn.reg_recording()
 			if reg == "" then
 				return ""
@@ -38,8 +34,7 @@ return {
 				globalstatus = true,
 			},
 			sections = {
-				-- lualine_c = { { "filename", path = 3 } },
-				lualine_b = { { "ex.relative_filename", max_length = 0.8 } },
+				lualine_b = { { "filename", path = 0 } },
 				lualine_c = {
 					{
 						"diff",
@@ -57,7 +52,7 @@ return {
 					isRecording,
 					{
 						"tabs",
-						mode = 1,
+						mode = 3,
 						path = 0,
 						symbols = { modified = "󱗝" },
 						use_mode_colors = true,

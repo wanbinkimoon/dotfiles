@@ -1,6 +1,5 @@
 return {
 	"nvim-treesitter/nvim-treesitter-textobjects",
-	lazy = true,
 	event = "BufRead",
 	config = function()
 		require("nvim-treesitter.configs").setup({
@@ -10,7 +9,6 @@ return {
 
 					-- Automatically jump forward to textobj, similar to targets.vim
 					lookahead = true,
-
 					keymaps = {
 						-- You can use the capture groups defined in textobjects.scm
 						["a="] = { query = "@assignment.outer", desc = "Select outer part of an assignment" },

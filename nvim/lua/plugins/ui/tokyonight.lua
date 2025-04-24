@@ -5,9 +5,12 @@ return {
 	priority = 1000,
 	opts = {},
 	config = function()
-		-- Borderless Telescope
 		require("tokyonight").setup({
-			style = "night",
+			-- colorscheme tokyonight-night
+			-- colorscheme tokyonight-storm
+			-- colorscheme tokyonight-day
+			-- colorscheme tokyonight-moon
+			style = "moon",
 			hide_inactive_statusline = true,
 			transparent = true,
 			on_highlights = function(hl, c)
@@ -19,14 +22,5 @@ return {
 		})
 
 		vim.cmd([[colorscheme tokyonight]])
-		-- vim.cmd([[colorscheme tokyonight-storm]])
-		-- vim.cmd([[colorscheme tokyonight-day]])
-		-- vim.cmd([[colorscheme tokyonight-moon]])
-
-		-- " There are also colorschemes for the different styles.
-		-- colorscheme tokyonight-night
-		-- colorscheme tokyonight-storm
-		-- colorscheme tokyonight-day
-		-- colorscheme tokyonight-moon
 	end,
 }

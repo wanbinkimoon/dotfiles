@@ -20,6 +20,9 @@ require("lazy").setup({
 	{ import = "plugins.navigation" },
 	{ import = "plugins.ui" },
 }, {
+	change_detection = {
+		notify = false,
+	},
 	performance = {
 		rtp = {
 			disabled_plugins = {

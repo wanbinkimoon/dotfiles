@@ -1,24 +1,20 @@
--- luacheck: globals vim
 return {
 	{
 		"nvim-telescope/telescope.nvim",
 		cmd = "Telescope",
+		event = "UIEnter",
 		keys = {
 			{ "<leader>sf", "<cmd>Telescope find_files<cr>", desc = "[S]earch: [F]iles" },
 			{ "<leader><leader>", "<cmd>Telescope oldfiles<cr>", desc = "[S]earch: Recent Files" },
 			{ "<leader>sg", "<cmd>Telescope live_grep_args<cr>", desc = "[S]earch: Live [G]rep" },
 			{ "<leader>s/", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "[S]earch: Live [G]rep" },
 		},
-		lazy = true,
 		dependencies = {
-			"nvim-lua/plenary.nvim",
 			"nvim-telescope/telescope-ui-select.nvim",
 			"nvim-telescope/telescope-live-grep-args.nvim",
-			"ahmedkhalf/project.nvim",
-			"echasnovski/mini.icons",
+			"nvim-lua/plenary.nvim",
 			"mrloop/telescope-git-branch.nvim",
 			"isak102/telescope-git-file-history.nvim",
-			"tpope/vim-fugitive",
 			"LukasPietzschmann/telescope-tabs",
 		},
 		config = function()
@@ -30,6 +26,10 @@ return {
 			-- Core configuration with minimal styling
 			local config = {
 				defaults = {
+					history = {
+						path = "~/.local/share/nvim/telescope_history",
+						limit = 100,
+					},
 					layout_strategy = "horizontal",
 					layout_config = {
 						horizontal = {
@@ -63,12 +63,18 @@ return {
 							["k"] = actions.move_selection_previous,
 							["<C-c>"] = actions.close,
 							["<CR>"] = actions.select_default,
+							-- Change history navigation keys (insert mode)
+							["<M-Up>"] = require("telescope.actions").cycle_history_prev,
+							["<M-Down>"] = require("telescope.actions").cycle_history_next,
 						},
 						i = {
 							["<C-p>"] = require("telescope.actions.layout").toggle_preview,
 							["<C-c>"] = actions.close,
 							["<C-j>"] = actions.move_selection_next,
 							["<C-k>"] = actions.move_selection_previous,
+							-- Change history navigation keys (insert mode)
+							["<M-Up>"] = require("telescope.actions").cycle_history_prev,
+							["<M-Down>"] = require("telescope.actions").cycle_history_next,
 						},
 					},
 				},
@@ -77,14 +83,10 @@ return {
 				pickers = {
 					find_files = picker_defaults,
 					oldfiles = vim.tbl_extend("force", picker_defaults, { initial_mode = "normal" }),
-					buffers = vim.tbl_extend("force", picker_defaults, { initial_mode = "normal" }),
 					git_branches = picker_defaults,
 					git_commits = vim.tbl_extend("force", picker_defaults, { initial_mode = "normal" }),
 					git_bcommits = vim.tbl_extend("force", picker_defaults, { initial_mode = "normal" }),
-					git_file_history = vim.tbl_extend("force", picker_defaults, {
-						initial_mode = "normal",
-						layout_strategy = "vertical",
-					}),
+					git_file_history = vim.tbl_extend("force", picker_defaults, { initial_mode = "normal" }),
 					live_grep = vim.tbl_extend("force", picker_defaults, {
 						additional_args = function()
 							return { "--hidden", "--glob=!**/.git/*", "--max-count=1000" }
@@ -104,14 +106,6 @@ return {
 								["<C-g>"] = require("telescope-live-grep-args.actions").quote_prompt({
 									postfix = " --iglob ",
 								}),
-								["<C-e>"] = function(prompt_bufnr)
-									local dir = vim.fn.input("Search directory: ", "", "dir")
-									actions._close(prompt_bufnr, true)
-									require("telescope.builtin").live_grep({
-										search_dirs = { dir },
-										prompt_title = "Grep in: " .. vim.fn.fnamemodify(dir, ":~:."),
-									})
-								end,
 							},
 						},
 					},
@@ -121,38 +115,18 @@ return {
 			telescope.setup(config)
 
 			-- Load all extensions at once
-			for _, ext in ipairs({ "ui-select", "live_grep_args", "git_branch", "git_file_history", "telescope-tabs" }) do
+			for _, ext in ipairs({
+				"ui-select",
+				"live_grep_args",
+				"git_branch",
+				"git_file_history",
+				"telescope-tabs",
+			}) do
 				telescope.load_extension(ext)
 			end
-			require("telescope-tabs").setup({})
 
 			-- Setup custom commands and keymaps
 			local builtin = require("telescope.builtin")
-
-			-- Custom commands
-			vim.api.nvim_create_user_command("GrepCurrentDir", function()
-				local dir = vim.fn.expand("%:p:h")
-				builtin.live_grep({
-					search_dirs = { dir },
-					prompt_title = "Grep in: " .. vim.fn.fnamemodify(dir, ":~:."),
-				})
-			end, {})
-
-			vim.api.nvim_create_user_command("GrepProject", function()
-				local ok, root = pcall(require("project_nvim.project").get_project_root)
-				local dir = ok and root or vim.loop.cwd()
-				builtin.live_grep({
-					cwd = dir,
-					prompt_title = "Grep in Project: " .. vim.fn.fnamemodify(dir, ":~:."),
-				})
-			end, {})
-
-			vim.api.nvim_create_user_command("FindFilesInDir", function(opts)
-				builtin.find_files({
-					search_dirs = { opts.args },
-					prompt_title = "Files in: " .. vim.fn.fnamemodify(opts.args, ":~:."),
-				})
-			end, { nargs = 1 })
 
 			-- Map function
 			local map = function(mode, lhs, rhs, desc, opts)
@@ -162,12 +136,15 @@ return {
 			-- File and text search keymaps
 			map("n", "<leader>sf", builtin.find_files, "[S]earch: [F]iles")
 			map("n", "<leader><leader>", builtin.oldfiles, "[S]earch: Recent Files")
-			map("n", "<leader>sg", "<cmd> Telescope live_grep_args<cr>", "[S]earch: Live [G]rep")
 			map("n", "<leader>s/", builtin.current_buffer_fuzzy_find, "[S]earch: Live [G]rep")
+			map("n", "<leader>sg", "<cmd> Telescope live_grep_args<cr>", "[S]earch: Live [G]rep")
 
 			local lga = require("telescope-live-grep-args.shortcuts")
 			map({ "n", "v" }, "<leader>sw", lga.grep_word_under_cursor, "[S]earch: [W]ord")
 			map("v", "<leader>ss", lga.grep_visual_selection, "[S]earch: Current [S]election")
+
+			-- Tabs
+			map("n", "<leader>st", "<cmd>Telescope telescope-tabs list_tabs<cr>", "[S]earch: [T]abs")
 
 			-- Git keymaps
 			map({ "n", "v" }, "<leader>sd", require("git_branch").files, "[S]earch: Git [D]iff")

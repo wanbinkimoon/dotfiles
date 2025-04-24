@@ -1,13 +1,17 @@
 return {
 	{
 		"ruifm/gitlinker.nvim",
-		lazy = true,
-		event = "BufRead",
+		event = "BufReadPost",
+		keys = { "<leader>gy" },
 		config = function()
 			local gitlinker = require("gitlinker")
 			gitlinker.setup({
 				callbacks = {
 					["github.com"] = require("gitlinker.hosts").get_github_type_url,
+					["github-qonto"] = function(url_data)
+						url_data.host = "github.com"
+						return require("gitlinker.hosts").get_github_type_url(url_data)
+					end,
 					["gitlab.com"] = require("gitlinker.hosts").get_gitlab_type_url,
 					["gitlab.qonto.co"] = require("gitlinker.hosts").get_gitlab_type_url,
 				},
