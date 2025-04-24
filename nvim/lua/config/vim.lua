@@ -15,11 +15,11 @@ vim.opt.scrolloff = 10
 vim.opt.showtabline = 0
 vim.opt.splitright = true
 -- WARN: this option collapse the command line.
-vim.opt.cmdheight = 0
+-- vim.opt.cmdheight = 0
 
-vim.wo.foldcolumn = "1"
-vim.wo.foldmethod = "indent"
-vim.wo.foldlevel = 99
+vim.opt.foldcolumn = "1"
+vim.opt.foldmethod = "indent"
+vim.opt.foldlevel = 99
 
 vim.g.loaded_man = 1 -- Disable :Man
 vim.g.loaded_spellfile = 1 -- Disable spellfile.vim
