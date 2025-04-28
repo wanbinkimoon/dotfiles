@@ -58,3 +58,4 @@ alias cd="z"
 alias ls="eza --icons=always -T --level=1 --header --hyperlink"
 
 source ~/.config/zsh/openwebui.sh
+alias ssh-setup='~/.config/zsh/ssh-agent.sh'
