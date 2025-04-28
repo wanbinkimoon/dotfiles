@@ -29,3 +29,5 @@ configstore
 1Password/ssh
 zsh/openwebui.sh
 karabiner
+zed
+zsh/ssh-agent.sh
