@@ -2,7 +2,7 @@ return {
 	{
 		"m4xshen/autoclose.nvim",
 		lazy = true,
-		event = "BufRead",
+		event = "InsertEnter",
 		config = function()
 			local autoclose = require("autoclose")
 			autoclose.setup({
@@ -14,6 +14,7 @@ return {
 	},
 	{
 		"windwp/nvim-ts-autotag",
+		event = "InsertEnter",
 		ft = { "html", "xml", "javascriptreact", "typescriptreact", "vue" },
 		config = function()
 			require("nvim-ts-autotag").setup({
