@@ -10,9 +10,10 @@ return {
 			{ "<leader>s/", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "[S]earch: Live [G]rep" },
 		},
 		dependencies = {
+			"tpope/vim-fugitive",
+			"nvim-lua/plenary.nvim",
 			"nvim-telescope/telescope-ui-select.nvim",
 			"nvim-telescope/telescope-live-grep-args.nvim",
-			"nvim-lua/plenary.nvim",
 			"mrloop/telescope-git-branch.nvim",
 			"isak102/telescope-git-file-history.nvim",
 			"LukasPietzschmann/telescope-tabs",
