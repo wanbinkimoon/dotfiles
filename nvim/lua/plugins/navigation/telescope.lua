@@ -48,6 +48,8 @@ return {
 					initial_mode = "insert",
 					previewer = false,
 					preview = { hide_on_startup = true },
+					file_ignore_patterns = { "node_modules/", ".git/" },
+					use_ft_detect = false,
 					borderchars = {
 						prompt = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
 						results = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
@@ -150,8 +152,8 @@ return {
 			-- Git keymaps
 			map({ "n", "v" }, "<leader>sd", require("git_branch").files, "[S]earch: Git [D]iff")
 			map({ "n", "v" }, "<leader>sb", builtin.git_branches, "[S]earch: Git [B]ranches")
-			map({ "n", "v" }, "<leader>gc", builtin.git_commits, "[G]it: [C]ommits")
-			map({ "n", "v" }, "<leader>gcb", builtin.git_bcommits, "[G]it: [H]istory")
+			map({ "n", "v" }, "<leader>ghc", builtin.git_commits, "[G]it: Commit [H]istory")
+			map({ "n", "v" }, "<leader>gbc", builtin.git_bcommits, "[G]it: [B]uffer [C]ommits")
 			map({ "n", "v" }, "<leader>gh", "<cmd>Telescope git_file_history<cr>", "[G]it: File [H]istory")
 
 			-- LSP keymaps
