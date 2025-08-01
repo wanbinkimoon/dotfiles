@@ -15,7 +15,7 @@ return {
 	{
 		"windwp/nvim-ts-autotag",
 		event = "InsertEnter",
-		ft = { "html", "xml", "javascriptreact", "typescriptreact", "vue" },
+		ft = { "html", "xml", "javascriptreact", "typescriptreact", "vue", "handlebars" },
 		config = function()
 			require("nvim-ts-autotag").setup({
 				filetypes = {

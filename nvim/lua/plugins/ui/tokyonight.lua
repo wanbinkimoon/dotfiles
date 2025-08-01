@@ -12,11 +12,22 @@ return {
 			-- colorscheme tokyonight-moon
 			style = "moon",
 			hide_inactive_statusline = true,
-			transparent = true,
+			transparent = false,
 			on_highlights = function(hl, c)
 				hl.WinSeparator = {
 					bg = c.bg_dark,
 					fg = c.fg_gutter,
+				}
+				hl.LineNr = {
+					fg = c.comment,
+				}
+				-- hl.CursorLineNr = {
+				--   fg = c.blue,
+				--   bold = true,
+				-- }
+				hl.CursorLine = {
+					-- bg = "#232838",
+					bg = c.bg_highlight,
 				}
 			end,
 		})

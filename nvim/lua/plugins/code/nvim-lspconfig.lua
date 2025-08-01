@@ -18,6 +18,9 @@ return {
 		lspconfig.eslint.setup({
 			capabilities = capabilities,
 			filetypes = eslint_filetypes,
+			settings = {
+				workingDirectories = { mode = "auto" },
+			},
 			on_attach = function(client)
 				client.server_capabilities.document_formatting = true
 				vim.api.nvim_create_autocmd("BufWritePre", {

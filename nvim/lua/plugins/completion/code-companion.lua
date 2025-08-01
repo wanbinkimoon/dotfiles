@@ -1,5 +1,6 @@
 return {
 	"olimorris/codecompanion.nvim",
+	enabled = true,
 	event = { "InsertEnter", "LspAttach" },
 	dependencies = {
 		"nvim-lua/plenary.nvim",
@@ -24,6 +25,7 @@ return {
 						modes = { n = "<C-a>", i = "<C-a>" },
 					},
 				},
+				tools = {},
 			},
 			display = {
 				diff = {
@@ -31,6 +33,7 @@ return {
 				},
 			},
 		},
+		extensions = {},
 	},
 	config = function(_, opts)
 		require("codecompanion").setup(opts)

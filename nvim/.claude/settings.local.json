@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:neovim.io)",
+      "Bash(nvim:*)",
+      "Bash(rm:*)"
+    ],
+    "deny": []
+  }
+}
