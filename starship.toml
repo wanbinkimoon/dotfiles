@@ -1,0 +1,66 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Performance optimizations
+add_newline = true
+# command_timeout = 500
+# scan_timeout = 10
+
+format = """
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_state\
+$git_status\
+$character"""
+
+right_format = """
+$cmd_duration\
+$time"""
+
+[directory]
+style = "blue"
+
+[character]
+success_symbol = "[❯](purple)"
+error_symbol = "[❯](red)"
+vimcmd_symbol = "[❮](green)"
+
+[git_branch]
+format = "[$branch]($style) "
+style = "bright-black"
+disabled = false
+
+[git_status]
+format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](218) ($ahead_behind)]($style)"
+style = "cyan"
+conflicted = "​"
+untracked = "​"
+modified = "​"
+staged = "​"
+renamed = "​"
+deleted = "​"
+stashed = "*"
+diverged = "⇡⇣"
+
+[git_state]
+disabled = true
+format = '\([$state( $progress_current/$progress_total)]($style)\)'
+style = "bright-black"
+
+[cmd_duration]
+disabled = false
+format = "[$duration]($style) "
+style = "yellow"
+
+[python]
+disabled = true
+format = "[$virtualenv]($style) "
+style = "bright-black"
+
+[time]
+disabled = false
+format = '[$time]($style)'
+time_format = '%T'
+style = "bright-black"
