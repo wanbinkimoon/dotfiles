@@ -1,11 +1,11 @@
 # Clean embroider build artifacts
-alias clean-embroider="rm -rf $TMPDIR/embroider"
+# alias clean-embroider="rm -rf $TMPDIR/embroider"
 
 # yalc add and clean embroider 
-alias yalc-embroider="yalc add $1 && clean-embroider"
+# alias yalc-embroider="yalc add $1 && clean-embroider"
 
 # yalc add and clean embroider then install fresh modules with pnpm and run the app
-alias yalc-embroider-run="yalc add $1 && rm -rf $TMPDIR/embroider && pnpm i && pnpm run start"
+# alias yalc-embroider-run="yalc add $1 && rm -rf $TMPDIR/embroider && pnpm i && pnpm run start"
 
 #check process on port and kills it 
 killport() {
@@ -55,7 +55,4 @@ eval "$(zoxide init zsh)"
 alias cd="z"
 
 # Eza (better ls) 
-alias ls="eza --icons=always -T --level=1 --header --hyperlink"
-
-source ~/.config/zsh/openwebui.sh
-alias ssh-setup='~/.config/zsh/ssh-agent.sh'
+alias ls="eza --icons=always -T -l --level=1 --header --hyperlink"

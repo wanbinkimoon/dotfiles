@@ -1,5 +1,9 @@
 export PATH="/Users/nicola.bertelloni/.local/bin:$PATH"
 
+# Starship configuration
+export STARSHIP_CONFIG=~/.config/starship.toml
+export STARSHIP_CACHE=~/.cache/starship
+
 # Bat (better cat)
 export BAT_THEME='Dracula'
 
@@ -23,3 +27,7 @@ export DISABLE_PROMPT_CACHING=1
 
 # 1Password SSH Agent
 export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
+
+# NVM enlarge space for node processes https://www.notion.so/Fatal-JavaScript-heap-out-of-memory-1a431ee4c69680589757ed1b737e8efd?pvs=26&qid=
+export NODE_OPTIONS="--max-old-space-size=8192"
+export PATH="/opt/homebrew/opt/kubernetes-cli/bin:$PATH"
