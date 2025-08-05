@@ -1,7 +1,7 @@
 ---@type vim.lsp.Config
 return {
 	cmd = { "eslint", "--stdio" },
-	filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+	filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "svelte" },
 	root_markers = {
 		".eslintrc.js",
 		".eslintrc.json",
@@ -21,16 +21,6 @@ return {
 		client.server_capabilities.document_formatting = true
 		vim.api.nvim_create_autocmd("BufWritePre", {
 			callback = function()
-				-- List of file types where ESLint should be applied
-				local eslint_filetypes = {
-					"javascript",
-					"javascriptreact",
-					"typescript",
-					"typescriptreact",
-					"vue",
-					"svelte",
-				}
-
 				-- Get current file type
 				local file_type = vim.bo.filetype
 
@@ -39,7 +29,7 @@ return {
 				local max_file_size = 1024 * 1024 -- 1MB
 
 				-- Apply ESLint for specific file types and small files
-				if vim.tbl_contains(eslint_filetypes, file_type) and file_size > 0 and file_size < max_file_size then
+				if vim.tbl_contains(client.config.filetypes, file_type) and file_size > 0 and file_size < max_file_size then
 					vim.cmd("EslintFixAll")
 				end
 

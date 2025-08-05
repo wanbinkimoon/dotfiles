@@ -4,7 +4,7 @@ return {
 	opts = {
 		---@type false | "classic" | "modern" | "helix"
 		preset = "classic",
-		delay = 500,
+		delay = 1000,
 	},
 	keys = {
 		{ "<leader>?", "<cmd>WhichKey<cr>", desc = "Buffer Local Keymaps (which-key)" },
