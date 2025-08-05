@@ -4,10 +4,10 @@ return {
 		cmd = "Telescope",
 		event = "UIEnter",
 		keys = {
-			{ "<leader>sf", "<cmd>Telescope find_files<cr>", desc = "[S]earch: [F]iles" },
-			{ "<leader><leader>", "<cmd>Telescope oldfiles<cr>", desc = "[S]earch: Recent Files" },
-			{ "<leader>sg", "<cmd>Telescope live_grep_args<cr>", desc = "[S]earch: Live [G]rep" },
-			{ "<leader>s/", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "[S]earch: Live [G]rep" },
+			{ "sf", "<cmd>Telescope find_files<cr>", desc = "[S]earch: [F]iles" },
+			{ "s<leader>", "<cmd>Telescope oldfiles<cr>", desc = "[S]earch: Recent Files" },
+			{ "sg", "<cmd>Telescope live_grep_args<cr>", desc = "[S]earch: Live [G]rep" },
+			{ "s/", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "[S]earch: Live [G]rep" },
 		},
 		dependencies = {
 			"tpope/vim-fugitive",
