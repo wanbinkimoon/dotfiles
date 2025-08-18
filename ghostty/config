@@ -1,0 +1,15 @@
+font-family = "jetbrainsmono nerd font mono"
+adjust-cell-height = 20%
+theme = tokyonight-storm
+macos-titlebar-style = hidden
+
+shell-integration = fish
+
+# Fixes color scheme in macOS
+window-colorspace = display-p3
+
+# Window padding
+window-padding-x = 12
+window-padding-y = 8,4
+window-padding-balance = true
+
