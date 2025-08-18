@@ -5,6 +5,9 @@ return {
 	build = ":TSUpdate",
 	dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
 	config = function()
+		-- Register markdown parser for MDX files
+		vim.treesitter.language.register('markdown', 'mdx')
+		
 		local config = require("nvim-treesitter.configs")
 		config.setup({
 			auto_install = true,
@@ -18,6 +21,7 @@ return {
 				"html",
 				"css",
 				"markdown",
+				"markdown_inline",
 				"lua",
 				"vim",
 				"gitignore",

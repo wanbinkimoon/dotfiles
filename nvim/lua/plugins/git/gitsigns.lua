@@ -1,6 +1,6 @@
 return {
 	"lewis6991/gitsigns.nvim",
-	event = { "BufReadPre", "BufNewFile" },
+	event = { "BufReadPost", "BufNewFile" },
 	config = function()
 		require("gitsigns").setup({
 			signs = {
@@ -12,17 +12,25 @@ return {
 				untracked = { text = "┃" },
 			},
 			signcolumn = true,
-			update_debounce = 200,
+			update_debounce = 100,
 			max_file_length = 40000,
-			current_line_blame = true, -- Disabled by default, toggle with `:Gitsigns toggle_current_line_blame`
+			attach_to_untracked = false,
+			current_line_blame = true,
 			current_line_blame_formatter = "<author>, <author_time:%R> - <abbrev_sha> - <summary>",
 			current_line_blame_opts = {
 				virt_text = true,
-				virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
-				delay = 500,
+				virt_text_pos = "eol",
+				delay = 1000,
 				ignore_whitespace = false,
 				virt_text_priority = 100,
 				use_focus = true,
+			},
+			preview_config = {
+				border = "single",
+				style = "minimal",
+				relative = "cursor",
+				row = 0,
+				col = 1,
 			},
 		})
 		-- TokyoNight Storm colors

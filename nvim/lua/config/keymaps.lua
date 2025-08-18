@@ -44,3 +44,8 @@ vim.keymap.set("n", "cq", "<cmd>copen<CR>", { desc = "Open quickfix" })
 vim.keymap.set("n", "cQ", "<cmd>cclose<CR>", { desc = "Close quickfix" })
 vim.keymap.set("n", "cn", "<cmd>cnext<CR>", { desc = "Next quickfix" })
 vim.keymap.set("n", "cp", "<cmd>cprev<CR>", { desc = "Previous quickfix" })
+
+-- Reload config
+vim.api.nvim_create_user_command("ReloadSource", function()
+	vim.cmd("so ~/.config/nvim/init.lua")
+end, { desc = "Reload Neovim configuration" })

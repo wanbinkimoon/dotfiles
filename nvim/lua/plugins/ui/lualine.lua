@@ -9,7 +9,7 @@ end
 
 return {
 	"nvim-lualine/lualine.nvim",
-	event = "VimEnter",
+	event = "VeryLazy",
 	config = function()
 		local custom_colors = get_custom_colors()
 		local icons = require("config.icons")
