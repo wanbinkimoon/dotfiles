@@ -20,9 +20,9 @@ $time"""
 style = "blue"
 
 [character]
-success_symbol = "[❯](purple)"
-error_symbol = "[❯](red)"
-vimcmd_symbol = "[❮](green)"
+success_symbol = "[ ❯](purple)"
+error_symbol = "[ ❯](red)"
+vimcmd_symbol = "[ ❮](green)"
 
 [git_branch]
 format = "[$branch]($style) "
@@ -34,14 +34,14 @@ format = "[$all_status$ahead_behind]($style)"
 style = "cyan"
 conflicted = ""
 untracked = ""
-modified = "*"
+modified = "[*](yellow) "
 staged = ""
 renamed = ""
 deleted = ""
 stashed = ""
-diverged = "⇡⇣"
-ahead = "⇡"
-behind = "⇣"
+diverged = " ⇡⇣"
+ahead = " ⇡"
+behind = " ⇣"
 up_to_date = ""
 
 [git_state]

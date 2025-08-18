@@ -39,3 +39,11 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		vim.hl.on_yank()
 	end,
 })
+
+-- MDX filetype detection
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+	pattern = "*.mdx",
+	callback = function()
+		vim.bo.filetype = "mdx"
+	end,
+})

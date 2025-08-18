@@ -16,7 +16,6 @@ return {
 			"nvim-telescope/telescope-live-grep-args.nvim",
 			"mrloop/telescope-git-branch.nvim",
 			"isak102/telescope-git-file-history.nvim",
-			"LukasPietzschmann/telescope-tabs",
 		},
 		config = function()
 			local telescope = require("telescope")
@@ -50,11 +49,11 @@ return {
 					preview = { hide_on_startup = true },
 					file_ignore_patterns = { "node_modules/", ".git/" },
 					use_ft_detect = false,
-					borderchars = {
-						prompt = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
-						results = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
-						preview = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
-					},
+					-- borderchars = {
+					-- 	prompt = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+					-- 	results = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+					-- 	preview = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+					-- },
 					highlights = {
 						selection_caret = { fg = "#89b4fa" },
 						selection = { bg = "#45475a", fg = "#89b4fa" },
@@ -123,7 +122,6 @@ return {
 				"live_grep_args",
 				"git_branch",
 				"git_file_history",
-				"telescope-tabs",
 			}) do
 				telescope.load_extension(ext)
 			end
@@ -137,17 +135,14 @@ return {
 			end
 
 			-- File and text search keymaps
-			map("n", "<leader>sf", builtin.find_files, "[S]earch: [F]iles")
-			map("n", "<leader><leader>", builtin.oldfiles, "[S]earch: Recent Files")
-			map("n", "<leader>s/", builtin.current_buffer_fuzzy_find, "[S]earch: Live [G]rep")
-			map("n", "<leader>sg", "<cmd> Telescope live_grep_args<cr>", "[S]earch: Live [G]rep")
+			map("n", "sf", builtin.find_files, "[S]earch: [F]iles")
+			map("n", "s<leader>", builtin.oldfiles, "[S]earch: Recent Files")
+			map("n", "s/", builtin.current_buffer_fuzzy_find, "[S]earch: Live [G]rep")
+			map("n", "sg", "<cmd> Telescope live_grep_args<cr>", "[S]earch: Live [G]rep")
 
 			local lga = require("telescope-live-grep-args.shortcuts")
 			map({ "n", "v" }, "<leader>sw", lga.grep_word_under_cursor, "[S]earch: [W]ord")
 			map("v", "<leader>ss", lga.grep_visual_selection, "[S]earch: Current [S]election")
-
-			-- Tabs
-			map("n", "<leader>st", "<cmd>Telescope telescope-tabs list_tabs<cr>", "[S]earch: [T]abs")
 
 			-- Git keymaps
 			map({ "n", "v" }, "<leader>sd", require("git_branch").files, "[S]earch: Git [D]iff")
