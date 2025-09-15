@@ -1,4 +1,4 @@
 return {
 	cmd = { "glint" },
-	filetypes = { "javascript", "typescript", "handlebars" },
+	filetypes = { "javascript", "handlebars" },
 }

@@ -92,8 +92,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 -- Make sure each file in lsp/ returns a table with the proper configuration
 vim.lsp.enable({
 	"css_ls",
-	"eslint_ls",
-	"eslint_d_ls",
+	-- "eslint_ls",
+	-- "eslint_d_ls",
 	"emmet_ls",
 	"ember_ls",
 	"glint_ls",

@@ -4,10 +4,10 @@ return {
 		cmd = "Telescope",
 		event = "UIEnter",
 		keys = {
-			{ "sf", "<cmd>Telescope find_files<cr>", desc = "[S]earch: [F]iles" },
-			{ "s<leader>", "<cmd>Telescope oldfiles<cr>", desc = "[S]earch: Recent Files" },
-			{ "sg", "<cmd>Telescope live_grep_args<cr>", desc = "[S]earch: Live [G]rep" },
-			{ "s/", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "[S]earch: Live [G]rep" },
+			{ "<leader>sf", "<cmd>Telescope find_files<cr>", desc = "[S]earch: [F]iles" },
+			{ "<leader><leader>", "<cmd>Telescope oldfiles<cr>", desc = "[S]earch: Recent Files" },
+			{ "<leader>sg", "<cmd>Telescope live_grep_args<cr>", desc = "[S]earch: Live [G]rep" },
+			{ "<leader>s/", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "[S]earch: Live [G]rep" },
 		},
 		dependencies = {
 			"tpope/vim-fugitive",
@@ -21,15 +21,11 @@ return {
 			local telescope = require("telescope")
 			local actions = require("telescope.actions")
 			local dimensions = { width = 0.75, height = 0.75 }
-			local picker_defaults = { previewer = false, layout_config = dimensions }
+			local picker_defaults = { previewer = false, layout_config = dimensions, hidden = true }
 
 			-- Core configuration with minimal styling
 			local config = {
 				defaults = {
-					history = {
-						path = "~/.local/share/nvim/telescope_history",
-						limit = 100,
-					},
 					layout_strategy = "horizontal",
 					layout_config = {
 						horizontal = {
@@ -49,11 +45,6 @@ return {
 					preview = { hide_on_startup = true },
 					file_ignore_patterns = { "node_modules/", ".git/" },
 					use_ft_detect = false,
-					-- borderchars = {
-					-- 	prompt = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
-					-- 	results = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
-					-- 	preview = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
-					-- },
 					highlights = {
 						selection_caret = { fg = "#89b4fa" },
 						selection = { bg = "#45475a", fg = "#89b4fa" },
@@ -135,10 +126,10 @@ return {
 			end
 
 			-- File and text search keymaps
-			map("n", "sf", builtin.find_files, "[S]earch: [F]iles")
-			map("n", "s<leader>", builtin.oldfiles, "[S]earch: Recent Files")
-			map("n", "s/", builtin.current_buffer_fuzzy_find, "[S]earch: Live [G]rep")
-			map("n", "sg", "<cmd> Telescope live_grep_args<cr>", "[S]earch: Live [G]rep")
+			map("n", "<leaer>sf", builtin.find_files, "[S]earch: [F]iles")
+			map("n", "<leader><leader>", builtin.oldfiles, "[S]earch: Recent Files")
+			map("n", "<leader>s/", builtin.current_buffer_fuzzy_find, "[S]earch: Live [G]rep")
+			map("n", "<leader>sg", "<cmd> Telescope live_grep_args<cr>", "[S]earch: Live [G]rep")
 
 			local lga = require("telescope-live-grep-args.shortcuts")
 			map({ "n", "v" }, "<leader>sw", lga.grep_word_under_cursor, "[S]earch: [W]ord")
@@ -155,6 +146,15 @@ return {
 			map({ "n", "v" }, "Gd", builtin.lsp_definitions, "LSP: [D]efinitions", { remap = true })
 			map({ "n", "v" }, "Gr", builtin.lsp_references, "LSP: [R]eferences")
 			map({ "n", "v" }, "Gt", builtin.lsp_type_definitions, "LSP: [T]ype Definitions")
+
+			-- Notification history command
+			vim.api.nvim_create_user_command("NotificationHistory", function()
+				if telescope.extensions.notify then
+					telescope.extensions.notify.notify()
+				else
+					vim.notify("Notify extension not loaded", vim.log.levels.WARN)
+				end
+			end, { desc = "Open notification history in Telescope" })
 		end,
 	},
 }
