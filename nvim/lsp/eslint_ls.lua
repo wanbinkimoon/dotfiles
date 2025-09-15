@@ -4,17 +4,47 @@ return {
 	filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "svelte" },
 	root_markers = {
 		".eslintrc.js",
+		".eslintrc.cjs",
 		".eslintrc.json",
 		".eslintrc.yaml",
 		".eslintrc.yml",
 		".eslintrc",
+		"eslint.config.js",
+		"eslint.config.mjs",
+		"eslint.config.cjs",
+		"eslint.config.ts",
+		"eslint.config.mts",
+		"eslint.config.cts",
 		"package.json",
 	},
 	settings = {
-		eslint = {
-			workingDirectories = { mode = "auto" },
-			autoFixOnSave = true,
-			packageManager = "pnpm",
+		validate = "on",
+		packageManager = "pnpm",
+		useESLintClass = false,
+		experimental = {
+			useFlatConfig = false,
+		},
+		codeActionOnSave = {
+			enable = false,
+			mode = "all",
+		},
+		format = true,
+		quiet = false,
+		onignoredfiles = "off",
+		rulescustomizations = {},
+		run = "ontype",
+		problems = {
+			shortentosingleline = false,
+		},
+		workingdirectories = { mode = "auto" },
+		codeaction = {
+			disablerulecomment = {
+				enable = true,
+				location = "separateline",
+			},
+			showdocumentation = {
+				enable = true,
+			},
 		},
 	},
 	on_attach = function(client)
@@ -29,7 +59,11 @@ return {
 				local max_file_size = 1024 * 1024 -- 1MB
 
 				-- Apply ESLint for specific file types and small files
-				if vim.tbl_contains(client.config.filetypes, file_type) and file_size > 0 and file_size < max_file_size then
+				if
+					vim.tbl_contains(client.config.filetypes, file_type)
+					and file_size > 0
+					and file_size < max_file_size
+				then
 					vim.cmd("EslintFixAll")
 				end
 
@@ -39,3 +73,4 @@ return {
 		})
 	end,
 }
+
