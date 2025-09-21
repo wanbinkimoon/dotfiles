@@ -15,7 +15,7 @@ services:
         - "/Volumes/koh-i-nur/Apple\ Music\ Library/Music:/music:ro"
       restart: unless-stopped
       networks:
-        - navidrome-network
+        - mediaserver-network
 
     jellyfin:
       image: jellyfin/jellyfin:latest
@@ -34,7 +34,29 @@ services:
         - "/Volumes/koh-i-nur:/media:ro"
       restart: unless-stopped
       networks:
-        - navidrome-network
+        - mediaserver-network
+
+    slskd:
+      image: slskd/slskd
+      container_name: slskd
+      ports:
+        - "5030:5030"
+        - "5031:5031"
+        - "50300:50300"
+      environment:
+        - SLSKD_REMOTE_CONFIGURATION=true
+        - SLSKD_SLSK_USERNAME=${SLSKD_SOULSEEK_USERNAME}
+        - SLSKD_SLSK_PASSWORD=${SLSKD_SOULSEEK_PASSWORD}
+        - SLSKD_USERNAME=${SLSKD_WEB_USERNAME}
+        - SLSKD_PASSWORD=${SLSKD_WEB_PASSWORD}
+      volumes:
+        - slskd-data:/app
+        - "./slskd.yml:/app/slskd.yml:ro"
+        - "/Volumes/koh-i-nur/Apple\ Music\ Library/_Downloads/:/downloads"
+        - "/Volumes/koh-i-nur/Apple\ Music\ Library/Music/:/music"
+      restart: always
+      networks:
+        - mediaserver-network
 
     caddy:
       build:
@@ -53,13 +75,14 @@ services:
         - ./certs/full-chain.crt:/certs/full-chain.crt:ro
         - ./certs/private.key:/certs/private.key:ro
       networks:
-        - navidrome-network
+        - mediaserver-network
       depends_on:
         - navidrome
         - jellyfin
 
 volumes:
     navidrome-data:
+    slskd-data:
     caddy_data:
     jellyfin-config:
     jellyfin-cache:
@@ -69,6 +92,6 @@ volumes:
     jellyfin-plugins:
 
 networks:
-    navidrome-network:
+    mediaserver-network:
       driver: bridge
 
