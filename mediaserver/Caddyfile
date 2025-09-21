@@ -20,9 +20,18 @@ serverino-polpettino.tailb15f1c.ts.net {
             header_up X-Forwarded-For {remote}
         }
     }
+    
+    handle_path /slskd/* {
+       reverse_proxy slskd:5030 {
+            header_up X-Forwarded-Proto https
+            header_up X-Forwarded-Host {host}
+            header_up X-Real-IP {remote}
+            header_up X-Forwarded-For {remote}
+        }
+    }
 
     # Root path - show available services
     handle / {
-        respond "Available services: /navidrome /jellyfin"
+        respond "Available services: /navidrome /jellyfin /slskd"
     }
 }

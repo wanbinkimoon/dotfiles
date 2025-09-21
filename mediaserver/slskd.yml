@@ -1,0 +1,26 @@
+soulseek:
+  # Credentials will be set via environment variables
+  # Set SLSKD_SOULSEEK_USERNAME and SLSKD_SOULSEEK_PASSWORD in .env file
+  
+web:
+  url_base: /slskd
+  # Authentication will be set via environment variables
+  # Set SLSKD_WEB_USERNAME and SLSKD_WEB_PASSWORD in .env file
+    
+shares:
+  directories:
+    - /music
+    - /downloads
+    
+downloads:
+  directory: /downloads
+  incomplete_directory: /incomplete
+  
+global:
+  upload:
+    directory: /downloads
+
+logging:
+  level: Info
+  
+remote_configuration: true
