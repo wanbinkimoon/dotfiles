@@ -1,0 +1,74 @@
+name: mediaserver
+
+services:
+    navidrome:
+      image: deluan/navidrome:latest
+      container_name: navidrome
+      ports:
+        - "4533:4533"
+      environment:
+        - ND_DATAFOLDER=/data
+        - ND_CONFIGFILE=/config/navidrome.toml
+      volumes:
+        - navidrome-data:/data
+        - "./navidrome.toml:/config/navidrome.toml:ro"
+        - "/Volumes/koh-i-nur/Apple\ Music\ Library/Music:/music:ro"
+      restart: unless-stopped
+      networks:
+        - navidrome-network
+
+    jellyfin:
+      image: jellyfin/jellyfin:latest
+      container_name: jellyfin
+      ports:
+        - "8096:8096"
+      environment:
+        - JELLYFIN_PublishedServerUrl=
+      volumes:
+        - jellyfin-config:/config
+        - jellyfin-cache:/cache
+        - jellyfin-data:/data
+        - jellyfin-log:/log
+        - jellyfin-metadata:/metadata
+        - jellyfin-plugins:/plugins
+        - "/Volumes/koh-i-nur:/media:ro"
+      restart: unless-stopped
+      networks:
+        - navidrome-network
+
+    caddy:
+      build:
+        context: .
+        dockerfile: Dockerfile.caddy
+      container_name: caddy
+      restart: unless-stopped
+      ports:
+        - "80:80"
+        - "443:443"
+      environment:
+        - TS_AUTHKEY=${TS_AUTHKEY}
+      volumes:
+        - ./Caddyfile:/etc/caddy/Caddyfile:ro
+        - caddy_data:/data
+        - ./certs/full-chain.crt:/certs/full-chain.crt:ro
+        - ./certs/private.key:/certs/private.key:ro
+      networks:
+        - navidrome-network
+      depends_on:
+        - navidrome
+        - jellyfin
+
+volumes:
+    navidrome-data:
+    caddy_data:
+    jellyfin-config:
+    jellyfin-cache:
+    jellyfin-data:
+    jellyfin-log:
+    jellyfin-metadata:
+    jellyfin-plugins:
+
+networks:
+    navidrome-network:
+      driver: bridge
+
