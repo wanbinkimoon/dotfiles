@@ -13,4 +13,3 @@ window-padding-x = 12
 window-padding-y = 8,4
 window-padding-balance = true
 
-keybind = shift+enter=text:\x1b\r
