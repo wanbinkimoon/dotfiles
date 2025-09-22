@@ -1,6 +1,11 @@
 soulseek:
   # Credentials will be set via environment variables
   # Set SLSKD_SOULSEEK_USERNAME and SLSKD_SOULSEEK_PASSWORD in .env file
+  description: antifa
+  # address: vps.slsknet.org
+  # port: 2271
+  address: server.slsknet.org
+  port: 2242
   
 web:
   url_base: /slskd
@@ -11,14 +16,17 @@ shares:
   directories:
     - /music
     - /downloads
+  cache:
+    storage_mode: disk
+    workers: 4
+    retention: 10080 # 1 week
     
-downloads:
-  directory: /downloads
-  incomplete_directory: /incomplete
-  
+directories:
+  # incomplete: /incomplete
+  # downloads: /downloads
+
 global:
   upload:
-    directory: /downloads
 
 logging:
   level: Info
