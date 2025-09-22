@@ -27,6 +27,8 @@ serverino-polpettino.tailb15f1c.ts.net {
             header_up X-Forwarded-Host {host}
             header_up X-Real-IP {remote}
             header_up X-Forwarded-For {remote}
+            header_up Upgrade {http.request.header.Upgrade}
+            header_up Connection "Upgrade"
         }
     }
 

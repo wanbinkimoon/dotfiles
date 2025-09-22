@@ -41,8 +41,8 @@ services:
       container_name: slskd
       ports:
         - "5030:5030"
-        - "5031:5031"
-        - "50300:50300"
+        - "5031:5031/tcp"
+        - "50300:50300/tcp"
       environment:
         - SLSKD_REMOTE_CONFIGURATION=true
         - SLSKD_SLSK_USERNAME=${SLSKD_SOULSEEK_USERNAME}
@@ -51,10 +51,11 @@ services:
         - SLSKD_PASSWORD=${SLSKD_WEB_PASSWORD}
       volumes:
         - slskd-data:/app
+        - slskd-incomplete:/app/incomplete
         - "./slskd.yml:/app/slskd.yml:ro"
-        - "/Volumes/koh-i-nur/Apple\ Music\ Library/_Downloads/:/downloads"
-        - "/Volumes/koh-i-nur/Apple\ Music\ Library/Music/:/music"
-      restart: always
+        - "/Volumes/koh-i-nur/Apple\ Music\ Library/_Downloads/:/app/downloads:rw"
+        - "/Volumes/koh-i-nur/Apple\ Music\ Library/Music/:/music:ro"
+      restart: unless-stopped
       networks:
         - mediaserver-network
 
@@ -79,10 +80,12 @@ services:
       depends_on:
         - navidrome
         - jellyfin
+        - slskd
 
 volumes:
     navidrome-data:
     slskd-data:
+    slskd-incomplete:
     caddy_data:
     jellyfin-config:
     jellyfin-cache:
