@@ -50,18 +50,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			max_height = height,
 		})
 
-		-- suppress error messages from lang servers
-		---@diagnostic disable-next-line: duplicate-set-field
-		vim.notify = function(msg, log_level)
-			if msg:match("exit code") then
-				return
-			end
-			if log_level == vim.log.levels.ERROR then
-				vim.api.nvim_err_writeln(msg)
-			else
-				vim.api.nvim_echo({ { msg } }, true, {})
-			end
-		end
 		vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Definition" })
 		vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "[C]ode: [A]ction" })
 		vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "[C]ode: [R]ename" })
@@ -79,6 +67,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 		capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
 
+		vim.lsp.buf.format({ async = false })
+
 		-- Setup default language server configuration
 		vim.lsp.config("*", {
 			capabilities = capabilities,
@@ -88,12 +78,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
--- Enable each language server by filename under the lsp/ folder
--- Make sure each file in lsp/ returns a table with the proper configuration
 vim.lsp.enable({
 	"css_ls",
-	-- "eslint_ls",
-	-- "eslint_d_ls",
+	"eslint_ls",
 	"emmet_ls",
 	"ember_ls",
 	"glint_ls",
