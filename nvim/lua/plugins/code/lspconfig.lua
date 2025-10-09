@@ -1,16 +1,15 @@
 return {
 	"neovim/nvim-lspconfig",
 	event = { "BufReadPre", "BufNewFile" },
-	enabled = true,
+	enabled = false,
 	dependencies = {},
 	config = function()
 		local lspconfig = require("lspconfig")
 
-		-- Setup ESLint LSP with proper @repo scoped package resolution
 		lspconfig.eslint.setup({
 			root_dir = function(fname)
-				-- Always use workspace root for @repo package resolution
-				local workspace_root = lspconfig.util.root_pattern("pnpm-workspace.yaml", "yarn.lock", "lerna.json")(fname)
+				local workspace_root =
+					lspconfig.util.root_pattern("pnpm-workspace.yaml", "yarn.lock", "lerna.json")(fname)
 				if workspace_root then
 					return workspace_root
 				end
@@ -27,18 +26,17 @@ return {
 				format = false, -- Let conform handle formatting
 				quiet = false, -- Show errors to help debug @repo resolution
 				onIgnoredFiles = "off",
-				run = "onSave",
+				run = "onType",
 				workingDirectories = { mode = "auto" },
-				-- Important: Let ESLint resolve from workspace root for @repo packages
 				options = {
-					extensions = { ".js", ".jsx", ".ts", ".tsx" }
-				}
+					extensions = { ".js", ".jsx", ".ts", ".tsx" },
+				},
 			},
 		})
 
 		-- Setup TypeScript LSP
 		lspconfig.ts_ls.setup({
-			on_attach = function(client, bufnr)
+			on_attach = function(client)
 				-- Disable typescript's formatting in favor of prettier/eslint
 				client.server_capabilities.document_formatting = false
 				client.server_capabilities.document_range_formatting = false
@@ -46,4 +44,3 @@ return {
 		})
 	end,
 }
-
