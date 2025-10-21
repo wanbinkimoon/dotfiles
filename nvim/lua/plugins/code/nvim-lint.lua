@@ -5,17 +5,17 @@ return {
 		local lint = require("lint")
 		
 		-- Configure eslint_d for monorepo support with @repo scoped packages
-		lint.linters.eslint_d.args = {
+		local eslint_d = lint.linters.eslint_d
+		eslint_d.args = vim.list_extend({
 			"--no-warn-ignored",
 			"--format",
 			"json",
 			"--stdin",
 			"--stdin-filename",
-			function() return vim.api.nvim_buf_get_name(0) end,
-		}
+		}, {})
 		
 		-- Override cwd to use workspace root for @repo package resolution
-		lint.linters.eslint_d.cwd = function()
+		eslint_d.cwd = function()
 			local function find_workspace_root(path)
 				local current = path or vim.fn.getcwd()
 				while current and current ~= "/" do
