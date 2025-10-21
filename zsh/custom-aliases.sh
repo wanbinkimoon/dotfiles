@@ -52,7 +52,7 @@ function git-clean() {
 
 # Add zeoxide to the shell
 eval "$(zoxide init zsh)"
-alias cd="z"
+# alias cd="z"
 
 # Eza (better ls) 
 alias ls="eza --icons=always -T -l --level=1 --header --hyperlink"
