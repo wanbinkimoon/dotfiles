@@ -1,5 +1,5 @@
 return {
-	enabled = false,
+	enabled = true,
 	"tpope/vim-fugitive",
 	cmd = { "Git", "G" }, -- Load on demand
 	keys = {
