@@ -4,7 +4,7 @@ if status is-interactive
   starship init fish | source
 
   zoxide init fish | source
-  alias cd="z"
+  # alias cd="z"
 
   alias ls="eza --icons=always -T -l --level=1 --header --hyperlink"
 end
