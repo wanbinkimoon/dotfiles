@@ -13,7 +13,7 @@ return {
 	config = function()
 		local custom_colors = get_custom_colors()
 		local icons = require("config.icons")
-		local CodeCompanionSpinner = require("plugins.ui.lualine.code-companion")
+		-- local CodeCompanionSpinner = require("plugins.ui.lualine.code-companion")
 		local function isRecording()
 			local reg = vim.fn.reg_recording()
 			if reg == "" then
@@ -46,7 +46,7 @@ return {
 						},
 					},
 					"diagnostics",
-					CodeCompanionSpinner,
+					-- CodeCompanionSpinner,
 				},
 				-- lualine_c = { { "git" }},
 				lualine_x = {
