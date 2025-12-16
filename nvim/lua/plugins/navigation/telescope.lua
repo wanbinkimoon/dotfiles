@@ -137,15 +137,17 @@ return {
 
 			-- Git keymaps
 			map({ "n", "v" }, "<leader>sd", require("git_branch").files, "[S]earch: Git [D]iff")
+			map({ "n", "v" }, "<leader>gh", "<cmd>Telescope git_file_history<cr>", "[G]it: File [H]istory")
 			map({ "n", "v" }, "<leader>sb", builtin.git_branches, "[S]earch: Git [B]ranches")
 			map({ "n", "v" }, "<leader>ghc", builtin.git_commits, "[G]it: Commit [H]istory")
 			map({ "n", "v" }, "<leader>gbc", builtin.git_bcommits, "[G]it: [B]uffer [C]ommits")
-			map({ "n", "v" }, "<leader>gh", "<cmd>Telescope git_file_history<cr>", "[G]it: File [H]istory")
 
 			-- LSP keymaps
 			map({ "n", "v" }, "Gd", builtin.lsp_definitions, "LSP: [D]efinitions", { remap = true })
 			map({ "n", "v" }, "Gr", builtin.lsp_references, "LSP: [R]eferences")
 			map({ "n", "v" }, "Gt", builtin.lsp_type_definitions, "LSP: [T]ype Definitions")
+			map({ "n", "v" }, "Gh", "<cmd>split | normal Gd <cr>", "LSP: [H]orizontal Split Definition")
+			map({ "n", "v" }, "Gv", "<cmd>vsplit | normal Gd <cr>", "LSP: [V]ertical Split Definition")
 
 			-- Notification history command
 			vim.api.nvim_create_user_command("NotificationHistory", function()
