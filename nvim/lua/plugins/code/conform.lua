@@ -4,10 +4,10 @@ return {
 	opts = {
 		formatters_by_ft = {
 			-- For JS/TS files, run eslint_d first, then prettierd
-			javascript = { "prettierd" },
-			typescript = { "prettierd" },
-			javascriptreact = { "prettierd" },
-			typescriptreact = { "prettierd" },
+			javascript = { "eslint_d", "prettierd" },
+			typescript = { "eslint_d", "prettierd" },
+			javascriptreact = { "eslint_d", "prettierd" },
+			typescriptreact = { "eslint_d", "prettierd" },
 
 			-- For other web files, just use prettierd
 			json = { "prettierd" },
