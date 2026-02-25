@@ -2,7 +2,10 @@ return {
 	"folke/trouble.nvim",
 	-- event = "BufRead",
 	opts = {
-		auto_close = true,
+		auto_close = false,
+		auto_preview = true, -- automatically open preview when on an item
+		auto_refresh = true, -- auto refresh when open
+		multiline = true, -- render multi-line messages
 		modes = {
 			symbols = { -- Configure symbols mode
 				win = {

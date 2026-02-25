@@ -26,7 +26,7 @@ return {
 			-- Core configuration with minimal styling
 			local config = {
 				defaults = {
-					layout_strategy = "horizontal",
+					layout_strategy = "vertical",
 					layout_config = {
 						horizontal = {
 							height = dimensions.height,
