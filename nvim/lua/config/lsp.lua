@@ -67,7 +67,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 		capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
 
-		vim.lsp.buf.format({ async = false })
+		-- vim.lsp.buf.format({ async = false })
 
 		-- Setup default language server configuration
 		vim.lsp.config("*", {
@@ -83,7 +83,7 @@ vim.lsp.enable({
 	"eslint_ls",
 	"emmet_ls",
 	"ember_ls",
-	"glint_ls",
+	-- "glint_ls",
 	"graphql_ls",
 	"html_ls",
 	"json_ls",
