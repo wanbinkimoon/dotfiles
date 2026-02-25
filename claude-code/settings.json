@@ -1,0 +1,14 @@
+{
+  "hooks": {
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.config/claude-code/notify.sh \"Claude Code needs your attention\""
+          }
+        ]
+      }
+    ]
+  }
+}
