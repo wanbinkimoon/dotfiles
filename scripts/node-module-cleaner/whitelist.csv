@@ -1,0 +1,6 @@
+# Absolute paths to node_modules folders that should NOT be deleted
+# One path per line, e.g.:
+# /Users/nicola.bertelloni/Developer/myproject/node_modules
+/Users/nicola.bertelloni/Developer/qonto/qonto-web
+/Users/nicola.bertelloni/Developer/qonto/qonto-web-2
+
