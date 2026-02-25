@@ -50,9 +50,11 @@ function git-clean() {
   done
 }
 
-# Add zeoxide to the shell
+# Starship prompt (initialized in .zshrc for interactive shells)
+
+# Zoxide - smart cd
 eval "$(zoxide init zsh)"
 # alias cd="z"
 
-# Eza (better ls) 
+# Eza - better ls
 alias ls="eza --icons=always -T -l --level=1 --header --hyperlink"
