@@ -1,6 +1,9 @@
-font-family = "jetbrainsmono nerd font mono"
-adjust-cell-height = 20%
+# font-family = "jetbrainsmono nerd font mono"
+font-family = "JetBrainsMonoNL Nerd Font Mono"
+
+adjust-cell-height = 5%
 theme = TokyoNight Storm
+# theme = Duotone Dark
 macos-titlebar-style = hidden
 
 shell-integration = fish
