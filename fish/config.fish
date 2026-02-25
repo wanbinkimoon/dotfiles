@@ -1,5 +1,5 @@
 if status is-interactive
-  source ~/.config/fish/completions/omz-git-aliases.sh
+  source ~/.config/fish/completions/omz-git-aliases.fish
 
   starship init fish | source
 
