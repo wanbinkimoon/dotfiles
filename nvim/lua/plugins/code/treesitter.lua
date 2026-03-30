@@ -5,36 +5,40 @@ return {
 	build = ":TSUpdate",
 	dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
 	config = function()
-		-- Register markdown parser for MDX files
-		vim.treesitter.language.register('markdown', 'mdx')
-		
-		local config = require("nvim-treesitter.configs")
-		config.setup({
-			auto_install = true,
-			highlight = { enable = true },
-			indent = { enable = true },
-			ensure_installed = {
-				"json",
-				"javascript",
-				"typescript",
-				"tsx",
-				"html",
-				"css",
-				"markdown",
-				"markdown_inline",
-				"lua",
-				"vim",
-				"gitignore",
-			},
-			incremental_selection = {
-				enable = true,
-				keymaps = {
-					init_selection = "<C-space>",
-					node_incremental = "<C-space>",
-					scope_incremental = false,
-					node_decremental = "<bs>",
-				},
-			},
+		vim.treesitter.language.register("markdown", "mdx")
+
+		vim.api.nvim_create_autocmd("FileType", {
+			callback = function(ev)
+				pcall(vim.treesitter.start, ev.buf)
+			end,
 		})
+
+		local installed = require("nvim-treesitter").get_installed()
+		local installed_set = {}
+		for _, lang in ipairs(installed) do
+			installed_set[lang] = true
+		end
+
+		local ensure_installed = {
+			"json",
+			"javascript",
+			"typescript",
+			"tsx",
+			"html",
+			"css",
+			"markdown",
+			"markdown_inline",
+			"lua",
+			"vim",
+			"gitignore",
+		}
+
+		local to_install = vim.tbl_filter(function(lang)
+			return not installed_set[lang]
+		end, ensure_installed)
+
+		if #to_install > 0 then
+			vim.cmd("TSInstall " .. table.concat(to_install, " "))
+		end
 	end,
 }

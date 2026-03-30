@@ -40,7 +40,7 @@ return {
 			["javascript.glimmer"] = { "ember", "djlint" },
 		}
 		
-		vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter", "BufReadPost" }, {
+		vim.api.nvim_create_autocmd({ "BufEnter", "BufReadPost", "InsertLeave" }, {
 			callback = function()
 				-- Only lint if we're in a supported filetype
 				local ft = vim.bo.filetype

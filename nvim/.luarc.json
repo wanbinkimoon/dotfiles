@@ -2,4 +2,3 @@
   "diagnostics.globals": ["vim"],
   "diagnostics.disable": ["undefined-doc-name"]
 }
-

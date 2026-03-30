@@ -3,35 +3,35 @@ return {
 	event = "BufWritePre", -- Load only when needed for saving
 	opts = {
 		formatters_by_ft = {
-			-- For JS/TS files, run eslint_d first, then prettierd
-			javascript = { "eslint_d", "prettierd" },
-			typescript = { "eslint_d", "prettierd" },
-			javascriptreact = { "eslint_d", "prettierd" },
-			typescriptreact = { "eslint_d", "prettierd" },
-
-			-- For other web files, just use prettierd
-			json = { "prettierd" },
+			javascript = { "eslint_d", "oxfmt", stop_after_first = true },
+			typescript = { "eslint_d", "oxfmt", stop_after_first = true },
+			javascriptreact = { "eslint_d", "oxfmt", stop_after_first = true },
+			typescriptreact = { "eslint_d", "oxfmt", stop_after_first = true },
+			json = { "oxfmt" },
 			css = { "prettierd" },
 			scss = { "prettierd" },
 			html = { "prettierd" },
 			svg = { "prettierd" },
-			-- handlebars = { "djlint" },
-
-			-- For Lua files
+			handlebars = { "prettierd" },
+			markdown = { "prettierd" },
 			lua = { "stylua" },
 		},
 
-		-- Simple format on save configuration
 		format_on_save = {
 			timeout_ms = 3000,
-			lsp_fallback = true,
+			lsp_fallback = false,
 		},
 
-		-- Basic formatter configurations
 		formatters = {
 			eslint_d = {
 				command = "eslint_d",
 				args = { "--fix-to-stdout", "--stdin", "--stdin-filename", "$FILENAME" },
+				stdin = true,
+			},
+
+			oxfmt = {
+				command = "oxfmt",
+				args = { "--stdin-filepath", "$FILENAME" },
 				stdin = true,
 			},
 
