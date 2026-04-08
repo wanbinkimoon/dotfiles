@@ -21,6 +21,101 @@ return {
 			local telescope = require("telescope")
 			local actions = require("telescope.actions")
 			local dimensions = { width = 0.75, height = 0.75 }
+
+			-- Custom live_grep filter state (persists within session)
+			local live_grep_filters = {
+				extension = nil, ---@type nil|string
+				directories = nil, ---@type nil|string[]
+			}
+
+			local function get_directories()
+				if vim.fn.executable("fd") ~= 1 then
+					vim.notify("fd not found — folder picker unavailable", vim.log.levels.WARN)
+					return nil
+				end
+				local data = {}
+				local handle = io.popen("fd --type d --hidden --exclude .git -X ls -h -d", "r")
+				if not handle then
+					return {}
+				end
+				local result = handle:read("*a")
+				handle:close()
+				for entry in result:gmatch("[^\r\n]+") do
+					table.insert(data, entry .. "/")
+				end
+				table.insert(data, 1, "./")
+				return data
+			end
+
+			local function run_live_grep(current_input)
+				require("telescope").extensions.live_grep_args.live_grep_args({
+					additional_args = live_grep_filters.extension and function()
+						return { "-g", "*." .. live_grep_filters.extension }
+					end or nil,
+					search_dirs = live_grep_filters.directories,
+					default_text = current_input,
+					previewer = false,
+					layout_config = dimensions,
+				})
+			end
+
+			local action_state = require("telescope.actions.state")
+			local action_set = require("telescope.actions.set")
+			local finders = require("telescope.finders")
+			local make_entry = require("telescope.make_entry")
+			local conf = require("telescope.config").values
+			local pickers_mod = require("telescope.pickers")
+
+			local function set_extension(prompt_bufnr)
+				local current_input = action_state.get_current_line()
+				vim.ui.input({ prompt = "*." }, function(input)
+					if input == nil then
+						return
+					end
+					input = input:gsub("^%.", "")
+					live_grep_filters.extension = input ~= "" and input or nil
+					actions.close(prompt_bufnr)
+					run_live_grep(current_input)
+				end)
+			end
+
+			local function set_folders(prompt_bufnr)
+				local current_input = action_state.get_current_line()
+				local data = get_directories()
+				if data == nil then
+					return  -- get_directories already notified
+				end
+				if vim.tbl_isempty(data) then
+					vim.notify("No directories found", vim.log.levels.WARN)
+					return
+				end
+				actions.close(prompt_bufnr)
+				pickers_mod.new({}, {
+					prompt_title = "Folders for Live Grep",
+					finder = finders.new_table({ results = data, entry_maker = make_entry.gen_from_file({}) }),
+					previewer = conf.file_previewer({}),
+					sorter = conf.file_sorter({}),
+					attach_mappings = function(bufnr)
+						action_set.select:replace(function()
+							local current_picker = action_state.get_current_picker(bufnr)
+							local dirs = {}
+							local selections = current_picker:get_multi_selection()
+							if vim.tbl_isempty(selections) then
+								table.insert(dirs, action_state.get_selected_entry().value)
+							else
+								for _, selection in ipairs(selections) do
+									table.insert(dirs, selection.value)
+								end
+							end
+							live_grep_filters.directories = dirs
+							actions.close(bufnr)
+							run_live_grep(current_input)
+						end)
+						return true
+					end,
+				}):find()
+			end
+
 			local picker_defaults = { previewer = false, layout_config = dimensions, hidden = true }
 
 			-- Core configuration with minimal styling
@@ -99,6 +194,8 @@ return {
 								["<C-g>"] = require("telescope-live-grep-args.actions").quote_prompt({
 									postfix = " --iglob ",
 								}),
+								["<C-f>"] = set_extension,
+								["<C-l>"] = set_folders,
 							},
 						},
 					},
