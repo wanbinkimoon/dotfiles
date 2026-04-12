@@ -22,6 +22,7 @@ vim.o.scrolloff = 10
 vim.o.showtabline = 0
 vim.o.splitright = true
 vim.o.winborder = "rounded"
+vim.o.pumborder = "rounded"
 
 -- WARN: this option collapse the command line.
 -- vim.opt.cmdheight = 0
@@ -34,7 +35,6 @@ vim.g.loaded_man = 1 -- Disable :Man
 vim.g.loaded_spellfile = 1 -- Disable spellfile.vim
 vim.g.loaded_ruby_provider = 0 -- Disable Ruby provider
 vim.g.loaded_perl_provider = 0 -- Disable Perl provider
-vim.opt.autoread = true
 -- default is 4000 ms
 vim.opt.updatetime = 1000
 

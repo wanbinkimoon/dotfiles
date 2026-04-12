@@ -6,12 +6,7 @@ return {
 	dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
 	config = function()
 		vim.treesitter.language.register("markdown", "mdx")
-
-		vim.api.nvim_create_autocmd("FileType", {
-			callback = function(ev)
-				pcall(vim.treesitter.start, ev.buf)
-			end,
-		})
+		vim.treesitter.language.register("glimmer", "handlebars")
 
 		local installed = require("nvim-treesitter").get_installed()
 		local installed_set = {}
@@ -31,6 +26,7 @@ return {
 			"lua",
 			"vim",
 			"gitignore",
+			"glimmer",
 		}
 
 		local to_install = vim.tbl_filter(function(lang)

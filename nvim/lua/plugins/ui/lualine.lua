@@ -13,24 +13,19 @@ return {
 	config = function()
 		local custom_colors = get_custom_colors()
 		local icons = require("config.icons")
-		-- local CodeCompanionSpinner = require("plugins.ui.lualine.code-companion")
 		local function isRecording()
 			local reg = vim.fn.reg_recording()
 			if reg == "" then
 				return ""
-			end -- not recording
+			end
 			return "recording to " .. reg
 		end
 
 		require("lualine").setup({
 			options = {
-				-- theme = "dracula-nvim",
-				-- theme = "palenight",
 				theme = "tokyonight",
 				component_separators = "/",
-				-- section_separators = { left = "", right = "" },
 				section_separators = { left = " ", right = " " },
-				-- disabled_filetypes = { "neo-tree" },
 				globalstatus = true,
 			},
 			sections = {
@@ -38,7 +33,6 @@ return {
 				lualine_c = {
 					{
 						"diff",
-						-- symbols = { added = " ", modified = "󱗝 ", removed = " " },
 						symbols = {
 							added = icons.git.Add,
 							modified = icons.git.Mod,
@@ -46,9 +40,12 @@ return {
 						},
 					},
 					"diagnostics",
-					-- CodeCompanionSpinner,
+					{
+						function()
+							return vim.ui.progress_status() or ""
+						end,
+					},
 				},
-				-- lualine_c = { { "git" }},
 				lualine_x = {
 					isRecording,
 					{

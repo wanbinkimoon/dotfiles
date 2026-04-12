@@ -11,10 +11,6 @@ vim.keymap.set("n", "<C-p>", "<C-i>", { noremap = true, desc = "Jump forward" })
 -- Remove search highlight
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
--- Add new line remaning in normal mode
-vim.keymap.set("n", "<leader>o", "o<ESC>k", { desc = "Add new line below" })
-vim.keymap.set("n", "<leader>O", "O<ESC>j", { desc = "Add new line above" })
-
 -- Move lines up and down
 vim.keymap.set("n", "<A-Down>", ":m .+1<CR>==")
 vim.keymap.set("n", "<A-Up>", ":m .-2<CR>==")
@@ -39,16 +35,8 @@ for i = 1, 9, 1 do
 	vim.keymap.set("n", "<tab>" .. i, "<cmd>tabnext " .. i .. "<CR>", { desc = "Go to tab " .. i })
 end
 
--- Quickfix
-vim.keymap.set("n", "cq", "<cmd>copen<CR>", { desc = "Open quickfix" })
-vim.keymap.set("n", "cQ", "<cmd>cclose<CR>", { desc = "Close quickfix" })
-vim.keymap.set("n", "cn", "<cmd>cnext<CR>", { desc = "Next quickfix" })
-vim.keymap.set("n", "cp", "<cmd>cprev<CR>", { desc = "Previous quickfix" })
-
--- Reload config
-vim.api.nvim_create_user_command("ReloadSource", function()
-	vim.cmd("so ~/.config/nvim/init.lua")
-end, { desc = "Reload Neovim configuration" })
+-- Use :restart (0.12 built-in) for a full Nvim restart with UI reattach
+vim.api.nvim_create_user_command("ReloadSource", "restart", { desc = "Restart Neovim (delegates to :restart)" })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which

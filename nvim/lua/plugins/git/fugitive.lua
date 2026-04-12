@@ -3,12 +3,12 @@ return {
 	"tpope/vim-fugitive",
 	cmd = { "Git", "G" }, -- Load on demand
 	keys = {
-		{ "gs", "<cmd>:Git<CR>", desc = "[G]it: open git status" },
-		{ "gb", "<cmd>:Git blame<CR>", desc = "[G]it: blame", { noremap = true } },
-		{ "gd", "<cmd>:Gdiff<CR>", desc = "[G]it: diff" },
-		{ "gk", "<cmd>:diffget //3<CR>", desc = "[G]it: diff get from right" },
-		{ "gj", "<cmd>:diffget //2<CR>", desc = "[G]it: diff get from left" },
-		{ "gv", "<cmd>:Gdiff<CR>", desc = "[G]it: open vertical diff" },
+		{ "Gs", "<cmd>:Git<CR>", desc = "[G]it: open git status" },
+		{ "Gb", "<cmd>:Git blame<CR>", desc = "[G]it: blame", { noremap = true } },
+		{ "Gd", "<cmd>:Gdiff<CR>", desc = "[G]it: diff" },
+		{ "Gk", "<cmd>:diffget //3<CR>", desc = "[G]it: diff get from right" },
+		{ "Gj", "<cmd>:diffget //2<CR>", desc = "[G]it: diff get from left" },
+		{ "Gv", "<cmd>:Gdiff<CR>", desc = "[G]it: open vertical diff" },
 	},
 	config = function()
 		vim.g.fugitive_git_command = "git"
