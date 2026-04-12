@@ -1,7 +1,7 @@
 # font-family = "jetbrainsmono nerd font mono"
 font-family = "JetBrainsMonoNL Nerd Font Mono"
 
-adjust-cell-height = 5%
+adjust-cell-height = 2%
 theme = TokyoNight Storm
 # theme = Duotone Dark
 macos-titlebar-style = hidden
