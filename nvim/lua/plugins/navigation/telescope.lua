@@ -1,8 +1,9 @@
 return {
 	{
 		"nvim-telescope/telescope.nvim",
+		enabled = false,
 		cmd = "Telescope",
-		event = "UIEnter",
+		-- event = "UIEnter",
 		keys = {
 			{ "<leader>sf", "<cmd>Telescope find_files<cr>", desc = "[S]earch: [F]iles" },
 			{ "<leader><leader>", "<cmd>Telescope oldfiles<cr>", desc = "[S]earch: Recent Files" },
@@ -83,37 +84,39 @@ return {
 				local current_input = action_state.get_current_line()
 				local data = get_directories()
 				if data == nil then
-					return  -- get_directories already notified
+					return -- get_directories already notified
 				end
 				if vim.tbl_isempty(data) then
 					vim.notify("No directories found", vim.log.levels.WARN)
 					return
 				end
 				actions.close(prompt_bufnr)
-				pickers_mod.new({}, {
-					prompt_title = "Folders for Live Grep",
-					finder = finders.new_table({ results = data, entry_maker = make_entry.gen_from_file({}) }),
-					previewer = conf.file_previewer({}),
-					sorter = conf.file_sorter({}),
-					attach_mappings = function(bufnr)
-						action_set.select:replace(function()
-							local current_picker = action_state.get_current_picker(bufnr)
-							local dirs = {}
-							local selections = current_picker:get_multi_selection()
-							if vim.tbl_isempty(selections) then
-								table.insert(dirs, action_state.get_selected_entry().value)
-							else
-								for _, selection in ipairs(selections) do
-									table.insert(dirs, selection.value)
+				pickers_mod
+					.new({}, {
+						prompt_title = "Folders for Live Grep",
+						finder = finders.new_table({ results = data, entry_maker = make_entry.gen_from_file({}) }),
+						previewer = conf.file_previewer({}),
+						sorter = conf.file_sorter({}),
+						attach_mappings = function(bufnr)
+							action_set.select:replace(function()
+								local current_picker = action_state.get_current_picker(bufnr)
+								local dirs = {}
+								local selections = current_picker:get_multi_selection()
+								if vim.tbl_isempty(selections) then
+									table.insert(dirs, action_state.get_selected_entry().value)
+								else
+									for _, selection in ipairs(selections) do
+										table.insert(dirs, selection.value)
+									end
 								end
-							end
-							live_grep_filters.directories = dirs
-							actions.close(bufnr)
-							run_live_grep(current_input)
-						end)
-						return true
-					end,
-				}):find()
+								live_grep_filters.directories = dirs
+								actions.close(bufnr)
+								run_live_grep(current_input)
+							end)
+							return true
+						end,
+					})
+					:find()
 			end
 
 			local picker_defaults = { previewer = false, layout_config = dimensions, hidden = true }
@@ -223,7 +226,7 @@ return {
 			end
 
 			-- File and text search keymaps
-			map("n", "<leaer>sf", builtin.find_files, "[S]earch: [F]iles")
+			map("n", "<leader>sf", builtin.find_files, "[S]earch: [F]iles")
 			map("n", "<leader><leader>", builtin.oldfiles, "[S]earch: Recent Files")
 			map("n", "<leader>s/", builtin.current_buffer_fuzzy_find, "[S]earch: Live [G]rep")
 			map("n", "<leader>sg", "<cmd> Telescope live_grep_args<cr>", "[S]earch: Live [G]rep")
@@ -238,7 +241,6 @@ return {
 			map({ "n", "v" }, "<leader>sb", builtin.git_branches, "[S]earch: Git [B]ranches")
 			map({ "n", "v" }, "<leader>ghc", builtin.git_commits, "[G]it: Commit [H]istory")
 			map({ "n", "v" }, "<leader>gbc", builtin.git_bcommits, "[G]it: [B]uffer [C]ommits")
-
 
 			-- Notification history command
 			vim.api.nvim_create_user_command("NotificationHistory", function()
