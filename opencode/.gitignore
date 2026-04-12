@@ -1,0 +1,20 @@
+# Generated / runtime
+.claude/
+.logs/
+.ocx/
+.opencode/
+.sisyphus/
+.DS_Store
+
+# Dependencies
+node_modules/
+
+# Backup / temp files
+*.bak
+*.bak.*
+package-lock.json
+pnpm-lock.yaml
+subtask2.jsonc
+
+# Catch-all: only track explicitly added files
+agents/

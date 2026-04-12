@@ -1,0 +1,31 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "plugin": ["oh-my-openagent@latest"],
+  "instructions": ["./AGENTS.md", "./RTK_AGENT.md", "~/.claude/CLAUDE.md"],
+  "small_model": "github-copilot/claude-haiku-4.5",
+  "mcp": {
+    "chrome-devtools": {
+      "type": "local",
+      "command": ["npx", "-y", "chrome-devtools-mcp@latest"]
+    },
+    "notion": {
+      "type": "remote",
+      "url": "https://mcp.notion.com/mcp"
+    },
+    "figma": {
+      "type": "remote",
+      "url": "https://mcp.figma.com/mcp"
+    },
+    "qonto-qa-master": {
+      "type": "remote",
+      "url": "https://qa-master.staging.qonto.co/mcp"
+    },
+    "qonto-qa-qa": {
+      "type": "remote",
+      "url": "https://qa-qa.staging.qonto.co/mcp"
+    }
+  },
+  "provider": {
+    "amazon-bedrock": {}
+  }
+}
