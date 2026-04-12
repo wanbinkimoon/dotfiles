@@ -1,19 +1,43 @@
-nicotine
-MusicBrainz
-MusicBrainz
+# OS
+.DS_Store
+
+# Removed from tracking (configs on disk, not versioned)
+btop
+claude-code
 gh
-github-copilot
-tmux/plugins
+gh-dash
+git
+jgit
+ldcli
+mediaserver
+op
+scripts
+sesh
+wezterm
+zsh
+
+# Never tracked
 .claude
 1Password/ssh
-btop
 configstore
-fish/conf.d/secrets.fish
+github-copilot
 glab-cli
 htop
 karabiner
 mcphub
+MusicBrainz
+nicotine
 raycast/extensions
 uv
 zed
-zsh/secrets.sh
+
+# Removed root files
+.p10k.zsh
+.zshrc
+display_nerd_fonts.sh
+
+# Secrets
+fish/conf.d/secrets.fish
+
+# Tmux plugins (managed by tpm)
+tmux/plugins
