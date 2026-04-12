@@ -35,9 +35,6 @@ for i = 1, 9, 1 do
 	vim.keymap.set("n", "<tab>" .. i, "<cmd>tabnext " .. i .. "<CR>", { desc = "Go to tab " .. i })
 end
 
--- Use :restart (0.12 built-in) for a full Nvim restart with UI reattach
-vim.api.nvim_create_user_command("ReloadSource", "restart", { desc = "Restart Neovim (delegates to :restart)" })
-
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.

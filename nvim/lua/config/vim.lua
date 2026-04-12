@@ -31,6 +31,9 @@ vim.opt.foldcolumn = "1"
 vim.opt.foldmethod = "indent"
 vim.opt.foldlevel = 99
 
+-- Native statuscolumn: folds | line number | gitsigns
+vim.o.statuscolumn = "%C%l %s"
+
 vim.g.loaded_man = 1 -- Disable :Man
 vim.g.loaded_spellfile = 1 -- Disable spellfile.vim
 vim.g.loaded_ruby_provider = 0 -- Disable Ruby provider
