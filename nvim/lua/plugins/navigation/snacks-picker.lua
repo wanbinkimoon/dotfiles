@@ -12,7 +12,7 @@ return {
 					preset = "vertical",
 					layout = {
 						width = 0.75,
-						height = 0.75,
+						height = 0.85,
 					},
 				},
 				sources = {
@@ -57,7 +57,16 @@ return {
 			{ "<leader>sw", function() Snacks.picker.grep_word() end, desc = "[S]earch: [W]ord", mode = { "n", "x" } },
 
 			-- Git
-			{ "<leader>gd", function() Snacks.picker.git_diff() end, desc = "[G]it: [D]iff" },
+			{
+				"<leader>gd",
+				function()
+					local dir = vim.fn.shellescape(vim.fn.expand("%:p:h"))
+					vim.fn.system("git -C " .. dir .. " rev-parse --verify --quiet main")
+					local base = vim.v.shell_error == 0 and "main" or "master"
+					Snacks.picker.git_diff({ base = base })
+				end,
+				desc = "[G]it: [D]iff vs base branch",
+			},
 			{ "<leader>gh", function() Snacks.picker.git_log_file() end, desc = "[G]it: File [H]istory" },
 			{ "<leader>sb", function() Snacks.picker.git_branches() end, desc = "[S]earch: Git [B]ranches" },
 			{ "<leader>ghc", function() Snacks.picker.git_log() end, desc = "[G]it: Commit [H]istory" },
