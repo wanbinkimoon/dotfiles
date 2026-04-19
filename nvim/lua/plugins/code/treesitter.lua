@@ -7,6 +7,7 @@ return {
 	config = function()
 		vim.treesitter.language.register("markdown", "mdx")
 		vim.treesitter.language.register("glimmer", "handlebars")
+		vim.treesitter.language.register("typescript", "javascript")
 
 		local installed = require("nvim-treesitter").get_installed()
 		local installed_set = {}
