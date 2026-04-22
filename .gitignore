@@ -41,3 +41,4 @@ fish/conf.d/secrets.fish
 
 # Tmux plugins (managed by tpm)
 tmux/plugins
+/secrets.sh
