@@ -63,9 +63,9 @@ return {
 					local dir = vim.fn.shellescape(vim.fn.expand("%:p:h"))
 					vim.fn.system("git -C " .. dir .. " rev-parse --verify --quiet main")
 					local base = vim.v.shell_error == 0 and "main" or "master"
-					Snacks.picker.git_diff({ base = base })
+					Snacks.picker.git_diff({ base = base, group = true })
 				end,
-				desc = "[G]it: [D]iff vs base branch",
+				desc = "[G]it: [D]iff Files vs base branch",
 			},
 			{ "<leader>gh", function() Snacks.picker.git_log_file() end, desc = "[G]it: File [H]istory" },
 			{ "<leader>sb", function() Snacks.picker.git_branches() end, desc = "[S]earch: Git [B]ranches" },
