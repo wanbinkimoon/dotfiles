@@ -49,6 +49,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			capabilities_configured = true
 		end
 
+		-- Override gd to use LSP (default gd is text-search only, same-file)
+		vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "LSP: Go to [D]efinition" })
+
 		-- Override grr default to use Trouble instead of quickfix
 		vim.keymap.set("n", "grr", "<cmd>Trouble lsp_references<cr>", { desc = "LSP: [R]eferences (Trouble)" })
 

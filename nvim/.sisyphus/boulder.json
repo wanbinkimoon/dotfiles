@@ -1,0 +1,12 @@
+{
+  "active_plan": "/Users/nicola.bertelloni/.config/nvim/.sisyphus/plans/js-ts-lsp-perf-fix.md",
+  "started_at": "2026-04-28T09:19:51.234Z",
+  "session_ids": [
+    "ses_23101f8cdffeZdPiAebmWhSkqq"
+  ],
+  "session_origins": {
+    "ses_23101f8cdffeZdPiAebmWhSkqq": "direct"
+  },
+  "plan_name": "js-ts-lsp-perf-fix",
+  "agent": "atlas"
+}
