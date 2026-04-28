@@ -6,14 +6,12 @@ return {
 		"javascriptreact",
 		"typescript",
 		"typescriptreact",
-		"vue",
-		"svelte",
 	},
 	root_markers = { "package.json", "tsconfig.json" },
 	on_attach = function(client)
-		-- Disable typescript's formatting in favor of prettier/eslint
-		client.server_capabilities.document_formatting = false
-		client.server_capabilities.document_range_formatting = false
+		-- Disable ts_ls formatting: conform.nvim owns all JS/TS formatting
+		client.server_capabilities.documentFormattingProvider = false
+		client.server_capabilities.documentRangeFormattingProvider = false
 	end,
 	root_dir = function(bufnr, on_dir)
 		local root_markers = { "package-lock.json", "yarn.lock", "pnpm-lock.yaml", "bun.lockb", "bun.lock" }
