@@ -63,6 +63,20 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			vim.cmd("vsplit")
 			vim.lsp.buf.definition()
 		end, { desc = "LSP: Def in [V]ertical Split" })
+
+		-- Manual ESLint fix-all (replaces eslint_d --fix-to-stdout that ran on save before)
+		vim.keymap.set("n", "<leader>cf", function()
+			vim.lsp.buf.code_action({
+				context = { only = { "source.fixAll.eslint" }, diagnostics = {} },
+				apply = true,
+			})
+		end, { desc = "LSP: ESLint Fix All (manual)" })
+		vim.api.nvim_buf_create_user_command(0, "EslintFixAll", function()
+			vim.lsp.buf.code_action({
+				context = { only = { "source.fixAll.eslint" }, diagnostics = {} },
+				apply = true,
+			})
+		end, { desc = "Run ESLint source.fixAll on current buffer" })
 	end,
 })
 
