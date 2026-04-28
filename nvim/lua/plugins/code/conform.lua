@@ -3,10 +3,10 @@ return {
 	event = "BufWritePre", -- Load only when needed for saving
 	opts = {
 		formatters_by_ft = {
-			javascript = { "eslint_d", "oxfmt", stop_after_first = true },
-			typescript = { "eslint_d", "oxfmt", stop_after_first = true },
-			javascriptreact = { "eslint_d", "oxfmt", stop_after_first = true },
-			typescriptreact = { "eslint_d", "oxfmt", stop_after_first = true },
+			javascript = { "oxfmt" },
+			typescript = { "oxfmt" },
+			javascriptreact = { "oxfmt" },
+			typescriptreact = { "oxfmt" },
 			json = { "oxfmt" },
 			css = { "prettierd" },
 			scss = { "prettierd" },
@@ -17,18 +17,14 @@ return {
 			lua = { "stylua" },
 		},
 
-		format_on_save = {
-			timeout_ms = 3000,
-			lsp_fallback = false,
-		},
+		format_on_save = function(bufnr)
+			if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+				return
+			end
+			return { timeout_ms = 500, lsp_fallback = false }
+		end,
 
 		formatters = {
-			eslint_d = {
-				command = "eslint_d",
-				args = { "--fix-to-stdout", "--stdin", "--stdin-filename", "$FILENAME" },
-				stdin = true,
-			},
-
 			oxfmt = {
 				command = "oxfmt",
 				args = { "--stdin-filepath", "$FILENAME" },
@@ -42,12 +38,24 @@ return {
 		},
 	},
 
-	-- Simple Format command
 	config = function(_, opts)
 		require("conform").setup(opts)
 
 		vim.api.nvim_create_user_command("Format", function()
-			require("conform").format({ async = true, lsp_fallback = true })
+			require("conform").format({ async = true, lsp_fallback = false })
 		end, {})
+
+		vim.api.nvim_create_user_command("FormatDisable", function(args)
+			if args.bang then
+				vim.b.disable_autoformat = true
+			else
+				vim.g.disable_autoformat = true
+			end
+		end, { desc = "Disable autoformat-on-save", bang = true })
+
+		vim.api.nvim_create_user_command("FormatEnable", function()
+			vim.b.disable_autoformat = false
+			vim.g.disable_autoformat = false
+		end, { desc = "Re-enable autoformat-on-save" })
 	end,
 }
